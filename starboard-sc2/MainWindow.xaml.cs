@@ -18,6 +18,8 @@ namespace Starboard
     /// </summary>
     public partial class MainWindow
     {
+        private int desiredWidth;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -25,6 +27,9 @@ namespace Starboard
             this.Closing += this.MainWindow_Closing;
 
             this.display.SetViewModel(this.viewModel);
+            this.scoreboardPreview.ViewModel = this.viewModel;
+
+            this.desiredWidth = (int)(SystemParameters.PrimaryScreenWidth * .36);
         }
 
         void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -45,6 +50,7 @@ namespace Starboard
             }
             else
             {
+                this.display.ViewboxWidth = this.desiredWidth;
                 this.display.Show();
             }
         }

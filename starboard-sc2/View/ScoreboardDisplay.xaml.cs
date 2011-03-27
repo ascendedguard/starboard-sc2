@@ -28,5 +28,11 @@ namespace Starboard.Scoreboard
         {
             scoreboardControl.ViewModel = vm;
         }
+
+        public double ViewboxWidth
+        {
+            get { return viewBox.Width; }
+            set { viewBox.Width = value; }
+        }
     }
 }
