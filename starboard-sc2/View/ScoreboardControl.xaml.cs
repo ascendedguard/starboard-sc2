@@ -23,6 +23,9 @@ namespace Starboard.Scoreboard
         /// <summary> Index of the subbar binding currently being used. </summary>
         private int index;
 
+        /// <summary> Reference to the timer object. We need to kill the timer when the control is disposed. </summary>
+        private Timer currentTimer;
+
         /// <summary> Initializes a new instance of the <see cref="ScoreboardControl"/> class. </summary>
         public ScoreboardControl()
         {
@@ -32,11 +35,21 @@ namespace Starboard.Scoreboard
             {
                 return;
             }
+            
+            this.currentTimer = new Timer(20000) { AutoReset = true };
+            this.currentTimer.AutoReset = false;
+            this.currentTimer.Elapsed += this.TimerElapsed;
+            this.currentTimer.Start();
+        }
 
-            var timer = new Timer(20000) { AutoReset = true };
-            timer.AutoReset = false;
-            timer.Elapsed += this.TimerElapsed;
-            timer.Start();        
+        /// <summary> Finalizes an instance of the <see cref="ScoreboardControl"/> class.  </summary>
+        ~ScoreboardControl()
+        {
+            if (this.currentTimer != null)
+            {
+                this.currentTimer.Stop();
+                this.currentTimer.Dispose();
+            }
         }
 
         /// <summary> Gets or sets the viewmodel used for the control </summary>
@@ -79,8 +92,7 @@ namespace Starboard.Scoreboard
         /// <param name="e"> The event arguments. </param>
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            var t = (Timer)sender;
-            t.Dispose();
+            this.currentTimer.Dispose();         
 
             this.Dispatcher.BeginInvoke((Action)delegate
                                                     {
@@ -108,9 +120,9 @@ namespace Starboard.Scoreboard
 
                                                         this.ChangeMatchupText(bindingField);
 
-                                                        var timer = new Timer(seconds * 1000) { AutoReset = false };
-                                                        timer.Elapsed += this.TimerElapsed;
-                                                        timer.Start();
+                                                        currentTimer = new Timer(seconds * 1000) { AutoReset = false };
+                                                        currentTimer.Elapsed += this.TimerElapsed;
+                                                        currentTimer.Start();
                                                     });
         }
     }
