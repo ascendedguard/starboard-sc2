@@ -1,6 +1,6 @@
 ﻿<Window x:Class="Starboard.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Scoreboard="clr-namespace:Starboard.Scoreboard" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Model="clr-namespace:Starboard.Model" Title="Starboard" Height="421" Width="383">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Scoreboard="clr-namespace:Starboard.Scoreboard" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Model="clr-namespace:Starboard.Model" ResizeMode="NoResize" Title="Starboard" Height="418" Width="406">
     <Window.DataContext>
         <Scoreboard:ScoreboardControlViewModel x:Name="viewModel" />
     </Window.DataContext>
@@ -21,58 +21,67 @@
         </ObjectDataProvider>
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="175"/>
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <StackPanel Margin="10">
-                <TextBlock Height="23" HorizontalAlignment="Left" Text="Player 1" VerticalAlignment="Top" />
-                <TextBox Height="23" Text="{Binding Path=Player1.Name, UpdateSourceTrigger=PropertyChanged}" />
-                <ComboBox Height="23" ItemsSource="{Binding Source={StaticResource RaceTypes}}" SelectedValue="{Binding Player1.Race}" />
-                <ComboBox Height="23" ItemsSource="{Binding Source={StaticResource PlayerColorTypes}}" SelectedValue="{Binding Player1.Color}" />
-                <TextBlock Height="23" Text="Score" />
-                <TextBox Height="23" Text="{Binding Path=Player1.Score, UpdateSourceTrigger=PropertyChanged}" />
-            </StackPanel>
-            <StackPanel Margin="10" Grid.Column="1">
-                <TextBlock Height="23" HorizontalAlignment="Left" Text="Player 2" VerticalAlignment="Top" />
-                <TextBox Height="23" Text="{Binding Path=Player2.Name, UpdateSourceTrigger=PropertyChanged}" />
-                <ComboBox Height="23" ItemsSource="{Binding Source={StaticResource RaceTypes}}" SelectedValue="{Binding Player2.Race}" />
-                <ComboBox Height="23" ItemsSource="{Binding Source={StaticResource PlayerColorTypes}}" SelectedValue="{Binding Player2.Color}"/>
-                <TextBlock Height="23" Text="Score" />
-                <TextBox Height="23" Text="{Binding Path=Player2.Score, UpdateSourceTrigger=PropertyChanged}" />
-            </StackPanel>
-        </Grid>
+        <TabControl>
+            <TabItem Header="Scoreboard">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="175"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="10">
+                            <TextBlock Height="23" HorizontalAlignment="Left" Text="Player 1" VerticalAlignment="Top" />
+                            <TextBox Height="23" Text="{Binding Path=Player1.Name, UpdateSourceTrigger=PropertyChanged}" />
+                            <ComboBox Height="23" ItemsSource="{Binding Source={StaticResource RaceTypes}}" SelectedValue="{Binding Player1.Race}" />
+                            <ComboBox Height="23" ItemsSource="{Binding Source={StaticResource PlayerColorTypes}}" SelectedValue="{Binding Player1.Color}" />
+                            <TextBlock Height="23" Text="Score" />
+                            <TextBox Height="23" Text="{Binding Path=Player1.Score, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                        <StackPanel Margin="10" Grid.Column="1">
+                            <TextBlock Height="23" HorizontalAlignment="Left" Text="Player 2" VerticalAlignment="Top" />
+                            <TextBox Height="23" Text="{Binding Path=Player2.Name, UpdateSourceTrigger=PropertyChanged}" />
+                            <ComboBox Height="23" ItemsSource="{Binding Source={StaticResource RaceTypes}}" SelectedValue="{Binding Player2.Race}" />
+                            <ComboBox Height="23" ItemsSource="{Binding Source={StaticResource PlayerColorTypes}}" SelectedValue="{Binding Player2.Color}"/>
+                            <TextBlock Height="23" Text="Score" />
+                            <TextBox Height="23" Text="{Binding Path=Player2.Score, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                    </Grid>
 
 
-        <Grid Margin="5" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <StackPanel VerticalAlignment="Top">
-                <TextBlock Margin="3,0,3,0" Height="23" Text="Sub-bar Text" />
-                <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarLine1, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarLine2, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarLine3, UpdateSourceTrigger=PropertyChanged}" />
-            </StackPanel>
-            <StackPanel Grid.Column="1" VerticalAlignment="Top">
-                <TextBlock Margin="3,0,3,0" Height="23" Text="Time" />
-                <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarTime1, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarTime2, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarTime3, UpdateSourceTrigger=PropertyChanged}" />
-            </StackPanel>
-            <Viewbox Grid.ColumnSpan="2" Margin="3,106,0,27" Name="viewbox1">
-                <Scoreboard:ScoreboardControl x:Name="scoreboardPreview" />
-            </Viewbox>
-        </Grid>
+                    <Grid Margin="5" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel VerticalAlignment="Top">
+                            <TextBlock Margin="3,0,3,0" Height="23" Text="Sub-bar Text" />
+                            <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarLine1, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarLine2, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarLine3, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                            <TextBlock Margin="3,0,3,0" Height="23" Text="Time" />
+                            <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarTime1, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarTime2, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarTime3, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                        <Viewbox Grid.ColumnSpan="2" Margin="3,106,0,27" Name="viewbox1">
+                            <Scoreboard:ScoreboardControl x:Name="scoreboardPreview" />
+                        </Viewbox>
+                    </Grid>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom">
-            <Button Grid.Row="1" Grid.Column="1"  Content="Show Scoreboard" Height="26" Click="ShowClicked" />
-        </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom">
+                        <Button Grid.Row="1" Grid.Column="1"  Content="Show Scoreboard" Height="26" Click="ShowClicked" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Options">
+                <CheckBox Content="Allow Scoreboard To Be Moved" Height="16" Checked="WindowMovableChecked" Unchecked="WindowMovableUnchecked"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

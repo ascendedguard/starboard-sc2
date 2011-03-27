@@ -12,13 +12,13 @@ namespace Starboard.Scoreboard
             InitializeComponent();
 
             this.Loaded += ScoreboardDisplay_Loaded;
-
+            this.IsWindowMovable = false;
         }
 
         void ScoreboardDisplay_Loaded(object sender, RoutedEventArgs e)
         {
             var leftAdjust = this.Width / 2.0;
-            var left = SystemParameters.PrimaryScreenWidth / 2.0 - leftAdjust;
+            var left = (SystemParameters.PrimaryScreenWidth / 2.0) - leftAdjust;
 
             this.Left = left;
             this.Top = 10;
@@ -33,6 +33,18 @@ namespace Starboard.Scoreboard
         {
             get { return viewBox.Width; }
             set { viewBox.Width = value; }
+        }
+
+        public bool IsWindowMovable { get; set; }
+
+        protected override void OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+
+            if (this.IsWindowMovable)
+            {
+                this.DragMove();
+            }
         }
     }
 }

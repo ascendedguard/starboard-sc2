@@ -60,5 +60,15 @@ namespace Starboard
                 this.display.Show();
             }
         }
+
+        private void WindowMovableChecked(object sender, RoutedEventArgs e)
+        {
+            this.display.IsWindowMovable = true;
+        }
+
+        private void WindowMovableUnchecked(object sender, RoutedEventArgs e)
+        {
+            this.display.IsWindowMovable = false;
+        }
     }
 }
