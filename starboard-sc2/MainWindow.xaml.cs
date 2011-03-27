@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MainWindow.xaml.cs" company="">
-//   
+// <copyright file="MainWindow.xaml.cs" company="Starboard">
+//   Copyright 2011
 // </copyright>
 // <summary>
 //   Interaction logic for MainWindow.xaml
@@ -18,7 +18,11 @@ namespace Starboard
     /// </summary>
     public partial class MainWindow
     {
-        private int desiredWidth;
+        /// <summary> Window controlling the scoreboard display </summary>
+        private readonly ScoreboardDisplay display = new ScoreboardDisplay();
+
+        /// <summary> The desired width of the viewbox in the display window, based on the screen resolution. </summary>
+        private readonly int desiredWidth;
 
         /// <summary> Initializes a new instance of the <see cref="MainWindow"/> class. </summary>
         public MainWindow()
@@ -41,8 +45,9 @@ namespace Starboard
             Application.Current.Shutdown();
         }
 
-        private ScoreboardDisplay display = new ScoreboardDisplay();
-
+        /// <summary> Shows/Hides the display when the "Show" button is clicked. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
         private void ShowClicked(object sender, RoutedEventArgs e)
         {
             if (this.display.IsVisible)
