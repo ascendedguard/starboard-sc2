@@ -15,13 +15,18 @@ namespace Starboard.Scoreboard
             this.IsWindowMovable = false;
         }
 
-        void ScoreboardDisplay_Loaded(object sender, RoutedEventArgs e)
+        public void ResetPosition()
         {
             var leftAdjust = this.Width / 2.0;
             var left = (SystemParameters.PrimaryScreenWidth / 2.0) - leftAdjust;
 
             this.Left = left;
-            this.Top = 10;
+            this.Top = 10;   
+        }
+
+        void ScoreboardDisplay_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.ResetPosition();
         }
 
         public void SetViewModel(ScoreboardControlViewModel vm)

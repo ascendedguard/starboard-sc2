@@ -70,5 +70,10 @@ namespace Starboard
         {
             this.display.IsWindowMovable = false;
         }
+
+        private void ResetPositionClicked(object sender, RoutedEventArgs e)
+        {
+            this.display.ResetPosition();
+        }
     }
 }

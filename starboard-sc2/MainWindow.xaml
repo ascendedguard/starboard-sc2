@@ -80,7 +80,11 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Options">
-                <CheckBox Content="Allow Scoreboard To Be Moved" Height="16" Checked="WindowMovableChecked" Unchecked="WindowMovableUnchecked"/>
+                <StackPanel>
+                    <CheckBox Content="Allow Scoreboard To Be Moved" Height="16" Checked="WindowMovableChecked" Unchecked="WindowMovableUnchecked"/>
+                    <Button Content="Reset Position" Width="100" HorizontalAlignment="Left" Click="ResetPositionClicked" />
+                </StackPanel>
+                
             </TabItem>
         </TabControl>
     </Grid>
