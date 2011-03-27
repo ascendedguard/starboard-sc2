@@ -13,6 +13,7 @@
         private static readonly ImageSource zergIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/ZergLogo.png"));
         private static readonly ImageSource terranIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/TerranEagleLogo.png"));
         private static readonly ImageSource protossIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/ProtossLogo.png"));
+        private static readonly ImageSource randomIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/RandomLogo.png"));
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -26,6 +27,8 @@
                     return terranIcon;
                 case Race.Zerg:
                     return zergIcon;
+                case Race.Random:
+                    return randomIcon;
             }
 
             return null;
