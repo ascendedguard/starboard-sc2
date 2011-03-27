@@ -20,11 +20,12 @@ namespace Starboard
     {
         private int desiredWidth;
 
+        /// <summary> Initializes a new instance of the <see cref="MainWindow"/> class. </summary>
         public MainWindow()
         {
             InitializeComponent();
 
-            this.Closing += this.MainWindow_Closing;
+            this.Closing += MainWindowClosing;
 
             this.display.SetViewModel(this.viewModel);
             this.scoreboardPreview.ViewModel = this.viewModel;
@@ -32,12 +33,12 @@ namespace Starboard
             this.desiredWidth = (int)(SystemParameters.PrimaryScreenWidth * .36);
         }
 
-        void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        /// <summary> Shuts down the application when the main window closes. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
+        private static void MainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (this.display.IsVisible)
-            {
-                this.display.Close();
-            }
+            Application.Current.Shutdown();
         }
 
         private ScoreboardDisplay display = new ScoreboardDisplay();
