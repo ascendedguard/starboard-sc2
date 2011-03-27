@@ -10,6 +10,7 @@
 namespace Starboard.Scoreboard
 {
     using System;
+    using System.ComponentModel;
     using System.Timers;
     using System.Windows;
     using System.Windows.Controls;
@@ -26,6 +27,11 @@ namespace Starboard.Scoreboard
         public ScoreboardControl()
         {
             InitializeComponent();
+
+            if (DesignerProperties.GetIsInDesignMode(this))
+            {
+                return;
+            }
 
             var timer = new Timer(20000) { AutoReset = true };
             timer.AutoReset = false;
