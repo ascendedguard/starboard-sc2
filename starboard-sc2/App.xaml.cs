@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="App.xaml.cs" company="">
-//   
+// <copyright file="App.xaml.cs" company="Starboard">
+//   Copyright 2011
 // </copyright>
 // <summary>
 //   Interaction logic for App.xaml
