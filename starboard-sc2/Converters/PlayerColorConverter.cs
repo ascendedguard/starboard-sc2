@@ -1,10 +1,10 @@
-﻿using System;
-using System.Globalization;
-using System.Windows.Data;
-using System.Windows.Media;
-
-namespace Starboard
+﻿namespace Starboard
 {
+    using System;
+    using System.Globalization;
+    using System.Windows.Data;
+    using System.Windows.Media;
+
     using Starboard.Model;
 
     public class PlayerColorConverter : IValueConverter
@@ -15,7 +15,7 @@ namespace Starboard
 
             var selectedColor = Colors.Black;
 
-            switch(color)
+            switch (color)
             {
                 case PlayerColor.Red:
                     selectedColor = Color.FromRgb(207, 0, 0);

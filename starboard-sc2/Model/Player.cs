@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Player.cs" company="Ascend">
+// <copyright file="Player.cs" company="Starboard">
 //   Copright 2011
 // </copyright>
 // <summary>

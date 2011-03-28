@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SubbarText.cs" company="Ascend">
+// <copyright file="SubbarText.cs" company="Starboard">
 //   Copyright 2011
 // </copyright>
 // <summary>

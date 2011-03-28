@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ScoreboardControl.xaml.cs" company="Ascend">
+// <copyright file="ScoreboardControl.xaml.cs" company="Starboard">
 //   Copyright 2011
 // </copyright>
 // <summary>
@@ -120,9 +120,9 @@ namespace Starboard.Scoreboard
 
                                                         this.ChangeMatchupText(bindingField);
 
-                                                        currentTimer = new Timer(seconds * 1000) { AutoReset = false };
-                                                        currentTimer.Elapsed += this.TimerElapsed;
-                                                        currentTimer.Start();
+                                                        this.currentTimer = new Timer(seconds * 1000) { AutoReset = false };
+                                                        this.currentTimer.Elapsed += this.TimerElapsed;
+                                                        this.currentTimer.Start();
                                                     });
         }
     }

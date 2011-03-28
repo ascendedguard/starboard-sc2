@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Race.cs" company="Ascend">
+// <copyright file="Race.cs" company="Starboard">
 //   Copyright 2011
 // </copyright>
 // <summary>

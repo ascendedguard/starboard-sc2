@@ -61,16 +61,25 @@ namespace Starboard
             }
         }
 
+        /// <summary> Enables the display to be moved when the "Is Window Movable" checkbox is checked. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
         private void WindowMovableChecked(object sender, RoutedEventArgs e)
         {
             this.display.IsWindowMovable = true;
         }
 
+        /// <summary> Disables the display to be moved when the "Is Window Movable" checkbox is checked. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
         private void WindowMovableUnchecked(object sender, RoutedEventArgs e)
         {
             this.display.IsWindowMovable = false;
         }
 
+        /// <summary> Resets the position of the scoreboard when the Reset button is clicked. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
         private void ResetPositionClicked(object sender, RoutedEventArgs e)
         {
             this.display.ResetPosition();
