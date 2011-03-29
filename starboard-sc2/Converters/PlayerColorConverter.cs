@@ -43,6 +43,11 @@
                     break;
             }
 
+            if (targetType == typeof(Brush))
+            {
+                return new SolidColorBrush(selectedColor);
+            }
+
             selectedColor.A = 202;
             return selectedColor;
         }

@@ -22,7 +22,7 @@
             <Rectangle Margin="2" RadiusX="5" RadiusY="5" Stroke="Transparent">
                 <Rectangle.Fill>
                     <LinearGradientBrush>
-                        <GradientStop Color="{Binding Path=Player1.Color, Converter={StaticResource PlayerColorConverter}}" Offset="0.0" />
+                        <GradientStop x:Name="player1Color" Color="#00000000" Offset="0.0" />
                         <GradientStop Color="#00000000" Offset=".8" />
                     </LinearGradientBrush>
                 </Rectangle.Fill>
@@ -32,7 +32,7 @@
                 <Rectangle.Fill>
                     <LinearGradientBrush>
                         <GradientStop Color="#00000000" Offset=".2" />
-                        <GradientStop Color="{Binding Path=Player2.Color, Converter={StaticResource PlayerColorConverter}}" Offset="1.0" />
+                        <GradientStop x:Name="player2Color" Color="#00000000" Offset="1.0" />
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>

@@ -3,12 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
         xmlns:Scoreboard="clr-namespace:Starboard.Scoreboard" 
         xmlns:System="clr-namespace:System;assembly=mscorlib" 
-        xmlns:Model="clr-namespace:Starboard.Model" 
-        ResizeMode="NoResize" Title="Starboard" Height="418" Width="406">
+        xmlns:Model="clr-namespace:Starboard.Model" xmlns:AscendStudio="clr-namespace:Starboard" ResizeMode="NoResize" Title="Starboard" Height="418" Width="406">
     <Window.DataContext>
         <Scoreboard:ScoreboardControlViewModel x:Name="viewModel" />
     </Window.DataContext>
     <Window.Resources>
+        <AscendStudio:PlayerColorConverter x:Key="PlayerColorConverter" />
+        
+        <DataTemplate DataType="{x:Type Model:PlayerColor}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border BorderBrush="Black" Margin="2" BorderThickness="1">
+                    <Rectangle Fill="{Binding Converter={StaticResource PlayerColorConverter}}"/>
+                </Border>
+                <TextBlock Grid.Column="1" Margin="3,0,0,0" Text="{Binding}" />
+            </Grid>
+        </DataTemplate>
+        
         <ObjectDataProvider ObjectType="{x:Type System:Enum}" MethodName="GetValues"
                     x:Key="RaceTypes">
             <ObjectDataProvider.MethodParameters>

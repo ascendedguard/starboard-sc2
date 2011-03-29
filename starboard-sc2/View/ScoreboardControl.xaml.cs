@@ -14,7 +14,9 @@ namespace Starboard.Scoreboard
     using System.Timers;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Media;
     using System.Windows.Media.Animation;
+
     using Timer = System.Timers.Timer;
 
     /// <summary> Interaction logic for ScoreboardControl.xaml </summary>
@@ -40,6 +42,14 @@ namespace Starboard.Scoreboard
             this.currentTimer.AutoReset = false;
             this.currentTimer.Elapsed += this.TimerElapsed;
             this.currentTimer.Start();
+
+            var viewModel = this.DataContext as ScoreboardControlViewModel;
+
+            if (viewModel != null)
+            {
+                viewModel.Player1.ColorChanged += this.Player1ColorChanged;
+                viewModel.Player2.ColorChanged += this.Player2ColorChanged;                
+            }
         }
 
         /// <summary> Finalizes an instance of the <see cref="ScoreboardControl"/> class.  </summary>
@@ -62,8 +72,35 @@ namespace Starboard.Scoreboard
 
             set
             {
+                // Unbind from old datacontext.
+                var oldContext = this.DataContext as ScoreboardControlViewModel;
+                if (oldContext != null)
+                {
+                    oldContext.Player1.ColorChanged -= this.Player1ColorChanged;
+                    oldContext.Player2.ColorChanged -= this.Player2ColorChanged;                    
+                }
+
                 this.DataContext = value;
+
+                value.Player1.ColorChanged += this.Player1ColorChanged;
+                value.Player2.ColorChanged += this.Player2ColorChanged;
             }
+        }
+
+        void Player2ColorChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var converter = new PlayerColorConverter();
+            var color = (Color)converter.Convert(e.NewValue, typeof(Color), null, null);
+            var anim = new ColorAnimation(color, new TimeSpan(0, 0, 0, 0, 500));
+            player2Color.BeginAnimation(GradientStop.ColorProperty, anim);
+        }
+
+        void Player1ColorChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var converter = new PlayerColorConverter();
+            var color = (Color)converter.Convert(e.NewValue, typeof(Color), null, null);
+            var anim = new ColorAnimation(color, new TimeSpan(0, 0, 0, 0, 500));
+            player1Color.BeginAnimation(GradientStop.ColorProperty, anim);
         }
 
         /// <summary> Changes the matchup text to the bind specified. </summary>
