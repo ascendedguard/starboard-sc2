@@ -98,11 +98,14 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Options">
-                <StackPanel>
-                    <CheckBox Content="Allow Scoreboard To Be Moved" Height="16" Checked="WindowMovableChecked" Unchecked="WindowMovableUnchecked"/>
-                    <Button Content="Reset Position" Width="100" HorizontalAlignment="Left" Click="ResetPositionClicked" />
-                </StackPanel>
-                
+                <Grid>
+                    <StackPanel>
+                        <CheckBox Content="Allow Scoreboard To Be Moved" Height="16" Checked="WindowMovableChecked" Unchecked="WindowMovableUnchecked"/>
+                        <Button Content="Reset Position" Width="100" HorizontalAlignment="Left" Click="ResetPositionClicked" />
+                    </StackPanel>
+
+                    <TextBlock HorizontalAlignment="Right" x:Name="txtBuild" VerticalAlignment="Bottom" Text="Build Version" />
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

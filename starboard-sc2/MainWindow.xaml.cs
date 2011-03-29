@@ -9,6 +9,7 @@
 
 namespace Starboard
 {
+    using System.Reflection;
     using System.Windows;
 
     using Starboard.Scoreboard;
@@ -35,6 +36,8 @@ namespace Starboard
             this.scoreboardPreview.ViewModel = this.viewModel;
 
             this.desiredWidth = (int)(SystemParameters.PrimaryScreenWidth * .36);
+
+            this.txtBuild.Text = string.Format("Build: {0}", Assembly.GetExecutingAssembly().GetName().Version);
         }
 
         /// <summary> Shuts down the application when the main window closes. </summary>
