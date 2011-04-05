@@ -1,76 +1,83 @@
 ﻿<UserControl x:Class="Starboard.Scoreboard.ScoreboardControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Scoreboard="clr-namespace:Starboard.Scoreboard" xmlns:AscendStudio="clr-namespace:Starboard" Height="56" Width="690">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Scoreboard="clr-namespace:Starboard.Scoreboard" xmlns:AscendStudio="clr-namespace:Starboard" xmlns:Converters="clr-namespace:Starboard.Converters" Height="56" Width="690">
     <UserControl.DataContext>
         <Scoreboard:ScoreboardControlViewModel />
     </UserControl.DataContext>
     <UserControl.Resources>
         <Scoreboard:RaceTypeConverter x:Key="RaceConverter"/>
         <AscendStudio:PlayerColorConverter x:Key="PlayerColorConverter" />
+        <Converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter" />
     </UserControl.Resources>
     <Grid>
-        
         <Image Source="/Images/Background.png"/>
-      
-        <!-- Player Colors-->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            
-            <Rectangle Margin="2" RadiusX="5" RadiusY="5" Stroke="Transparent">
-                <Rectangle.Fill>
-                    <LinearGradientBrush>
-                        <GradientStop x:Name="player1Color" Color="#00000000" Offset="0.0" />
-                        <GradientStop Color="#00000000" Offset=".8" />
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
-
-            <Rectangle Grid.Column="1" Margin="2" RadiusX="5" RadiusY="5" Stroke="Transparent">
-                <Rectangle.Fill>
-                    <LinearGradientBrush>
-                        <GradientStop Color="#00000000" Offset=".2" />
-                        <GradientStop x:Name="player2Color" Color="#00000000" Offset="1.0" />
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
-            
-            <Rectangle Grid.ColumnSpan="2" Margin="2" RadiusX="5" RadiusY="5" Stroke="Transparent">
-                <Rectangle.Fill>
-                    <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                        <GradientStop Color="#77000000" Offset="0" />
-                        <GradientStop Color="#00000000" Offset=".4" />
-                        <GradientStop Color="#00000000" Offset=".6" />
-                        <GradientStop Color="#77000000" Offset="1" /> 
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
-
-            <TextBlock Text="{Binding Player1.Name}" FontFamily="Century Gothic" FontSize="24" TextOptions.TextHintingMode="Animated"  Foreground="White" VerticalAlignment="Center" Margin="75,0,0,0"/>
-            <TextBlock Grid.Column="1" Text="{Binding Player2.Name}" TextAlignment="Right" FontFamily="Century Gothic" FontSize="24" TextOptions.TextHintingMode="Animated"  Foreground="White" VerticalAlignment="Center" Margin="0,0,75,0"/>
-
-            <Image Margin="10" HorizontalAlignment="Left" Source="{Binding Path=Player1.Race, Converter={StaticResource RaceConverter}}" />
-            <Image Margin="10" HorizontalAlignment="Right" Grid.Column="1" Source="{Binding Path=Player2.Race, Converter={StaticResource RaceConverter}}" />
+        <Grid Margin="5">
+            <Grid.Visibility>
+                <Binding Path="IsAnnouncementTextShowing" Converter="{StaticResource BooleanVisibilityConverter}" ConverterParameter="true"/>
+            </Grid.Visibility>
+            <TextBlock Text="{Binding AnnouncementText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Century Gothic" FontSize="24" TextOptions.TextHintingMode="Animated"  Foreground="White" />
         </Grid>
+        <Grid Visibility="{Binding Path=IsAnnouncementTextShowing, Converter={StaticResource BooleanVisibilityConverter}}">
+            <!-- Player Colors-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+            
+                <Rectangle Margin="2" RadiusX="5" RadiusY="5" Stroke="Transparent">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush>
+                            <GradientStop x:Name="player1Color" Color="#00000000" Offset="0.0" />
+                            <GradientStop Color="#00000000" Offset=".8" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
 
-        <!-- Scoring -->
-        <Grid Margin="5" HorizontalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+                <Rectangle Grid.Column="1" Margin="2" RadiusX="5" RadiusY="5" Stroke="Transparent">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#00000000" Offset=".2" />
+                            <GradientStop x:Name="player2Color" Color="#00000000" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            
+                <Rectangle Grid.ColumnSpan="2" Margin="2" RadiusX="5" RadiusY="5" Stroke="Transparent">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                            <GradientStop Color="#77000000" Offset="0" />
+                            <GradientStop Color="#00000000" Offset=".4" />
+                            <GradientStop Color="#00000000" Offset=".6" />
+                            <GradientStop Color="#77000000" Offset="1" /> 
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
 
-            <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontFamily="Century Gothic" FontSize="24" FontWeight="Bold" TextOptions.TextHintingMode="Animated" >
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="{}{0} - {1}">
-                        <Binding Path="Player1.Score" />
-                        <Binding Path="Player2.Score" />
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-            <TextBlock x:Name="txtStatus" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontFamily="Century Gothic" FontSize="18" TextOptions.TextHintingMode="Animated" Text="{Binding SubbarLine1}" />
+                <TextBlock Text="{Binding Player1.Name}" FontFamily="Century Gothic" FontSize="24" TextOptions.TextHintingMode="Animated"  Foreground="White" VerticalAlignment="Center" Margin="75,0,0,0"/>
+                <TextBlock Grid.Column="1" Text="{Binding Player2.Name}" TextAlignment="Right" FontFamily="Century Gothic" FontSize="24" TextOptions.TextHintingMode="Animated"  Foreground="White" VerticalAlignment="Center" Margin="0,0,75,0"/>
+
+                <Image Margin="10" HorizontalAlignment="Left" Source="{Binding Path=Player1.Race, Converter={StaticResource RaceConverter}}" />
+                <Image Margin="10" HorizontalAlignment="Right" Grid.Column="1" Source="{Binding Path=Player2.Race, Converter={StaticResource RaceConverter}}" />
+            </Grid>
+
+            <!-- Scoring -->
+            <Grid Margin="5" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontFamily="Century Gothic" FontSize="24" FontWeight="Bold" TextOptions.TextHintingMode="Animated" >
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} - {1}">
+                            <Binding Path="Player1.Score" />
+                            <Binding Path="Player2.Score" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock x:Name="txtStatus" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontFamily="Century Gothic" FontSize="18" TextOptions.TextHintingMode="Animated" Text="{Binding SubbarLine1}" />
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

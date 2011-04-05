@@ -87,5 +87,10 @@ namespace Starboard
         {
             this.display.ResetPosition();
         }
+
+        private void btnShowAnnouncement_Click(object sender, RoutedEventArgs e)
+        {
+            this.viewModel.IsAnnouncementTextShowing = !this.viewModel.IsAnnouncementTextShowing;
+        }
     }
 }

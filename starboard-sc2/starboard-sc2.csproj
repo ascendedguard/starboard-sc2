@@ -49,6 +49,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BooleanVisibilityConverter.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\PlayerColor.cs" />
     <Compile Include="Model\Race.cs" />

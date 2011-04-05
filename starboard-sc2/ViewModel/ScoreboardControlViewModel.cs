@@ -109,5 +109,25 @@ namespace Starboard.Scoreboard
             get { return (int)GetValue(SubbarTime3Property); }
             set { SetValue(SubbarTime3Property, value); }
         }
+
+        public string AnnouncementText
+        {
+            get { return (string)GetValue(AnnouncementTextProperty); }
+            set { SetValue(AnnouncementTextProperty, value); }
+        }
+
+        public static readonly DependencyProperty AnnouncementTextProperty =
+            DependencyProperty.Register("AnnouncementText", typeof(string), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(string.Empty));
+
+        public bool IsAnnouncementTextShowing
+        {
+            get { return (bool)GetValue(IsAnnouncementTextShowingProperty); }
+            set { SetValue(IsAnnouncementTextShowingProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsAnnouncementTextShowingProperty =
+            DependencyProperty.Register("IsAnnouncementTextShowing", typeof(bool), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(false));
+
+        
     }
 }

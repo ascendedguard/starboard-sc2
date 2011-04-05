@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
         xmlns:Scoreboard="clr-namespace:Starboard.Scoreboard" 
         xmlns:System="clr-namespace:System;assembly=mscorlib" 
-        xmlns:Model="clr-namespace:Starboard.Model" xmlns:AscendStudio="clr-namespace:Starboard" ResizeMode="NoResize" Title="Starboard" Height="418" Width="406">
+        xmlns:Model="clr-namespace:Starboard.Model" xmlns:AscendStudio="clr-namespace:Starboard" ResizeMode="NoResize" Title="Starboard" Height="507" Width="407">
     <Window.DataContext>
         <Scoreboard:ScoreboardControlViewModel x:Name="viewModel" />
     </Window.DataContext>
@@ -70,7 +70,7 @@
                     </Grid>
 
 
-                    <Grid Margin="5" Grid.Row="1">
+                    <Grid Margin="5,5,5,91" Grid.Row="1" Height="165">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
@@ -95,6 +95,9 @@
                     <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom">
                         <Button Grid.Row="1" Grid.Column="1"  Content="Show Scoreboard" Height="26" Click="ShowClicked" />
                     </StackPanel>
+                    <TextBlock Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="6,176,0,0" Name="textBlock1" Text="Announcement Overlay" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Path=AnnouncementText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="5,205,0,0" Name="textBox1" VerticalAlignment="Top" Width="300" />
+                    <Button Content="Switch" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="308,205,0,0" Name="btnShowAnnouncement" VerticalAlignment="Top" Width="62" Click="btnShowAnnouncement_Click" />
                 </Grid>
             </TabItem>
             <TabItem Header="Options">
