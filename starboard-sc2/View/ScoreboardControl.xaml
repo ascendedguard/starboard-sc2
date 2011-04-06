@@ -66,7 +66,7 @@
             <Grid Margin="5" HorizontalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontFamily="Century Gothic" FontSize="24" FontWeight="Bold" TextOptions.TextHintingMode="Animated" >
@@ -77,7 +77,9 @@
                         </MultiBinding>
                     </TextBlock.Text>
                 </TextBlock>
-                <TextBlock x:Name="txtStatus" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontFamily="Century Gothic" FontSize="18" TextOptions.TextHintingMode="Animated" Text="{Binding SubbarLine1}" />
+
+                <TextBlock x:Name="txtStatus" Visibility="{Binding Path=IsSubbarShowing, Converter={StaticResource BooleanVisibilityConverter}}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontFamily="Century Gothic" FontSize="18" TextOptions.TextHintingMode="Animated" Text="{Binding SubbarLine1}" />
+                
             </Grid>
         </Grid>
     </Grid>

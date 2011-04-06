@@ -101,5 +101,10 @@ namespace Starboard
         {
             this.viewModel.IsAnnouncementTextShowing = !this.viewModel.IsAnnouncementTextShowing;
         }
+
+        private void btnShowSubbar_Click(object sender, RoutedEventArgs e)
+        {
+            this.viewModel.IsSubbarShowing = !this.viewModel.IsSubbarShowing;
+        }
     }
 }

@@ -128,6 +128,15 @@ namespace Starboard.Scoreboard
         public static readonly DependencyProperty IsAnnouncementTextShowingProperty =
             DependencyProperty.Register("IsAnnouncementTextShowing", typeof(bool), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(false));
 
+        public bool IsSubbarShowing
+        {
+            get { return (bool)GetValue(IsSubbarShowingProperty); }
+            set { SetValue(IsSubbarShowingProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsSubbarShowingProperty =
+            DependencyProperty.Register("IsSubbarShowing", typeof(bool), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(true));
+
         
     }
 }

@@ -82,14 +82,15 @@
                             <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarLine3, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <StackPanel Grid.Column="1" VerticalAlignment="Top">
-                            <TextBlock Margin="3,0,3,0" Height="23" Text="Time" />
+                            <TextBlock Margin="3,0,3,0" Height="23" Text="Time To Show, In Seconds" />
                             <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarTime1, UpdateSourceTrigger=PropertyChanged}" />
                             <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarTime2, UpdateSourceTrigger=PropertyChanged}" />
                             <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarTime3, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
-                        <Viewbox Grid.ColumnSpan="2" Margin="3,106,0,27" Name="viewbox1">
+                        <Viewbox Grid.ColumnSpan="2" Margin="3,125,0,6" Name="viewbox1">
                             <Scoreboard:ScoreboardControl x:Name="scoreboardPreview" />
                         </Viewbox>
+                        <Button Content="Toggle Subbar" Grid.Column="1" Height="23" HorizontalAlignment="Left" Margin="66,96,0,0" Name="btnShowSubbar" VerticalAlignment="Top" Width="110" Click="btnShowSubbar_Click" />
                     </Grid>
 
                     <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom">
