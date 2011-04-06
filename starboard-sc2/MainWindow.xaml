@@ -102,9 +102,11 @@
             </TabItem>
             <TabItem Header="Options">
                 <Grid>
-                    <StackPanel>
+                    <StackPanel Margin="5">
                         <CheckBox Content="Allow Scoreboard To Be Moved" Height="16" Checked="WindowMovableChecked" Unchecked="WindowMovableUnchecked"/>
                         <Button Content="Reset Position" Width="100" HorizontalAlignment="Left" Click="ResetPositionClicked" />
+                        <TextBlock Text="Size:" />
+                        <Slider x:Name="sldrSize" />
                     </StackPanel>
 
                     <TextBlock HorizontalAlignment="Right" x:Name="txtBuild" VerticalAlignment="Bottom" Text="Build Version" />

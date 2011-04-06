@@ -11,6 +11,8 @@ namespace Starboard
 {
     using System.Reflection;
     using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Controls.Primitives;
 
     using Starboard.Scoreboard;
 
@@ -36,6 +38,13 @@ namespace Starboard
             this.scoreboardPreview.ViewModel = this.viewModel;
 
             this.desiredWidth = (int)(SystemParameters.PrimaryScreenWidth * .36);
+            this.display.ViewboxWidth = this.desiredWidth;
+
+            this.sldrSize.Minimum = (int)(SystemParameters.PrimaryScreenWidth * .10);
+            this.sldrSize.Maximum = (int)(SystemParameters.PrimaryScreenWidth * .60);
+            this.sldrSize.DataContext = this.display;
+            this.sldrSize.SetBinding(RangeBase.ValueProperty, "ViewboxWidth");
+
 
             this.txtBuild.Text = string.Format("Build: {0}", Assembly.GetExecutingAssembly().GetName().Version);
         }
