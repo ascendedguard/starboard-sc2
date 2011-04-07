@@ -11,11 +11,13 @@ As-is, the application runs as a single executable, no installation required, an
 ** Changes **
 
 v0.2:
-*Scoreboard colors now animate between states
-*Added build number to options screen.
-*Added the ability to add announcement text over the scoreboard
-*Added the ability to resize the scoreboard using a slider.
-*Added the ability to hide the subbar to center the score.
+
+* Scoreboard colors now animate between states
+* Added build number to options screen.
+* Added the ability to add announcement text over the scoreboard
+* Added the ability to resize the scoreboard using a slider.
+* Added the ability to hide the subbar to center the score.
 
 v0.1: 
-*Initial Release
+
+* Initial Release
