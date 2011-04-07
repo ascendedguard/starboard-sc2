@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="Starboard.View.TimedTextControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Height="31" d:Width="367">
+    <Grid x:Name="gridBase">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="40"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Margin="3" Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Margin="3" Grid.Column="1" Text="{Binding Time}" />
+        <Button Margin="5" Grid.Column="2" Content="X" Click="RemoveRowClicked" />
+    </Grid>
+</UserControl>

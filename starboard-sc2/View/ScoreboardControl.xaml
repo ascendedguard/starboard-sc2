@@ -11,12 +11,12 @@
     </UserControl.Resources>
     <Grid>
         <Image Source="/Images/Background.png"/>
-        <Grid Margin="5" Visibility="{Binding Path=IsAnnouncementTextShowing, Converter={StaticResource BooleanVisibilityConverter}}">
-            <TextBlock Text="{Binding AnnouncementText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Century Gothic" FontSize="24" TextOptions.TextHintingMode="Animated"  Foreground="White" />
+        <Grid Margin="5" Visibility="{Binding Path=IsAnnouncementShowing, Converter={StaticResource BooleanVisibilityConverter}}">
+            <TextBlock x:Name="txtAnnouncement" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Century Gothic" FontSize="24" TextOptions.TextHintingMode="Animated"  Foreground="White" />
         </Grid>
         <Grid>
             <Grid.Visibility>
-                <Binding Path="IsAnnouncementTextShowing" Converter="{StaticResource BooleanVisibilityConverter}" ConverterParameter="true"/>
+                <Binding Path="IsAnnouncementShowing" Converter="{StaticResource BooleanVisibilityConverter}" ConverterParameter="true"/>
             </Grid.Visibility>
 
             <!-- Player Colors-->

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
         xmlns:Scoreboard="clr-namespace:Starboard.Scoreboard" 
         xmlns:System="clr-namespace:System;assembly=mscorlib" 
-        xmlns:Model="clr-namespace:Starboard.Model" xmlns:AscendStudio="clr-namespace:Starboard" ResizeMode="NoResize" Title="Starboard" Height="507" Width="407">
+        xmlns:Model="clr-namespace:Starboard.Model" xmlns:AscendStudio="clr-namespace:Starboard" Title="Starboard" Height="648" Width="417">
     <Window.DataContext>
         <Scoreboard:ScoreboardControlViewModel x:Name="viewModel" />
     </Window.DataContext>
@@ -70,35 +70,29 @@
                     </Grid>
 
 
-                    <Grid Margin="5,5,5,91" Grid.Row="1" Height="165">
+                    <Grid Margin="5,6,5,180" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <StackPanel VerticalAlignment="Top">
-                            <TextBlock Margin="3,0,3,0" Height="23" Text="Sub-bar Text" />
-                            <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarLine1, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarLine2, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarLine3, UpdateSourceTrigger=PropertyChanged}" />
-                        </StackPanel>
-                        <StackPanel Grid.Column="1" VerticalAlignment="Top">
-                            <TextBlock Margin="3,0,3,0" Height="23" Text="Time To Show, In Seconds" />
-                            <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarTime1, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarTime2, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBox Height="23" Margin="3,0,3,0" Text="{Binding Path=SubbarTime3, UpdateSourceTrigger=PropertyChanged}" />
-                        </StackPanel>
-                        <Viewbox Grid.ColumnSpan="2" Margin="3,125,0,6" Name="viewbox1">
+                        <TextBlock Margin="15,0,0,0" Text="Sub-bar Text" Height="16" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="1" Text="Time To Show, In Seconds" Height="16" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                        <ListBox HorizontalContentAlignment="Stretch" x:Name="spSubbar" Margin="5,22,5,79" Grid.ColumnSpan="2" />
+                        <Viewbox Grid.ColumnSpan="2" Margin="3,0,0,6" Name="viewbox1" Height="38" VerticalAlignment="Bottom">
                             <Scoreboard:ScoreboardControl x:Name="scoreboardPreview" />
                         </Viewbox>
-                        <Button Content="Toggle Subbar" Grid.Column="1" Height="23" HorizontalAlignment="Left" Margin="66,96,0,0" Name="btnShowSubbar" VerticalAlignment="Top" Width="110" Click="btnShowSubbar_Click" />
+                        <Button Content="Toggle Subbar" Height="23" HorizontalAlignment="Left" Margin="6,0,0,50" Name="btnShowSubbar" VerticalAlignment="Bottom" Width="110" Click="btnShowSubbar_Click" />
+                        <Button Content="Add Subbar" Height="23" HorizontalAlignment="Right" Margin="0,0,6,50" Name="button1" VerticalAlignment="Bottom" Width="110" Grid.Column="1" Click="AddSubbarClicked" />
                     </Grid>
 
-                    <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom">
-                        <Button Grid.Row="1" Grid.Column="1"  Content="Show Scoreboard" Height="26" Click="ShowClicked" />
-                    </StackPanel>
-                    <TextBlock Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="6,176,0,0" Name="textBlock1" Text="Announcement Overlay" VerticalAlignment="Top" />
-                    <TextBox Text="{Binding Path=AnnouncementText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="5,205,0,0" Name="textBox1" VerticalAlignment="Top" Width="300" />
-                    <Button Content="Switch" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="308,205,0,0" Name="btnShowAnnouncement" VerticalAlignment="Top" Width="62" Click="btnShowAnnouncement_Click" />
+                    <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom"  Content="Show Scoreboard" Height="26" Click="ShowClicked" />
+
+                    <Grid Grid.Row="1" Margin="6,0,0,33" VerticalAlignment="Bottom" Height="147">
+                        <TextBlock Height="23" HorizontalAlignment="Left" Margin="6,6,0,0" Name="textBlock1" Text="Announcement Overlay" VerticalAlignment="Top" />
+                        <Button Content="Toggle" Height="23" HorizontalAlignment="Right" Margin="0,6,127,0" Name="btnShowAnnouncement" VerticalAlignment="Top" Width="82" Click="btnShowAnnouncement_Click" />
+                        <ListBox HorizontalContentAlignment="Stretch" x:Name="lbxAnnouncements" Margin="5,35,5,0" />
+                        <Button Content="Add Text" Height="23" HorizontalAlignment="Right" Margin="0,6,11,0" Name="button2" VerticalAlignment="Top" Width="110" Click="AddAnnouncementClicked" />
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Options">

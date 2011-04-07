@@ -8,6 +8,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Starboard.Scoreboard
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Windows;
 
     using Starboard.Model;
@@ -18,30 +20,6 @@ namespace Starboard.Scoreboard
         /// <summary> DependencyProperty for the MatchupType property. </summary>
         public static readonly DependencyProperty MatchupTypeProperty =
             DependencyProperty.Register("MatchupType", typeof(string), typeof(ScoreboardControlViewModel), new UIPropertyMetadata("King of the Hill"));
-
-        /// <summary> DependencyProperty for the SubbarLine1 property. </summary>
-        public static readonly DependencyProperty SubbarLine1Property =
-            DependencyProperty.Register("SubbarLine1", typeof(string), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(string.Empty));
-
-        /// <summary> DependencyProperty for the SubbarLine2 property. </summary>
-        public static readonly DependencyProperty SubbarLine2Property =
-            DependencyProperty.Register("SubbarLine2", typeof(string), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(string.Empty));
-
-        /// <summary> DependencyProperty for the SubbarLine3 property. </summary>
-        public static readonly DependencyProperty SubbarLine3Property =
-            DependencyProperty.Register("SubbarLine3", typeof(string), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(string.Empty));
-
-        /// <summary> DependencyProperty for the SubbarTime1 property. </summary>
-        public static readonly DependencyProperty SubbarTime1Property =
-            DependencyProperty.Register("SubbarTime1", typeof(int), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(10));
-
-        /// <summary> DependencyProperty for the SubbarTime2 property. </summary>
-        public static readonly DependencyProperty SubbarTime2Property =
-            DependencyProperty.Register("SubbarTime2", typeof(int), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(10));
-
-        /// <summary> DependencyProperty for the SubbarTime3 property. </summary>
-        public static readonly DependencyProperty SubbarTime3Property =
-            DependencyProperty.Register("SubbarTime3", typeof(int), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(10));
 
         /// <summary> Holds our first player, which is initialized on creation. </summary>
         private readonly Player player1 = new Player();
@@ -68,48 +46,9 @@ namespace Starboard.Scoreboard
             set { SetValue(MatchupTypeProperty, value); }
         }
 
-        /// <summary> Gets or sets the first line of text to show in the subbar. </summary>
-        public string SubbarLine1
-        {
-            get { return (string)GetValue(SubbarLine1Property); }
-            set { SetValue(SubbarLine1Property, value); }
-        }
-
-        /// <summary> Gets or sets the second line of text to show in the subbar. </summary>
-        public string SubbarLine2
-        {
-            get { return (string)GetValue(SubbarLine2Property); }
-            set { SetValue(SubbarLine2Property, value); }
-        }
-
-        /// <summary> Gets or sets the third line of text to show in the subbar. </summary>
-        public string SubbarLine3
-        {
-            get { return (string)GetValue(SubbarLine3Property); }
-            set { SetValue(SubbarLine3Property, value); }
-        }
-
-        /// <summary> Gets or sets the time, in seconds, to display the first line of text. </summary>
-        public int SubbarTime1
-        {
-            get { return (int)GetValue(SubbarTime1Property); }
-            set { SetValue(SubbarTime1Property, value); }
-        }
-
-        /// <summary> Gets or sets the time, in seconds, to display the second line of text. </summary>
-        public int SubbarTime2
-        {
-            get { return (int)GetValue(SubbarTime2Property); }
-            set { SetValue(SubbarTime2Property, value); }
-        }
-
-        /// <summary> Gets or sets the time, in seconds, to display the third line of text. </summary>
-        public int SubbarTime3
-        {
-            get { return (int)GetValue(SubbarTime3Property); }
-            set { SetValue(SubbarTime3Property, value); }
-        }
-
+        public ObservableCollection<TimedText> SubbarText = new ObservableCollection<TimedText>();
+        public ObservableCollection<TimedText> AnnouncementText = new ObservableCollection<TimedText>();
+        /*
         public string AnnouncementText
         {
             get { return (string)GetValue(AnnouncementTextProperty); }
@@ -118,15 +57,15 @@ namespace Starboard.Scoreboard
 
         public static readonly DependencyProperty AnnouncementTextProperty =
             DependencyProperty.Register("AnnouncementText", typeof(string), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(string.Empty));
-
-        public bool IsAnnouncementTextShowing
+        */
+        public bool IsAnnouncementShowing
         {
-            get { return (bool)GetValue(IsAnnouncementTextShowingProperty); }
-            set { SetValue(IsAnnouncementTextShowingProperty, value); }
+            get { return (bool)GetValue(IsAnnouncementShowingProperty); }
+            set { SetValue(IsAnnouncementShowingProperty, value); }
         }
 
-        public static readonly DependencyProperty IsAnnouncementTextShowingProperty =
-            DependencyProperty.Register("IsAnnouncementTextShowing", typeof(bool), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(false));
+        public static readonly DependencyProperty IsAnnouncementShowingProperty =
+            DependencyProperty.Register("IsAnnouncementShowing", typeof(bool), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(false));
 
         public bool IsSubbarShowing
         {
@@ -135,7 +74,7 @@ namespace Starboard.Scoreboard
         }
 
         public static readonly DependencyProperty IsSubbarShowingProperty =
-            DependencyProperty.Register("IsSubbarShowing", typeof(bool), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(true));
+            DependencyProperty.Register("IsSubbarShowing", typeof(bool), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(false));
 
         
     }

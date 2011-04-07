@@ -9,12 +9,15 @@
 
 namespace Starboard
 {
+    using System;
     using System.Reflection;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
 
+    using Starboard.Model;
     using Starboard.Scoreboard;
+    using Starboard.View;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -99,12 +102,52 @@ namespace Starboard
 
         private void btnShowAnnouncement_Click(object sender, RoutedEventArgs e)
         {
-            this.viewModel.IsAnnouncementTextShowing = !this.viewModel.IsAnnouncementTextShowing;
+            this.viewModel.IsAnnouncementShowing = !this.viewModel.IsAnnouncementShowing;
         }
 
         private void btnShowSubbar_Click(object sender, RoutedEventArgs e)
         {
             this.viewModel.IsSubbarShowing = !this.viewModel.IsSubbarShowing;
+        }
+
+        private void AddSubbarClicked(object sender, RoutedEventArgs e)
+        {
+            TimedText text = new TimedText();
+            var ctrl = new TimedTextControl { TimedText = text };
+
+            ctrl.RowDeleted += this.ctrl_RowDeleted;
+
+            this.viewModel.SubbarText.Add(text);
+            spSubbar.Items.Add(ctrl);
+        }
+
+        void ctrl_RowDeleted(object sender, EventArgs e)
+        {
+            var ctrl = (TimedTextControl)sender;
+
+            this.viewModel.SubbarText.Remove(ctrl.TimedText);
+            ctrl.RowDeleted -= this.ctrl_RowDeleted;
+            spSubbar.Items.Remove(ctrl);
+        }
+
+        private void AddAnnouncementClicked(object sender, RoutedEventArgs e)
+        {
+            TimedText text = new TimedText();
+            var ctrl = new TimedTextControl() { TimedText = text };
+
+            ctrl.RowDeleted += this.AnnouncementRowDeleted;
+
+            this.viewModel.AnnouncementText.Add(text);
+            lbxAnnouncements.Items.Add(ctrl);
+        }
+
+        private void AnnouncementRowDeleted(object sender, EventArgs e)
+        {
+            var ctrl = (TimedTextControl)sender;
+
+            this.viewModel.AnnouncementText.Remove(ctrl.TimedText);
+            ctrl.RowDeleted -= this.ctrl_RowDeleted;
+            lbxAnnouncements.Items.Remove(ctrl);
         }
     }
 }

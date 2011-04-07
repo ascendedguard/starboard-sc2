@@ -53,13 +53,16 @@
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\PlayerColor.cs" />
     <Compile Include="Model\Race.cs" />
-    <Compile Include="Model\SubbarText.cs" />
+    <Compile Include="Model\TimedText.cs" />
     <Compile Include="ViewModel\ScoreboardControlViewModel.cs" />
     <Compile Include="View\ScoreboardControl.xaml.cs">
       <DependentUpon>ScoreboardControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ScoreboardDisplay.xaml.cs">
       <DependentUpon>ScoreboardDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TimedTextControl.xaml.cs">
+      <DependentUpon>TimedTextControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -82,6 +85,10 @@
     <Page Include="View\ScoreboardDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TimedTextControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
