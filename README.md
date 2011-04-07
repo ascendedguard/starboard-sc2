@@ -10,6 +10,12 @@ As-is, the application runs as a single executable, no installation required, an
 
 ** Changes **
 
+v0.3:
+
+* User can change (or remove) announcement and subbar text.
+* User can customize the number of messages.
+* Announcement messages can now rotate similar to subbar text.
+
 v0.2:
 
 * Scoreboard colors now animate between states
