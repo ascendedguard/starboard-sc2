@@ -13,7 +13,6 @@ namespace Starboard.Scoreboard
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
-    using System.Timers;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
@@ -129,8 +128,11 @@ namespace Starboard.Scoreboard
             {
                 if (e.OldStartingIndex == this.previousAnnouncementIndex)
                 {
-                    this.currentAnnouncementTimer.Stop();
-                    this.currentAnnouncementTimer.Dispose();
+                    if (this.currentAnnouncementTimer != null)
+                    {
+                        this.currentAnnouncementTimer.Stop();
+                        this.currentAnnouncementTimer.Dispose();                     
+                    }
 
                     // Go back 1 so we get the next element.
                     this.previousAnnouncementIndex--;
@@ -140,7 +142,7 @@ namespace Starboard.Scoreboard
             }
         }
 
-        void SubbarText_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void SubbarText_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             var s = (ObservableCollection<TimedText>)sender;
 
@@ -184,8 +186,11 @@ namespace Starboard.Scoreboard
             {
                 if (e.OldStartingIndex == this.previousSubbarIndex)
                 {
-                    this.currentSubbarTimer.Stop();
-                    this.currentSubbarTimer.Dispose();
+                    if (this.currentAnnouncementTimer != null)
+                    {
+                        this.currentSubbarTimer.Stop();
+                        this.currentSubbarTimer.Dispose();                        
+                    }
 
                     // Go back 1 so we get the next element.
                     this.previousSubbarIndex--;
