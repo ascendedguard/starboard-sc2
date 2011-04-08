@@ -10,6 +10,10 @@ As-is, the application runs as a single executable, no installation required, an
 
 ** Changes **
 
+v0.3.1:
+
+* Fixed crash when deleting single subbar or announcement messages.
+
 v0.3:
 
 * User can change (or remove) announcement and subbar text.
