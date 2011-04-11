@@ -78,14 +78,17 @@ namespace Starboard.Scoreboard
         {
             public bool changeRace = false;
             public bool changeColor = false;
+            public bool changeScore = false;
 
             public Race race = Race.Unknown;
             public PlayerColor color = PlayerColor.Unknown;
+
+            public int scoreChange = 0;
         }
 
         private HotkeyChanges GetKeyChanges(System.Windows.Input.Key key)
         {
-            HotkeyChanges changes = new HotkeyChanges();
+            var changes = new HotkeyChanges();
 
             switch (key)
             {
@@ -145,6 +148,16 @@ namespace Starboard.Scoreboard
                     changes.changeColor = true;
                     changes.color = PlayerColor.LightPink;
                     break;
+                case System.Windows.Input.Key.OemPlus:
+                case System.Windows.Input.Key.Add:
+                    changes.changeScore = true;
+                    changes.scoreChange = 1;
+                    break;
+                case System.Windows.Input.Key.OemMinus:
+                case System.Windows.Input.Key.Subtract:
+                    changes.changeScore = true;
+                    changes.scoreChange = -1;
+                    break;
             }
 
             return changes;
@@ -167,6 +180,12 @@ namespace Starboard.Scoreboard
                     scoreboardControl.ViewModel.Player1.Race = changes.race;
                     e.Handled = true;
                 }
+
+                if (changes.changeScore)
+                {
+                    scoreboardControl.ViewModel.Player1.Score += changes.scoreChange;
+                    e.Handled = true;                    
+                }
             }
 
             if (e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Alt)
@@ -182,6 +201,12 @@ namespace Starboard.Scoreboard
                 if (changes.changeRace)
                 {
                     scoreboardControl.ViewModel.Player2.Race = changes.race;
+                    e.Handled = true;
+                }
+
+                if (changes.changeScore)
+                {
+                    scoreboardControl.ViewModel.Player2.Score += changes.scoreChange;
                     e.Handled = true;
                 }
             }
