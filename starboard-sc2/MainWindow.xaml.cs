@@ -131,7 +131,7 @@ namespace Starboard
         private void AddAnnouncementClicked(object sender, RoutedEventArgs e)
         {
             TimedText text = new TimedText();
-            var ctrl = new TimedTextControl() { TimedText = text };
+            var ctrl = new TimedTextControl { TimedText = text };
 
             ctrl.RowDeleted += this.AnnouncementRowDeleted;
 
@@ -146,6 +146,11 @@ namespace Starboard
             this.viewModel.AnnouncementText.Remove(ctrl.TimedText);
             ctrl.RowDeleted -= this.ctrl_RowDeleted;
             lbxAnnouncements.Items.Remove(ctrl);
+        }
+
+        private void ResetSize(object sender, RoutedEventArgs e)
+        {
+            this.sldrSize.Value = desiredWidth;
         }
     }
 }
