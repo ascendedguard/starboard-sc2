@@ -116,7 +116,7 @@
                             <TextBlock Grid.Column="1" Text="Time To Show, In Seconds" Height="16" VerticalAlignment="Top" HorizontalAlignment="Left" />
                         	<ListBox Grid.ColumnSpan="2" HorizontalContentAlignment="Stretch" x:Name="lbxAnnouncements" Margin="5,22,5,35" />
                         	<Button Content="Toggle Announcement" Height="23" HorizontalAlignment="Left" Margin="6,0,0,6" Name="btnShowAnnouncement" VerticalAlignment="Bottom" Width="142" Click="btnShowAnnouncement_Click" />
-                        	<Button Content="Add Text" Height="23" HorizontalAlignment="Right" Margin="0,171,6,0" Name="button2" VerticalAlignment="Top" Width="110" Click="AddAnnouncementClicked" Grid.Column="1" />
+                        	<Button Content="Add Text" Height="23" HorizontalAlignment="Right" Margin="0,0,5,6" Name="button2" VerticalAlignment="Bottom" Width="110" Click="AddAnnouncementClicked" Grid.Column="1" />
                         </Grid>
                     </Expander>
 
