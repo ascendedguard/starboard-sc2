@@ -78,8 +78,7 @@
                     </TextBlock.Text>
                 </TextBlock>
 
-                <TextBlock x:Name="txtStatus" Visibility="{Binding Path=IsSubbarShowing, Converter={StaticResource BooleanVisibilityConverter}}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontFamily="Century Gothic" FontSize="18" TextOptions.TextHintingMode="Animated" Text="{Binding SubbarLine1}" />
-                
+                <TextBlock x:Name="txtStatus" Visibility="{Binding Path=IsSubbarShowing, Converter={StaticResource BooleanVisibilityConverter}}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontFamily="Century Gothic" FontSize="18" TextOptions.TextHintingMode="Animated"/>             
             </Grid>
         </Grid>
     </Grid>

@@ -12,7 +12,6 @@ namespace Starboard
     using System;
     using System.Reflection;
     using System.Windows;
-    using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
 
     using Starboard.Model;
@@ -47,7 +46,6 @@ namespace Starboard
             this.sldrSize.Maximum = (int)(SystemParameters.PrimaryScreenWidth * .60);
             this.sldrSize.DataContext = this.display;
             this.sldrSize.SetBinding(RangeBase.ValueProperty, "ViewboxWidth");
-
 
             this.txtBuild.Text = string.Format("Build: {0}", Assembly.GetExecutingAssembly().GetName().Version);
         }

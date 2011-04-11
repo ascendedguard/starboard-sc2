@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
         xmlns:Scoreboard="clr-namespace:Starboard.Scoreboard" 
         xmlns:System="clr-namespace:System;assembly=mscorlib" 
-        xmlns:Model="clr-namespace:Starboard.Model" xmlns:AscendStudio="clr-namespace:Starboard" Title="Starboard" Height="648" Width="417">
+        xmlns:Model="clr-namespace:Starboard.Model" xmlns:AscendStudio="clr-namespace:Starboard" xmlns:View="clr-namespace:Starboard.View" Title="Starboard" Height="679" Width="471">
     <Window.DataContext>
         <Scoreboard:ScoreboardControlViewModel x:Name="viewModel" />
     </Window.DataContext>
@@ -43,7 +43,7 @@
             <TabItem Header="Scoreboard">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="175"/>
+                        <RowDefinition Height="200"/>
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <Grid>
@@ -54,16 +54,16 @@
                         <StackPanel Margin="10">
                             <TextBlock Height="23" HorizontalAlignment="Left" Text="Player 1" VerticalAlignment="Top" />
                             <TextBox Height="23" Text="{Binding Path=Player1.Name, UpdateSourceTrigger=PropertyChanged}" />
-                            <ComboBox Height="23" ItemsSource="{Binding Source={StaticResource RaceTypes}}" SelectedValue="{Binding Player1.Race}" />
-                            <ComboBox Height="23" ItemsSource="{Binding Source={StaticResource PlayerColorTypes}}" SelectedValue="{Binding Player1.Color}" />
+                            <View:RaceSelectionControl SelectedRace="{Binding Path=Player1.Race, Mode=OneWayToSource}"/>
+                            <View:ColorSelectionControl SelectedColor="{Binding Path=Player1.Color, Mode=OneWayToSource}" Height="50" />
                             <TextBlock Height="23" Text="Score" />
                             <TextBox Height="23" Text="{Binding Path=Player1.Score, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <StackPanel Margin="10" Grid.Column="1">
                             <TextBlock Height="23" HorizontalAlignment="Left" Text="Player 2" VerticalAlignment="Top" />
                             <TextBox Height="23" Text="{Binding Path=Player2.Name, UpdateSourceTrigger=PropertyChanged}" />
-                            <ComboBox Height="23" ItemsSource="{Binding Source={StaticResource RaceTypes}}" SelectedValue="{Binding Player2.Race}" />
-                            <ComboBox Height="23" ItemsSource="{Binding Source={StaticResource PlayerColorTypes}}" SelectedValue="{Binding Player2.Color}"/>
+                            <View:RaceSelectionControl SelectedRace="{Binding Path=Player2.Race, Mode=OneWayToSource}"/>
+                            <View:ColorSelectionControl SelectedColor="{Binding Path=Player2.Color, Mode=OneWayToSource}" Height="50" />
                             <TextBlock Height="23" Text="Score" />
                             <TextBox Height="23" Text="{Binding Path=Player2.Score, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>

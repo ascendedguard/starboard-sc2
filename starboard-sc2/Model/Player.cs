@@ -9,7 +9,6 @@
 
 namespace Starboard.Model
 {
-    using System;
     using System.Windows;
 
     public class Player : Freezable
@@ -23,6 +22,9 @@ namespace Starboard.Model
         public static readonly DependencyProperty ColorProperty =
             DependencyProperty.Register("Color", typeof(PlayerColor), typeof(Player), new UIPropertyMetadata(PlayerColor.Unknown, ColorChangedCallback));
 
+        public static readonly DependencyProperty RaceProperty =
+            DependencyProperty.Register("Race", typeof(Race), typeof(Player), new UIPropertyMetadata(Race.Terran));
+
         public event DependencyPropertyChangedEventHandler ColorChanged;
 
         private static void ColorChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -35,9 +37,6 @@ namespace Starboard.Model
             }
         }
 
-        public static readonly DependencyProperty RaceProperty =
-            DependencyProperty.Register("Race", typeof(Race), typeof(Player), new UIPropertyMetadata(Race.Terran));
-        
         public string Name
         {
             get { return (string)GetValue(NameProperty); }
