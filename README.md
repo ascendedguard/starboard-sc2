@@ -8,7 +8,25 @@ Main development is done with Visual Studio 2010 (Express should be supported du
 
 As-is, the application runs as a single executable, no installation required, and has a requirement of .NET 4.0 Client Profile, available as a free download from Microsoft.
 
+** Hotkeys **
+
+As of version 0.4, you can click on the scoreboard and press a hotkey to make an instant change. The following are the supported hotkeys:
+
+* Ctrl+Hotkey = Player 1
+* Alt+Hotkey = Player 2
+
+* PTZR - Change race to Protoss, Terran, Zerg, Random
+* 1-8 - Change player color to choices 1-8, as shown on the main setup.
+* +/- - Increment/Decrement player's score by 1.
+
 ** Changes **
+
+v0.4:
+
+* Added 1-click selections for race and player color
+* You can now shrink the subbar and announcement sections
+* Setup window will auto-size to contents.
+* Added hotkeys for player race, color, and score.
 
 v0.3.1:
 
