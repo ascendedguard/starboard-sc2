@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace Starboard.View
+﻿namespace Starboard.View
 {
+    using System.Windows;
+    using System.Windows.Controls;
+
     using Starboard.Model;
 
     /// <summary>
@@ -33,7 +22,22 @@ namespace Starboard.View
         }
 
         public static readonly DependencyProperty SelectedRaceProperty =
-            DependencyProperty.Register("SelectedRace", typeof(Race), typeof(RaceSelectionControl), new UIPropertyMetadata(Race.Terran));
+            DependencyProperty.Register("SelectedRace", typeof(Race), typeof(RaceSelectionControl), new UIPropertyMetadata(Race.Terran, raceChanged));
+
+        private static void raceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var userControl = (RaceSelectionControl)d;
+            var race = (Race)e.NewValue;
+
+            foreach (RadioButton control in userControl.gridBase.Children)
+            {
+                if ((Race)control.Content == race)
+                {
+                    control.IsChecked = true;
+                    break;
+                }
+            }
+        }
 
         private void RadioButton_Click(object sender, RoutedEventArgs e)
         {

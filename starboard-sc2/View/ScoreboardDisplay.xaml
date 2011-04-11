@@ -4,7 +4,7 @@
         Title="ScoreboardDisplay" AllowsTransparency="False" Topmost="True" ResizeMode="NoResize" WindowStartupLocation="Manual" WindowStyle="None" Background="Transparent" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Scoreboard="clr-namespace:Starboard.Scoreboard" d:DesignHeight="102" d:DesignWidth="723" SizeToContent="WidthAndHeight">
     <Grid x:Name="rootGrid">
         <Viewbox Margin="0" Stretch="Uniform" x:Name="viewBox">
-            <Scoreboard:ScoreboardControl x:Name="scoreboardControl" />
+            <Scoreboard:ScoreboardControl Focusable="True"  x:Name="scoreboardControl" />
         </Viewbox>
     </Grid>
 </Window>

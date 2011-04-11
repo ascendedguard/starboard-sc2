@@ -18,7 +18,7 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <UniformGrid Columns="4">
+    <UniformGrid x:Name="gridBase" Columns="4">
         <RadioButton Click="RadioButton_Click" IsChecked="True">
             <x:Static Member="Model:Race.Terran" />
         </RadioButton>

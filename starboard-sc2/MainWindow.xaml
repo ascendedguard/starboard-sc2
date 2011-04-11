@@ -63,16 +63,16 @@
                         <StackPanel Margin="10">
                             <TextBlock Height="23" HorizontalAlignment="Left" Text="Player 1" VerticalAlignment="Top" />
                             <TextBox Height="23" Text="{Binding Path=Player1.Name, UpdateSourceTrigger=PropertyChanged}" />
-                            <View:RaceSelectionControl SelectedRace="{Binding Path=Player1.Race, Mode=OneWayToSource}"/>
-                            <View:ColorSelectionControl SelectedColor="{Binding Path=Player1.Color, Mode=OneWayToSource}" Height="50" />
+                            <View:RaceSelectionControl SelectedRace="{Binding Path=Player1.Race}"/>
+                            <View:ColorSelectionControl SelectedColor="{Binding Path=Player1.Color}" Height="50" />
                             <TextBlock Height="23" Text="Score" />
                             <TextBox Height="23" Text="{Binding Path=Player1.Score, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <StackPanel Margin="10" Grid.Column="1">
                             <TextBlock Height="23" HorizontalAlignment="Left" Text="Player 2" VerticalAlignment="Top" />
                             <TextBox Height="23" Text="{Binding Path=Player2.Name, UpdateSourceTrigger=PropertyChanged}" />
-                            <View:RaceSelectionControl SelectedRace="{Binding Path=Player2.Race, Mode=OneWayToSource}"/>
-                            <View:ColorSelectionControl SelectedColor="{Binding Path=Player2.Color, Mode=OneWayToSource}" Height="50" />
+                            <View:RaceSelectionControl SelectedRace="{Binding Path=Player2.Race}"/>
+                            <View:ColorSelectionControl SelectedColor="{Binding Path=Player2.Color}" Height="50" />
                             <TextBlock Height="23" Text="Score" />
                             <TextBox Height="23" Text="{Binding Path=Player2.Score, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>

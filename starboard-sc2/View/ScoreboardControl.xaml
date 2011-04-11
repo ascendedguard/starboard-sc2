@@ -1,6 +1,13 @@
 ﻿<UserControl x:Class="Starboard.Scoreboard.ScoreboardControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Scoreboard="clr-namespace:Starboard.Scoreboard" xmlns:AscendStudio="clr-namespace:Starboard" xmlns:Converters="clr-namespace:Starboard.Converters" Height="56" Width="690">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             mc:Ignorable="d" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:Scoreboard="clr-namespace:Starboard.Scoreboard" 
+             xmlns:AscendStudio="clr-namespace:Starboard" 
+             xmlns:Converters="clr-namespace:Starboard.Converters"
+             Height="56" Width="690">
     <UserControl.DataContext>
         <Scoreboard:ScoreboardControlViewModel />
     </UserControl.DataContext>

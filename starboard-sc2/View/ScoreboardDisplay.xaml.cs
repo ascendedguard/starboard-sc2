@@ -11,6 +11,8 @@ namespace Starboard.Scoreboard
 {
     using System.Windows;
 
+    using Starboard.Model;
+
     /// <summary>
     /// Interaction logic for ScoreboardDisplay.xaml
     /// </summary>
@@ -70,6 +72,121 @@ namespace Starboard.Scoreboard
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
             this.ResetPosition();
+        }
+
+        private class HotkeyChanges
+        {
+            public bool changeRace = false;
+            public bool changeColor = false;
+
+            public Race race = Race.Unknown;
+            public PlayerColor color = PlayerColor.Unknown;
+        }
+
+        private HotkeyChanges GetKeyChanges(System.Windows.Input.Key key)
+        {
+            HotkeyChanges changes = new HotkeyChanges();
+
+            switch (key)
+            {
+                case System.Windows.Input.Key.P:
+                    changes.changeRace = true;
+                    changes.race = Race.Protoss;
+                    break;
+                case System.Windows.Input.Key.T:
+                    changes.changeRace = true;
+                    changes.race = Race.Terran;
+                    break;
+                case System.Windows.Input.Key.Z:
+                    changes.changeRace = true;
+                    changes.race = Race.Zerg;
+                    break;
+                case System.Windows.Input.Key.R:
+                    changes.changeRace = true;
+                    changes.race = Race.Random;
+                    break;
+                case System.Windows.Input.Key.D1:
+                case System.Windows.Input.Key.NumPad1:
+                    changes.changeColor = true;
+                    changes.color = PlayerColor.Red;
+                    break;
+                case System.Windows.Input.Key.D2:
+                case System.Windows.Input.Key.NumPad2:
+                    changes.changeColor = true;
+                    changes.color = PlayerColor.Blue;
+                    break;
+                case System.Windows.Input.Key.D3:
+                case System.Windows.Input.Key.NumPad3:
+                    changes.changeColor = true;
+                    changes.color = PlayerColor.Teal;
+                    break;
+                case System.Windows.Input.Key.D4:
+                case System.Windows.Input.Key.NumPad4:
+                    changes.changeColor = true;
+                    changes.color = PlayerColor.Purple;
+                    break;
+                case System.Windows.Input.Key.D5:
+                case System.Windows.Input.Key.NumPad5:
+                    changes.changeColor = true;
+                    changes.color = PlayerColor.Yellow;
+                    break;
+                case System.Windows.Input.Key.D6:
+                case System.Windows.Input.Key.NumPad6:
+                    changes.changeColor = true;
+                    changes.color = PlayerColor.Orange;
+                    break;
+                case System.Windows.Input.Key.D7:
+                case System.Windows.Input.Key.NumPad7:
+                    changes.changeColor = true;
+                    changes.color = PlayerColor.Green;
+                    break;
+                case System.Windows.Input.Key.D8:
+                case System.Windows.Input.Key.NumPad8:
+                    changes.changeColor = true;
+                    changes.color = PlayerColor.LightPink;
+                    break;
+            }
+
+            return changes;
+        }
+
+        protected override void OnKeyDown(System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Control)
+            {
+                var changes = GetKeyChanges(e.Key);
+
+                if (changes.changeColor)
+                {
+                    scoreboardControl.ViewModel.Player1.Color = changes.color;
+                    e.Handled = true;
+                }
+
+                if (changes.changeRace)
+                {
+                    scoreboardControl.ViewModel.Player1.Race = changes.race;
+                    e.Handled = true;
+                }
+            }
+
+            if (e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Alt)
+            {
+                var changes = GetKeyChanges(e.SystemKey);
+
+                if (changes.changeColor)
+                {
+                    scoreboardControl.ViewModel.Player2.Color = changes.color;
+                    e.Handled = true;
+                }
+
+                if (changes.changeRace)
+                {
+                    scoreboardControl.ViewModel.Player2.Race = changes.race;
+                    e.Handled = true;
+                }
+            }
+
+            base.OnKeyDown(e);
         }
     }
 }
