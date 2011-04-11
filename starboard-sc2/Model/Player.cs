@@ -14,7 +14,7 @@ namespace Starboard.Model
     public class Player : Freezable
     {
         public static readonly DependencyProperty ScoreProperty =
-            DependencyProperty.Register("Score", typeof(string), typeof(Player), new UIPropertyMetadata("0"));
+            DependencyProperty.Register("Score", typeof(int), typeof(Player), new UIPropertyMetadata(0));
 
         public static readonly DependencyProperty NameProperty =
             DependencyProperty.Register("Name", typeof(string), typeof(Player), new UIPropertyMetadata("Player"));
@@ -55,9 +55,9 @@ namespace Starboard.Model
             set { SetValue(RaceProperty, value); }
         }
         
-        public string Score
+        public int Score
         {
-            get { return (string)GetValue(ScoreProperty); }
+            get { return (int)GetValue(ScoreProperty); }
             set { SetValue(ScoreProperty, value); }
         }
 

@@ -152,5 +152,15 @@ namespace Starboard
         {
             this.sldrSize.Value = desiredWidth;
         }
+
+        private void IncrementPlayer1Score(object sender, RoutedEventArgs e)
+        {
+            this.viewModel.Player1.Score++;
+        }
+
+        private void IncrementPlayer2Score(object sender, RoutedEventArgs e)
+        {
+            this.viewModel.Player2.Score++;
+        }
     }
 }
