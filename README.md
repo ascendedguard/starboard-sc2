@@ -21,6 +21,11 @@ As of version 0.4, you can click on the scoreboard and press a hotkey to make an
 
 ** Changes **
 
+v0.4.1:
+
+* Fixed not being able to minimize.
+* Added icon
+
 v0.4:
 
 * Added 1-click selections for race and player color
