@@ -35,6 +35,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>StarboardIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xaml">
@@ -125,6 +131,9 @@
     <Resource Include="Images\BlackLogo\BlackRandomLogo.png" />
     <Resource Include="Images\BlackLogo\BlackTerranEagleLogo.png" />
     <Resource Include="Images\BlackLogo\BlackZergLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="StarboardIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
