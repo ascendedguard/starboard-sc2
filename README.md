@@ -21,6 +21,10 @@ As of version 0.4, you can click on the scoreboard and press a hotkey to make an
 
 ** Changes **
 
+v0.4.2:
+
+* Fixed the 1-click buttons not working properly.
+
 v0.4.1:
 
 * Fixed not being able to minimize.
