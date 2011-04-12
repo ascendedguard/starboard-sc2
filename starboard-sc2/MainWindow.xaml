@@ -9,7 +9,7 @@
         Title="Starboard" 
         Width="471"
         SizeToContent="Height"
-        ResizeMode="NoResize">
+        ResizeMode="CanMinimize">
     <Window.DataContext>
         <Scoreboard:ScoreboardControlViewModel x:Name="viewModel" />
     </Window.DataContext>
