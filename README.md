@@ -8,7 +8,7 @@ Main development is done with Visual Studio 2010 (Express should be supported du
 
 As-is, the application runs as a single executable, no installation required, and has a requirement of .NET 4.0 Client Profile, available as a free download from Microsoft.
 
-** Hotkeys **
+**Hotkeys**
 
 As of version 0.4, you can click on the scoreboard and press a hotkey to make an instant change. The following are the supported hotkeys:
 
@@ -19,7 +19,7 @@ As of version 0.4, you can click on the scoreboard and press a hotkey to make an
 * 1-8 - Change player color to choices 1-8, as shown on the main setup.
 * +/- - Increment/Decrement player's score by 1.
 
-** Changes **
+**Changes**
 
 v0.4.2:
 

@@ -116,7 +116,14 @@ namespace Starboard.Scoreboard
                 {
                     var el = s[0];
 
-                    this.currentAnnouncementTimer = new Timer(el.Time * 1000) { AutoReset = false };
+                    var time = el.Time * 1000;
+
+                    if (time <= 0)
+                    {
+                        time = 1000;
+                    }
+
+                    this.currentAnnouncementTimer = new Timer(time) { AutoReset = false };
                     this.currentAnnouncementTimer.Elapsed += this.AnnouncementTimerElapsed;
                     this.currentAnnouncementTimer.Start();
                 }
@@ -174,7 +181,14 @@ namespace Starboard.Scoreboard
                 {
                     var el = s[0];
 
-                    this.currentSubbarTimer = new Timer(el.Time * 1000) { AutoReset = false };
+                    var time = el.Time * 1000;
+
+                    if (time <= 0)
+                    {
+                        time = 1000;
+                    }
+
+                    this.currentSubbarTimer = new Timer(time) { AutoReset = false };
                     this.currentSubbarTimer.Elapsed += this.SubbarTimerElapsed;
                     this.currentSubbarTimer.Start();
                 }
@@ -302,7 +316,14 @@ namespace Starboard.Scoreboard
                     return;
                 }
 
-                this.currentAnnouncementTimer = new Timer(textField.Time * 1000) { AutoReset = false };
+                var time = textField.Time * 1000;
+
+                if (time <= 0)
+                {
+                    time = 1000;
+                }
+
+                this.currentAnnouncementTimer = new Timer(time) { AutoReset = false };
                 this.currentAnnouncementTimer.Elapsed += this.AnnouncementTimerElapsed;
                 this.currentAnnouncementTimer.Start();
             });
@@ -341,7 +362,14 @@ namespace Starboard.Scoreboard
                         return;
                     }
 
-                    this.currentSubbarTimer = new Timer(textField.Time * 1000) { AutoReset = false };
+                    var time = textField.Time * 1000;
+
+                    if (time <= 0)
+                    {
+                        time = 1000;
+                    }
+
+                    this.currentSubbarTimer = new Timer(time) { AutoReset = false };
                     this.currentSubbarTimer.Elapsed += this.SubbarTimerElapsed;
                     this.currentSubbarTimer.Start();
                 });
