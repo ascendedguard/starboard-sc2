@@ -19,16 +19,16 @@
         </Style>
     </UserControl.Resources>
     <UniformGrid x:Name="gridBase" Columns="4">
-        <RadioButton Click="RadioButton_Click" IsChecked="True">
+        <RadioButton Click="RaceButtonClicked" IsChecked="True">
             <x:Static Member="Model:Race.Terran" />
         </RadioButton>
-        <RadioButton Click="RadioButton_Click">
+        <RadioButton Click="RaceButtonClicked">
             <x:Static Member="Model:Race.Zerg" />
         </RadioButton>
-        <RadioButton Click="RadioButton_Click">
+        <RadioButton Click="RaceButtonClicked">
             <x:Static Member="Model:Race.Protoss" />
         </RadioButton>
-        <RadioButton Click="RadioButton_Click">
+        <RadioButton Click="RaceButtonClicked">
             <x:Static Member="Model:Race.Random" />
         </RadioButton>
     </UniformGrid>
