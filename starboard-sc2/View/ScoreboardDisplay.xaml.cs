@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ScoreboardDisplay.xaml.cs" company="Starboard">
-//   Copyright 2011
+//   Copyright © 2011 All Rights Reserved
 // </copyright>
 // <summary>
 //   Interaction logic for ScoreboardDisplay.xaml
