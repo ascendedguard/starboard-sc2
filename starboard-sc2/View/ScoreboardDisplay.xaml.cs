@@ -66,152 +66,101 @@ namespace Starboard.Scoreboard
             }
         }
 
+        /// <summary> Overrides the OnKeyDown event to handled hotkeys for this window. </summary>
+        /// <param name="e"> The event arguments. </param>
+        protected override void OnKeyDown(System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Control)
+            {
+                var result = ApplyHotkey(e.Key, scoreboardControl.ViewModel.Player1);
+                e.Handled = result;
+            }
+
+            if (e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Alt)
+            {
+                var result = ApplyHotkey(e.SystemKey, scoreboardControl.ViewModel.Player2);
+                e.Handled = result;
+            }
+
+            base.OnKeyDown(e);
+        }
+
+        /// <summary> Applies the hotkey for the attached key to the attached player. </summary>
+        /// <param name="key"> The key which was pressed in the hotkey sequence. </param>
+        /// <param name="player"> The player to apply the change to. </param>
+        /// <returns> Whether the key pressed was a valid hotkey, and was applied to the player. </returns>
+        private static bool ApplyHotkey(System.Windows.Input.Key key, Player player)
+        {
+            var handled = true;
+
+            switch (key)
+            {
+                case System.Windows.Input.Key.P:
+                    player.Race = Race.Protoss;
+                    break;
+                case System.Windows.Input.Key.T:
+                    player.Race = Race.Terran;
+                    break;
+                case System.Windows.Input.Key.Z:
+                    player.Race = Race.Zerg;
+                    break;
+                case System.Windows.Input.Key.R:
+                    player.Race = Race.Random;
+                    break;
+                case System.Windows.Input.Key.D1:
+                case System.Windows.Input.Key.NumPad1:
+                    player.Color = PlayerColor.Red;
+                    break;
+                case System.Windows.Input.Key.D2:
+                case System.Windows.Input.Key.NumPad2:
+                    player.Color = PlayerColor.Blue;
+                    break;
+                case System.Windows.Input.Key.D3:
+                case System.Windows.Input.Key.NumPad3:
+                    player.Color = PlayerColor.Teal;
+                    break;
+                case System.Windows.Input.Key.D4:
+                case System.Windows.Input.Key.NumPad4:
+                    player.Color = PlayerColor.Purple;
+                    break;
+                case System.Windows.Input.Key.D5:
+                case System.Windows.Input.Key.NumPad5:
+                    player.Color = PlayerColor.Yellow;
+                    break;
+                case System.Windows.Input.Key.D6:
+                case System.Windows.Input.Key.NumPad6:
+                    player.Color = PlayerColor.Orange;
+                    break;
+                case System.Windows.Input.Key.D7:
+                case System.Windows.Input.Key.NumPad7:
+                    player.Color = PlayerColor.Green;
+                    break;
+                case System.Windows.Input.Key.D8:
+                case System.Windows.Input.Key.NumPad8:
+                    player.Color = PlayerColor.LightPink;
+                    break;
+                case System.Windows.Input.Key.OemPlus:
+                case System.Windows.Input.Key.Add:
+                    player.Score++;
+                    break;
+                case System.Windows.Input.Key.OemMinus:
+                case System.Windows.Input.Key.Subtract:
+                    player.Score--;
+                    break;
+                default:
+                    handled = false;
+                    break;
+            }
+
+            return handled;
+        }
+
         /// <summary> Resets the position of the window after it has completed loading. </summary>
         /// <param name="sender"> The sender. </param>
         /// <param name="e"> The event parameters. </param>
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
             this.ResetPosition();
-        }
-
-        private class HotkeyChanges
-        {
-            public bool changeRace = false;
-            public bool changeColor = false;
-            public bool changeScore = false;
-
-            public Race race = Race.Unknown;
-            public PlayerColor color = PlayerColor.Unknown;
-
-            public int scoreChange = 0;
-        }
-
-        private HotkeyChanges GetKeyChanges(System.Windows.Input.Key key)
-        {
-            var changes = new HotkeyChanges();
-
-            switch (key)
-            {
-                case System.Windows.Input.Key.P:
-                    changes.changeRace = true;
-                    changes.race = Race.Protoss;
-                    break;
-                case System.Windows.Input.Key.T:
-                    changes.changeRace = true;
-                    changes.race = Race.Terran;
-                    break;
-                case System.Windows.Input.Key.Z:
-                    changes.changeRace = true;
-                    changes.race = Race.Zerg;
-                    break;
-                case System.Windows.Input.Key.R:
-                    changes.changeRace = true;
-                    changes.race = Race.Random;
-                    break;
-                case System.Windows.Input.Key.D1:
-                case System.Windows.Input.Key.NumPad1:
-                    changes.changeColor = true;
-                    changes.color = PlayerColor.Red;
-                    break;
-                case System.Windows.Input.Key.D2:
-                case System.Windows.Input.Key.NumPad2:
-                    changes.changeColor = true;
-                    changes.color = PlayerColor.Blue;
-                    break;
-                case System.Windows.Input.Key.D3:
-                case System.Windows.Input.Key.NumPad3:
-                    changes.changeColor = true;
-                    changes.color = PlayerColor.Teal;
-                    break;
-                case System.Windows.Input.Key.D4:
-                case System.Windows.Input.Key.NumPad4:
-                    changes.changeColor = true;
-                    changes.color = PlayerColor.Purple;
-                    break;
-                case System.Windows.Input.Key.D5:
-                case System.Windows.Input.Key.NumPad5:
-                    changes.changeColor = true;
-                    changes.color = PlayerColor.Yellow;
-                    break;
-                case System.Windows.Input.Key.D6:
-                case System.Windows.Input.Key.NumPad6:
-                    changes.changeColor = true;
-                    changes.color = PlayerColor.Orange;
-                    break;
-                case System.Windows.Input.Key.D7:
-                case System.Windows.Input.Key.NumPad7:
-                    changes.changeColor = true;
-                    changes.color = PlayerColor.Green;
-                    break;
-                case System.Windows.Input.Key.D8:
-                case System.Windows.Input.Key.NumPad8:
-                    changes.changeColor = true;
-                    changes.color = PlayerColor.LightPink;
-                    break;
-                case System.Windows.Input.Key.OemPlus:
-                case System.Windows.Input.Key.Add:
-                    changes.changeScore = true;
-                    changes.scoreChange = 1;
-                    break;
-                case System.Windows.Input.Key.OemMinus:
-                case System.Windows.Input.Key.Subtract:
-                    changes.changeScore = true;
-                    changes.scoreChange = -1;
-                    break;
-            }
-
-            return changes;
-        }
-
-        protected override void OnKeyDown(System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Control)
-            {
-                var changes = GetKeyChanges(e.Key);
-
-                if (changes.changeColor)
-                {
-                    scoreboardControl.ViewModel.Player1.Color = changes.color;
-                    e.Handled = true;
-                }
-
-                if (changes.changeRace)
-                {
-                    scoreboardControl.ViewModel.Player1.Race = changes.race;
-                    e.Handled = true;
-                }
-
-                if (changes.changeScore)
-                {
-                    scoreboardControl.ViewModel.Player1.Score += changes.scoreChange;
-                    e.Handled = true;                    
-                }
-            }
-
-            if (e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Alt)
-            {
-                var changes = GetKeyChanges(e.SystemKey);
-
-                if (changes.changeColor)
-                {
-                    scoreboardControl.ViewModel.Player2.Color = changes.color;
-                    e.Handled = true;
-                }
-
-                if (changes.changeRace)
-                {
-                    scoreboardControl.ViewModel.Player2.Race = changes.race;
-                    e.Handled = true;
-                }
-
-                if (changes.changeScore)
-                {
-                    scoreboardControl.ViewModel.Player2.Score += changes.scoreChange;
-                    e.Handled = true;
-                }
-            }
-
-            base.OnKeyDown(e);
         }
     }
 }
