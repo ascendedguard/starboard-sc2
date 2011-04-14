@@ -19,7 +19,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ascend")]
 [assembly: AssemblyProduct("starboard-sc2")]
-[assembly: AssemblyCopyright("Copyright © Ascend 2011")]
+[assembly: AssemblyCopyright("Copyright © Starboard 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
