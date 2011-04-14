@@ -25,28 +25,28 @@
         </Style>
     </UserControl.Resources>
     <UniformGrid x:Name="gridBase" Columns="4">
-        <RadioButton Click="RadioButton_Click">
+        <RadioButton Click="ColorClicked">
             <x:Static Member="Model:PlayerColor.Red" />
         </RadioButton>
-        <RadioButton Click="RadioButton_Click">
+        <RadioButton Click="ColorClicked">
             <x:Static Member="Model:PlayerColor.Blue" />
         </RadioButton>
-        <RadioButton Click="RadioButton_Click">
+        <RadioButton Click="ColorClicked">
             <x:Static Member="Model:PlayerColor.Teal" />
         </RadioButton>
-        <RadioButton Click="RadioButton_Click">
+        <RadioButton Click="ColorClicked">
             <x:Static Member="Model:PlayerColor.Purple" />
         </RadioButton>        
-        <RadioButton Click="RadioButton_Click">
+        <RadioButton Click="ColorClicked">
             <x:Static Member="Model:PlayerColor.Yellow" />
         </RadioButton>        
-        <RadioButton Click="RadioButton_Click">
+        <RadioButton Click="ColorClicked">
             <x:Static Member="Model:PlayerColor.Orange" />
         </RadioButton>        
-        <RadioButton Click="RadioButton_Click">
+        <RadioButton Click="ColorClicked">
             <x:Static Member="Model:PlayerColor.Green" />
         </RadioButton>        
-        <RadioButton Click="RadioButton_Click">
+        <RadioButton Click="ColorClicked">
             <x:Static Member="Model:PlayerColor.LightPink" />
         </RadioButton>
     </UniformGrid>

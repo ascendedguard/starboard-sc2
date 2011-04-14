@@ -16,8 +16,9 @@ namespace Starboard.View
     using Starboard.Model;
 
     /// <summary> 
-    /// Control for providing 1-click control over a player's race. Allows databinding to the selected
-    /// value through the SelectedRace property. 
+    ///         /// <summary> Creates and starts a proper ColorAnimation when the color changes for Player 1. </summary>
+    /// <param name="sender"> The sender. </param>
+    /// <param name="e"> The event arguments. </param>
     /// </summary>
     public partial class RaceSelectionControl
     {
