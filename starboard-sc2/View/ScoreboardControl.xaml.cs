@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ScoreboardControl.xaml.cs" company="Starboard">
-//   Copyright 2011
+//   Copyright © 2011 All Rights Reserved
 // </copyright>
 // <summary>
-//   Interaction logic for ScoreboardControl.xaml
+//   Main control displaying the scoreboard. Has built-in logic for handling transitions and animations.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -23,14 +23,19 @@ namespace Starboard.Scoreboard
 
     using Timer = System.Timers.Timer;
 
-    /// <summary> Interaction logic for ScoreboardControl.xaml </summary>
+    /// <summary> Main control displaying the scoreboard. Has built-in logic for handling transitions and animations. </summary>
     public partial class ScoreboardControl
     {
+        /// <summary> Index of the last subbar item displayed. </summary>
         private int previousSubbarIndex;
+
+        /// <summary> Index of the last announcement item displayed. </summary>
         private int previousAnnouncementIndex;
 
-        /// <summary> Reference to the timer object. We need to kill the timer when the control is disposed. </summary>
+        /// <summary> Reference to the timer handling subbar animations and transitions. </summary>
         private Timer currentSubbarTimer;
+
+        /// <summary> Reference to the timer handling announcement animations and transitions. </summary>
         private Timer currentAnnouncementTimer;
 
         /// <summary> Initializes a new instance of the <see cref="ScoreboardControl"/> class. </summary>
@@ -78,14 +83,17 @@ namespace Starboard.Scoreboard
                 value.Player2.ColorChanged += this.Player2ColorChanged;
 
                 this.previousSubbarIndex = 0;
-                value.SubbarText.CollectionChanged += this.SubbarText_CollectionChanged;
+                value.SubbarText.CollectionChanged += this.SubbarTextCollectionChanged;
 
                 this.previousAnnouncementIndex = 0;
-                value.AnnouncementText.CollectionChanged += this.AnnouncementText_CollectionChanged;
+                value.AnnouncementText.CollectionChanged += this.AnnouncementTextCollectionChanged;
             }
         }
 
-        private void AnnouncementText_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        /// <summary> Handles logic when the number of announcement messages has changed. Starts/stops appropriate timers automatically. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
+        private void AnnouncementTextCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             var s = (ObservableCollection<TimedText>)sender;
 
@@ -149,7 +157,10 @@ namespace Starboard.Scoreboard
             }
         }
 
-        private void SubbarText_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        /// <summary> Handles logic when the number of subbar messages has changed. Starts/stops appropriate timers automatically. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
+        private void SubbarTextCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             var s = (ObservableCollection<TimedText>)sender;
 
@@ -214,14 +225,9 @@ namespace Starboard.Scoreboard
             }
         }
 
-        private void Player2ColorChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            var converter = new PlayerColorConverter();
-            var color = (Color)converter.Convert(e.NewValue, typeof(Color), null, null);
-            var anim = new ColorAnimation(color, new TimeSpan(0, 0, 0, 0, 500));
-            player2Color.BeginAnimation(GradientStop.ColorProperty, anim);
-        }
-
+        /// <summary> Creates and starts a proper ColorAnimation when the color changes for Player 1. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
         private void Player1ColorChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             var converter = new PlayerColorConverter();
@@ -230,6 +236,19 @@ namespace Starboard.Scoreboard
             player1Color.BeginAnimation(GradientStop.ColorProperty, anim);
         }
 
+        /// <summary> Creates and starts a proper ColorAnimation when the color changes for Player 2. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
+        private void Player2ColorChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var converter = new PlayerColorConverter();
+            var color = (Color)converter.Convert(e.NewValue, typeof(Color), null, null);
+            var anim = new ColorAnimation(color, new TimeSpan(0, 0, 0, 0, 500));
+            player2Color.BeginAnimation(GradientStop.ColorProperty, anim);
+        }
+
+        /// <summary> Changes the object which the announcement text is bound, and animates the transition. </summary>
+        /// <param name="newBinding"> The new binding. </param>
         private void ChangeAnnouncementText(BindingBase newBinding)
         {
             // Fade text away.
@@ -286,6 +305,9 @@ namespace Starboard.Scoreboard
             timer.Start();
         }
 
+        /// <summary> Finds the next announcement and setups the proper binding when the announcement timer has elapsed. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
         private void AnnouncementTimerElapsed(object sender, EventArgs e)
         {
             // Just incase we call this manually.
