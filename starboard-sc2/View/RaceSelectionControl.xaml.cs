@@ -24,7 +24,7 @@ namespace Starboard.View
     {
         /// <summary> DependencyProperty for the SelectedRace property. </summary>
         public static readonly DependencyProperty SelectedRaceProperty =
-            DependencyProperty.Register("SelectedRace", typeof(Race), typeof(RaceSelectionControl), new UIPropertyMetadata(Race.Terran, RaceChanged));
+            DependencyProperty.Register("SelectedRace", typeof(Race), typeof(RaceSelectionControl), new FrameworkPropertyMetadata(Race.Terran, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, RaceChanged));
 
         /// <summary> Initializes a new instance of the <see cref="RaceSelectionControl"/> class. </summary>
         public RaceSelectionControl()

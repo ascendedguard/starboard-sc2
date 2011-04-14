@@ -21,7 +21,7 @@ namespace Starboard.View
     {
         /// <summary> DependencyProperty for the SelectedColor property. </summary>
         public static readonly DependencyProperty SelectedColorProperty =
-            DependencyProperty.Register("SelectedColor", typeof(PlayerColor), typeof(ColorSelectionControl), new UIPropertyMetadata(PlayerColor.Unknown, ColorChanged));
+            DependencyProperty.Register("SelectedColor", typeof(PlayerColor), typeof(ColorSelectionControl), new FrameworkPropertyMetadata(PlayerColor.Unknown, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, ColorChanged));
 
         /// <summary> Initializes a new instance of the <see cref="ColorSelectionControl"/> class. </summary>
         public ColorSelectionControl()
