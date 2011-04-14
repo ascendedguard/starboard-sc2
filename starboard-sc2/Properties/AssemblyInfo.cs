@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="AssemblyInfo.cs" company="Starboard">
-//   Copright 2011
+//   Copyright © 2011 All Rights Reserved
 // </copyright>
 // <summary>
 //   AssemblyInfo.cs
