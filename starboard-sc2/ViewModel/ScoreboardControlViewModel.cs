@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ScoreboardControlViewModel.cs" company="Starboard">
-//   Copyright 2011
+//   Copyright © 2011 All Rights Reserved
 // </copyright>
 // <summary>
-//   Defines the ScoreboardControlViewModel type.
+//   ViewModel controlling all the information necessary for databinding the scoreboards.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace Starboard.Scoreboard
 {
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Windows;
 
@@ -21,11 +21,25 @@ namespace Starboard.Scoreboard
         public static readonly DependencyProperty MatchupTypeProperty =
             DependencyProperty.Register("MatchupType", typeof(string), typeof(ScoreboardControlViewModel), new UIPropertyMetadata("King of the Hill"));
 
+        /// <summary> DependencyProperty for the IsAnnouncementShowing property. </summary>
+        public static readonly DependencyProperty IsAnnouncementShowingProperty =
+            DependencyProperty.Register("IsAnnouncementShowing", typeof(bool), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(false));
+
+        /// <summary> DependencyProperty for the IsSubbarShowing property. </summary>
+        public static readonly DependencyProperty IsSubbarShowingProperty =
+            DependencyProperty.Register("IsSubbarShowing", typeof(bool), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(false));
+
         /// <summary> Holds our first player, which is initialized on creation. </summary>
         private readonly Player player1 = new Player();
 
         /// <summary> Holds our second player, which is initialized on creation. </summary>
         private readonly Player player2 = new Player();
+
+        /// <summary> Contains the array of TimedText objects defining the subbar text. </summary>
+        private readonly ObservableCollection<TimedText> subbarText = new ObservableCollection<TimedText>();
+
+        /// <summary> Contains the array of TimedText objects defining the announcement text. </summary>
+        private readonly ObservableCollection<TimedText> announcementText = new ObservableCollection<TimedText>();
 
         /// <summary> Gets the first player's information. </summary>
         public Player Player1
@@ -46,36 +60,36 @@ namespace Starboard.Scoreboard
             set { SetValue(MatchupTypeProperty, value); }
         }
 
-        public ObservableCollection<TimedText> SubbarText = new ObservableCollection<TimedText>();
-        public ObservableCollection<TimedText> AnnouncementText = new ObservableCollection<TimedText>();
-        /*
-        public string AnnouncementText
+        /// <summary> Gets the array containing the subbar text fields. </summary>
+        public ObservableCollection<TimedText> SubbarText
         {
-            get { return (string)GetValue(AnnouncementTextProperty); }
-            set { SetValue(AnnouncementTextProperty, value); }
+            get
+            {
+                return this.subbarText;
+            }
         }
 
-        public static readonly DependencyProperty AnnouncementTextProperty =
-            DependencyProperty.Register("AnnouncementText", typeof(string), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(string.Empty));
-        */
+        /// <summary> Gets the array containing the announcement text fields. </summary>
+        public ObservableCollection<TimedText> AnnouncementText
+        {
+            get
+            {
+                return this.announcementText;
+            }
+        }
+
+        /// <summary> Gets or sets a value indicating whether the announcement is showing. </summary>
         public bool IsAnnouncementShowing
         {
             get { return (bool)GetValue(IsAnnouncementShowingProperty); }
             set { SetValue(IsAnnouncementShowingProperty, value); }
         }
 
-        public static readonly DependencyProperty IsAnnouncementShowingProperty =
-            DependencyProperty.Register("IsAnnouncementShowing", typeof(bool), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(false));
-
+        /// <summary> Gets or sets a value indicating whether the subbar is showing. </summary>
         public bool IsSubbarShowing
         {
             get { return (bool)GetValue(IsSubbarShowingProperty); }
             set { SetValue(IsSubbarShowingProperty, value); }
         }
-
-        public static readonly DependencyProperty IsSubbarShowingProperty =
-            DependencyProperty.Register("IsSubbarShowing", typeof(bool), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(false));
-
-        
     }
 }
