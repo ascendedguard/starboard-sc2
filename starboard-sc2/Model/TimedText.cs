@@ -1,7 +1,17 @@
-﻿namespace Starboard.Model
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TimedText.cs" company="Starboard">
+//   Copyright © 2011 All Rights Reserved
+// </copyright>
+// <summary>
+//   Simple class containing a Time, in seconds, and associated Text.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Starboard.Model
 {
     using System.ComponentModel;
 
+    /// <summary> Simple class containing a Time, in seconds, and associated Text. </summary>
     public class TimedText : INotifyPropertyChanged
     {
         /// <summary> Time delay to show the text, in seconds. </summary>
@@ -10,6 +20,7 @@
         /// <summary> Message text </summary>
         private string text = string.Empty;
 
+        /// <summary> PropertyChanged event, indiciating a class Property has changed. </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary> Gets or sets the text to be displayed. </summary>
@@ -42,11 +53,14 @@
             }
         }
 
+        /// <summary> Triggers the PropertyChanged event for the requested property. </summary>
+        /// <param name="property"> The property name. </param>
         private void OnPropertyChanged(string property)
         {
-            if (this.PropertyChanged != null)
+            var handler = this.PropertyChanged;
+            if (handler != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(property));
+                handler(this, new PropertyChangedEventArgs(property));
             }
         }
     }
