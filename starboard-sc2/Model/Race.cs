@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Race.cs" company="Starboard">
-//   Copyright 2011
+//   Copyright © 2011 All Rights Reserved
 // </copyright>
 // <summary>
 //   Defines the possible races of a player.
