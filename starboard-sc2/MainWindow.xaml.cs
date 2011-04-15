@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MainWindow.xaml.cs" company="Starboard">
-//   Copyright 2011
+//   Copyright © 2011 All Rights Reserved
 // </copyright>
 // <summary>
 //   Interaction logic for MainWindow.xaml
@@ -98,39 +98,54 @@ namespace Starboard
             this.display.ResetPosition();
         }
 
-        private void btnShowAnnouncement_Click(object sender, RoutedEventArgs e)
+        /// <summary> Handles when the Show Announcement button is clicked. Toggles whether announcements are showing. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
+        private void ShowAnnouncementClicked(object sender, RoutedEventArgs e)
         {
             this.viewModel.IsAnnouncementShowing = !this.viewModel.IsAnnouncementShowing;
         }
 
-        private void btnShowSubbar_Click(object sender, RoutedEventArgs e)
+        /// <summary> Handles when the Show Subbar button is clicked. Toggles whether the subbar is showing. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
+        private void ShowSubbarClicked(object sender, RoutedEventArgs e)
         {
             this.viewModel.IsSubbarShowing = !this.viewModel.IsSubbarShowing;
         }
 
+        /// <summary> Adds a new TimedTextControl to the Subbar list. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
         private void AddSubbarClicked(object sender, RoutedEventArgs e)
         {
-            TimedText text = new TimedText();
+            var text = new TimedText();
             var ctrl = new TimedTextControl { TimedText = text };
 
-            ctrl.RowDeleted += this.ctrl_RowDeleted;
+            ctrl.RowDeleted += this.SubbarRowDeleted;
 
             this.viewModel.SubbarText.Add(text);
             spSubbar.Items.Add(ctrl);
         }
 
-        void ctrl_RowDeleted(object sender, EventArgs e)
+        /// <summary> Handles when a TimedTextControl requests to be removed. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
+        private void SubbarRowDeleted(object sender, EventArgs e)
         {
             var ctrl = (TimedTextControl)sender;
 
             this.viewModel.SubbarText.Remove(ctrl.TimedText);
-            ctrl.RowDeleted -= this.ctrl_RowDeleted;
+            ctrl.RowDeleted -= this.SubbarRowDeleted;
             spSubbar.Items.Remove(ctrl);
         }
 
+        /// <summary> Adds a new TimedTextControl to the Announcement list. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
         private void AddAnnouncementClicked(object sender, RoutedEventArgs e)
         {
-            TimedText text = new TimedText();
+            var text = new TimedText();
             var ctrl = new TimedTextControl { TimedText = text };
 
             ctrl.RowDeleted += this.AnnouncementRowDeleted;
@@ -139,25 +154,37 @@ namespace Starboard
             lbxAnnouncements.Items.Add(ctrl);
         }
 
+        /// <summary> Handles when a TimedTextControl requests to be removed. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
         private void AnnouncementRowDeleted(object sender, EventArgs e)
         {
             var ctrl = (TimedTextControl)sender;
 
             this.viewModel.AnnouncementText.Remove(ctrl.TimedText);
-            ctrl.RowDeleted -= this.ctrl_RowDeleted;
+            ctrl.RowDeleted -= this.SubbarRowDeleted;
             lbxAnnouncements.Items.Remove(ctrl);
         }
 
+        /// <summary> Resets the Size slider to it's default value. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
         private void ResetSize(object sender, RoutedEventArgs e)
         {
-            this.sldrSize.Value = desiredWidth;
+            this.sldrSize.Value = this.desiredWidth;
         }
 
+        /// <summary> Increments player 1's score by 1. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
         private void IncrementPlayer1Score(object sender, RoutedEventArgs e)
         {
             this.viewModel.Player1.Score++;
         }
 
+        /// <summary> Increments player 2's score by 1. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
         private void IncrementPlayer2Score(object sender, RoutedEventArgs e)
         {
             this.viewModel.Player2.Score++;
