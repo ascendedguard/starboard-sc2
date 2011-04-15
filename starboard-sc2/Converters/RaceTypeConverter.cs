@@ -1,4 +1,13 @@
-﻿namespace Starboard.Scoreboard
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="RaceTypeConverter.cs" company="Starboard">
+//   Copyright © 2011 All Rights Reserved
+// </copyright>
+// <summary>
+//   Converts a Race to an appropriate image. If "black" is passed in as a parameter, an appropriate black icon is returned.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Starboard.Scoreboard
 {
     using System;
     using System.Globalization;
@@ -8,21 +17,39 @@
 
     using Starboard.Model;
 
+    /// <summary> Converts a Race to an appropriate image. If "black" is passed in as a parameter, an appropriate black icon is returned. </summary>
     public class RaceTypeConverter : IValueConverter
     {
-        // White logos
-        private static readonly ImageSource zergIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/ZergLogo.png"));
-        private static readonly ImageSource terranIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/TerranEagleLogo.png"));
-        private static readonly ImageSource protossIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/ProtossLogo.png"));
-        private static readonly ImageSource randomIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/RandomLogo.png"));
+        /// <summary> Assembly-embedded location of the white zerg icon. </summary>
+        private static readonly ImageSource ZergIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/ZergLogo.png"));
 
-        // Black logos
-        private static readonly ImageSource zergBlackIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/BlackLogo/BlackZergLogo.png"));
-        private static readonly ImageSource terranBlackIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/BlackLogo/BlackTerranEagleLogo.png"));
-        private static readonly ImageSource protossBlackIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/BlackLogo/BlackProtossLogo.png"));
-        private static readonly ImageSource randomBlackIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/BlackLogo/BlackRandomLogo.png"));
+        /// <summary> Assembly-embedded location of the white terran icon. </summary>
+        private static readonly ImageSource TerranIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/TerranEagleLogo.png"));
 
+        /// <summary> Assembly-embedded location of the white protoss icon. </summary>
+        private static readonly ImageSource ProtossIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/ProtossLogo.png"));
 
+        /// <summary> Assembly-embedded location of the white random icon. </summary>
+        private static readonly ImageSource RandomIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/RandomLogo.png"));
+
+        /// <summary> Assembly-embedded location of the black zerg icon. </summary>
+        private static readonly ImageSource ZergBlackIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/BlackLogo/BlackZergLogo.png"));
+
+        /// <summary> Assembly-embedded location of the black terran icon. </summary>
+        private static readonly ImageSource TerranBlackIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/BlackLogo/BlackTerranEagleLogo.png"));
+
+        /// <summary> Assembly-embedded location of the black protoss icon. </summary>
+        private static readonly ImageSource ProtossBlackIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/BlackLogo/BlackProtossLogo.png"));
+
+        /// <summary> Assembly-embedded location of the black random icon. </summary>
+        private static readonly ImageSource RandomBlackIcon = new BitmapImage(new Uri("pack://application:,,,/starboard-sc2;component/Images/BlackLogo/BlackRandomLogo.png"));
+
+        /// <summary> Returns an ImageSource for the given Race enumeration. </summary>
+        /// <param name="value"> The value. </param>
+        /// <param name="targetType"> The target type. </param>
+        /// <param name="parameter"> The parameter. If "black", a black ImageSource is returned. </param>
+        /// <param name="culture"> The culture. </param>
+        /// <returns> Returns a white ImageSource of the given race. If "black" is used as a parameter, a black ImageSource is returned. </returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
@@ -39,13 +66,13 @@
                     switch (race)
                     {
                         case Race.Protoss:
-                            return protossBlackIcon;
+                            return ProtossBlackIcon;
                         case Race.Terran:
-                            return terranBlackIcon;
+                            return TerranBlackIcon;
                         case Race.Zerg:
-                            return zergBlackIcon;
+                            return ZergBlackIcon;
                         case Race.Random:
-                            return randomBlackIcon;
+                            return RandomBlackIcon;
                     }
                 }
             }
@@ -53,18 +80,25 @@
             switch (race)
             {
                 case Race.Protoss:
-                    return protossIcon;
+                    return ProtossIcon;
                 case Race.Terran:
-                    return terranIcon;
+                    return TerranIcon;
                 case Race.Zerg:
-                    return zergIcon;
+                    return ZergIcon;
                 case Race.Random:
-                    return randomIcon;
+                    return RandomIcon;
             }
 
             return null;
         }
 
+        /// <summary> Not Implemented. </summary>
+        /// <param name="value"> The value. </param>
+        /// <param name="targetType"> The target type. </param>
+        /// <param name="parameter"> The parameter. </param>
+        /// <param name="culture"> The culture. </param>
+        /// <returns> Throws a NotImplementedException </returns>
+        /// <exception cref="NotImplementedException"> Always thrown. This function is not used. </exception>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
