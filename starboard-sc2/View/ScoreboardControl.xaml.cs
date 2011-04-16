@@ -137,11 +137,6 @@ namespace Starboard.Scoreboard
 
                     var time = el.Time * 1000;
 
-                    if (time <= 0)
-                    {
-                        time = 1000;
-                    }
-
                     this.currentAnnouncementTimer = new Timer(time) { AutoReset = false };
                     this.currentAnnouncementTimer.Elapsed += this.AnnouncementTimerElapsed;
                     this.currentAnnouncementTimer.Start();
@@ -204,11 +199,6 @@ namespace Starboard.Scoreboard
                     var el = s[0];
 
                     var time = el.Time * 1000;
-
-                    if (time <= 0)
-                    {
-                        time = 1000;
-                    }
 
                     this.currentSubbarTimer = new Timer(time) { AutoReset = false };
                     this.currentSubbarTimer.Elapsed += this.SubbarTimerElapsed;
@@ -349,11 +339,6 @@ namespace Starboard.Scoreboard
 
                 var time = textField.Time * 1000;
 
-                if (time <= 0)
-                {
-                    time = 1000;
-                }
-
                 this.currentAnnouncementTimer = new Timer(time) { AutoReset = false };
                 this.currentAnnouncementTimer.Elapsed += this.AnnouncementTimerElapsed;
                 this.currentAnnouncementTimer.Start();
@@ -394,11 +379,6 @@ namespace Starboard.Scoreboard
                     }
 
                     var time = textField.Time * 1000;
-
-                    if (time <= 0)
-                    {
-                        time = 1000;
-                    }
 
                     this.currentSubbarTimer = new Timer(time) { AutoReset = false };
                     this.currentSubbarTimer.Elapsed += this.SubbarTimerElapsed;
