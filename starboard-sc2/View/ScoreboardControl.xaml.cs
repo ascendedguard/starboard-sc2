@@ -88,10 +88,10 @@ namespace Starboard.Scoreboard
 
                 this.DataContext = value;
 
-                this.playerOneObserver = new PropertyObserver<Player>(value.Player1).RegisterHandler(
-                    n => n.Color, this.Player1ColorChanged);
-                this.playerTwoObserver = new PropertyObserver<Player>(value.Player2).RegisterHandler(
-                    n => n.Color, this.Player2ColorChanged);
+                this.playerOneObserver = new PropertyObserver<Player>(value.Player1)
+                    .RegisterHandler(n => n.Color, this.Player1ColorChanged);
+                this.playerTwoObserver = new PropertyObserver<Player>(value.Player2)
+                    .RegisterHandler(n => n.Color, this.Player2ColorChanged);
 
                 this.previousSubbarIndex = 0;
                 value.SubbarText.CollectionChanged += this.SubbarTextCollectionChanged;
