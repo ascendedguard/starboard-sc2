@@ -20,12 +20,19 @@ namespace Starboard.Scoreboard
     using System.Windows.Media.Animation;
 
     using Starboard.Model;
+    using Starboard.MVVM;
 
     using Timer = System.Timers.Timer;
 
     /// <summary> Main control displaying the scoreboard. Has built-in logic for handling transitions and animations. </summary>
     public partial class ScoreboardControl
     {
+        /// <summary> Used to keep a reference to the property observer used for player one. </summary>
+        private PropertyObserver<Player> playerOneObserver;
+
+        /// <summary> Used to keep a reference to the property observer used for player two. </summary>
+        private PropertyObserver<Player> playerTwoObserver;
+
         /// <summary> Index of the last subbar item displayed. </summary>
         private int previousSubbarIndex;
 
@@ -69,18 +76,22 @@ namespace Starboard.Scoreboard
 
             set
             {
-                // Unbind from old datacontext.
-                var oldContext = this.DataContext as ScoreboardControlViewModel;
-                if (oldContext != null)
+                if (this.playerOneObserver != null)
                 {
-                    oldContext.Player1.ColorChanged -= this.Player1ColorChanged;
-                    oldContext.Player2.ColorChanged -= this.Player2ColorChanged;                    
+                    this.playerOneObserver.UnregisterHandler(n => n.Color);
+                }
+                
+                if (this.playerTwoObserver != null)
+                {
+                    this.playerTwoObserver.UnregisterHandler(n => n.Color);
                 }
 
                 this.DataContext = value;
 
-                value.Player1.ColorChanged += this.Player1ColorChanged;
-                value.Player2.ColorChanged += this.Player2ColorChanged;
+                this.playerOneObserver = new PropertyObserver<Player>(value.Player1).RegisterHandler(
+                    n => n.Color, this.Player1ColorChanged);
+                this.playerTwoObserver = new PropertyObserver<Player>(value.Player2).RegisterHandler(
+                    n => n.Color, this.Player2ColorChanged);
 
                 this.previousSubbarIndex = 0;
                 value.SubbarText.CollectionChanged += this.SubbarTextCollectionChanged;
@@ -225,24 +236,22 @@ namespace Starboard.Scoreboard
             }
         }
 
-        /// <summary> Creates and starts a proper ColorAnimation when the color changes for Player 1. </summary>
-        /// <param name="sender"> The sender. </param>
-        /// <param name="e"> The event arguments. </param>
-        private void Player1ColorChanged(object sender, DependencyPropertyChangedEventArgs e)
+        /// <summary> Creates and starts a proper ColorAnimation when the color changes for Player 1.  </summary>
+        /// <param name="player"> The player. </param>
+        private void Player1ColorChanged(Player player)
         {
             var converter = new PlayerColorConverter();
-            var color = (Color)converter.Convert(e.NewValue, typeof(Color), null, null);
+            var color = (Color)converter.Convert(player.Color, typeof(Color), null, null);
             var anim = new ColorAnimation(color, new TimeSpan(0, 0, 0, 0, 500));
             player1Color.BeginAnimation(GradientStop.ColorProperty, anim);
         }
 
-        /// <summary> Creates and starts a proper ColorAnimation when the color changes for Player 2. </summary>
-        /// <param name="sender"> The sender. </param>
-        /// <param name="e"> The event arguments. </param>
-        private void Player2ColorChanged(object sender, DependencyPropertyChangedEventArgs e)
+        /// <summary> Creates and starts a proper ColorAnimation when the color changes for Player 2.  </summary>
+        /// <param name="player"> The player. </param>
+        private void Player2ColorChanged(Player player)
         {
             var converter = new PlayerColorConverter();
-            var color = (Color)converter.Convert(e.NewValue, typeof(Color), null, null);
+            var color = (Color)converter.Convert(player.Color, typeof(Color), null, null);
             var anim = new ColorAnimation(color, new TimeSpan(0, 0, 0, 0, 500));
             player2Color.BeginAnimation(GradientStop.ColorProperty, anim);
         }

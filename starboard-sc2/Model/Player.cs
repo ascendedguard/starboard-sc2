@@ -3,89 +3,86 @@
 //   Copyright © 2011 All Rights Reserved
 // </copyright>
 // <summary>
-//   Model for a Player, containing the player's name, color, race and score, implemented as a DependencyObject.
+//   Model for a Player, containing the player's name, color, race and score.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Starboard.Model
 {
-    using System.Windows;
+    using Starboard.MVVM;
 
-    /// <summary> Model for a Player, containing the player's name, color, race and score, implemented as a DependencyObject. </summary>
-    public class Player : Freezable
+    /// <summary> Model for a Player, containing the player's name, color, race and score.</summary>
+    public class Player : ObservableObject
     {
-        /// <summary> DependencyProperty for the Name property. </summary>
-        public static readonly DependencyProperty NameProperty =
-            DependencyProperty.Register("Name", typeof(string), typeof(Player), new UIPropertyMetadata("Player"));
+        /// <summary> The player's name, defaulting to "Player". </summary>
+        private string name = "Player";
 
-        /// <summary> DependencyProperty for the Color property. </summary>
-        public static readonly DependencyProperty ColorProperty =
-            DependencyProperty.Register("Color", typeof(PlayerColor), typeof(Player), new UIPropertyMetadata(PlayerColor.Unknown, ColorChangedCallback));
+        /// <summary> The player's color, default to "Unknown" </summary>
+        private PlayerColor color = PlayerColor.Unknown;
 
-        /// <summary> DependencyProperty for the Race property. </summary>
-        public static readonly DependencyProperty RaceProperty =
-            DependencyProperty.Register("Race", typeof(Race), typeof(Player), new UIPropertyMetadata(Race.Terran));
+        /// <summary> The player's race, defaulting to terran. </summary>
+        private Race race = Race.Terran;
 
-        /// <summary> DependencyProperty for the Score property. </summary>
-        public static readonly DependencyProperty ScoreProperty =
-            DependencyProperty.Register("Score", typeof(int), typeof(Player), new UIPropertyMetadata(0));
+        /// <summary> The current score, starting at 0. </summary>
+        private int score;
 
-        /// <summary> Triggers when the player's color changes. </summary>
-        public event DependencyPropertyChangedEventHandler ColorChanged;
-
-        /// <summary>
-        /// Gets or sets the player name.
-        /// </summary>
+        /// <summary> Gets or sets the name of the player. </summary>
         public string Name
         {
-            get { return (string)GetValue(NameProperty); }
-            set { SetValue(NameProperty, value); }
+            get 
+            { 
+                return this.name; 
+            }
+
+            set
+            {
+                this.name = value;
+                RaisePropertyChanged("Name");
+            }
         }
 
-        /// <summary>
-        /// Gets or sets the player color.
-        /// </summary>
+        /// <summary> Gets or sets the color of the player. </summary>
         public PlayerColor Color
         {
-            get { return (PlayerColor)GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
+            get
+            {
+                return this.color;
+            }
+
+            set
+            {
+                this.color = value;
+                RaisePropertyChanged("Color");
+            }
         }
 
-        /// <summary>
-        /// Gets or sets the race of the player.
-        /// </summary>
+        /// <summary> Gets or sets the race of the player. </summary>
         public Race Race
         {
-            get { return (Race)GetValue(RaceProperty); }
-            set { SetValue(RaceProperty, value); }
+            get
+            {
+                return this.race;
+            }
+
+            set
+            {
+                this.race = value;
+                RaisePropertyChanged("Race");
+            }
         }
 
-        /// <summary>
-        /// Gets or sets the current score.
-        /// </summary>
+        /// <summary> Gets or sets the player's current score. </summary>
         public int Score
         {
-            get { return (int)GetValue(ScoreProperty); }
-            set { SetValue(ScoreProperty, value); }
-        }
-
-        /// <summary> Implementation for a Freezable object. </summary>
-        /// <returns> A new instance of the Player class. </returns>
-        protected override Freezable CreateInstanceCore()
-        {
-            return new Player();
-        }
-
-        /// <summary> Triggers the event saying the PlayerColor has changed, for the ScoreboardControl object. </summary>
-        /// <param name="d"> The dependency object the change has occured to. </param>
-        /// <param name="e"> The event arguments containing the new color value. </param>
-        private static void ColorChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var player = (Player)d;
-
-            if (player.ColorChanged != null)
+            get
             {
-                player.ColorChanged(d, e);
+                return this.score;
+            }
+
+            set
+            {
+                this.score = value;
+                RaisePropertyChanged("Score");
             }
         }
     }
