@@ -60,6 +60,8 @@
     <Compile Include="Model\PlayerColor.cs" />
     <Compile Include="Model\Race.cs" />
     <Compile Include="Model\TimedText.cs" />
+    <Compile Include="MVVM\ObservableObject.cs" />
+    <Compile Include="MVVM\RelayCommand.cs" />
     <Compile Include="ViewModel\ScoreboardControlViewModel.cs" />
     <Compile Include="View\ColorSelectionControl.xaml.cs">
       <DependentUpon>ColorSelectionControl.xaml</DependentUpon>
