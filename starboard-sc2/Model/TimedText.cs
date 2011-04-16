@@ -45,7 +45,8 @@ namespace Starboard.Model
 
             set
             {
-                this.time = value;
+                this.time = value < 1 ? 1 : value;
+
                 this.RaisePropertyChanged("Time");
             }
         }
