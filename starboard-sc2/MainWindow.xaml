@@ -141,6 +141,7 @@
                             <Slider x:Name="sldrSize" />
                             <Button Grid.Column="1" Content="Reset" Click="ResetSize" />
                         </Grid>
+                        <CheckBox Margin="2" Content="Allow Transparency" Checked="TransparencyOptionChecked" Unchecked="TransparencyOptionUnchecked" />
                     </StackPanel>
 
                     <TextBlock HorizontalAlignment="Right" x:Name="txtBuild" VerticalAlignment="Bottom" Text="Build Version" />

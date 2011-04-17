@@ -24,7 +24,7 @@ namespace Starboard
     public partial class MainWindow
     {
         /// <summary> Window controlling the scoreboard display </summary>
-        private readonly ScoreboardDisplay display = new ScoreboardDisplay();
+        private ScoreboardDisplay display = new ScoreboardDisplay();
 
         /// <summary> The desired width of the viewbox in the display window, based on the screen resolution. </summary>
         private readonly int desiredWidth;
@@ -188,6 +188,30 @@ namespace Starboard
         private void IncrementPlayer2Score(object sender, RoutedEventArgs e)
         {
             this.viewModel.Player2.Score++;
+        }
+
+        /// <summary> Recreates the scoreboard display to allow transparency. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
+        private void TransparencyOptionChecked(object sender, RoutedEventArgs e)
+        {
+            this.display.Close();
+            this.display = null;
+
+            this.display = new ScoreboardDisplay { AllowsTransparency = true };
+            this.display.SetViewModel(this.viewModel);
+        }
+
+        /// <summary> Recreates the scoreboard display to turn off transparency. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
+        private void TransparencyOptionUnchecked(object sender, RoutedEventArgs e)
+        {
+            this.display.Close();
+            this.display = null;
+
+            this.display = new ScoreboardDisplay { AllowsTransparency = false };
+            this.display.SetViewModel(this.viewModel);
         }
     }
 }

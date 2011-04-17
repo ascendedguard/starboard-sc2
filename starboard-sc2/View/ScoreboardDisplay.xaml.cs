@@ -9,7 +9,9 @@
 
 namespace Starboard.Scoreboard
 {
+    using System;
     using System.Windows;
+    using System.Windows.Media.Animation;
 
     using Starboard.Model;
 
@@ -52,6 +54,35 @@ namespace Starboard.Scoreboard
         public void SetViewModel(ScoreboardControlViewModel vm)
         {
             scoreboardControl.ViewModel = vm;
+        }
+
+        /// <summary> Overrides the original Show function to support a fade-in effect in cases where transparency is used. </summary>
+        public new void Show()
+        {
+            if (this.AllowsTransparency)
+            {
+                scoreboardControl.Opacity = 0;
+            }
+
+            base.Show();
+
+            if (this.AllowsTransparency)
+            {
+                var animation = new DoubleAnimation(1, new Duration(new TimeSpan(0, 0, 0, 1)));
+                scoreboardControl.BeginAnimation(OpacityProperty, animation);
+            }
+        }
+
+        /// <summary> Overrides the original Hide function to support fading in cases where transparency is used. </summary>
+        public new void Hide()
+        {
+            if (this.AllowsTransparency)
+            {
+                var animation = new DoubleAnimation(0, new Duration(new TimeSpan(0, 0, 0, 1)));
+                Action hideAction = base.Hide;
+                animation.Completed += (sender, e) => hideAction();
+                scoreboardControl.BeginAnimation(OpacityProperty, animation);
+            }
         }
 
         /// <summary> Allows the window to be dragged if IsWindowMovable has been set. </summary>
