@@ -20,6 +20,9 @@ namespace Starboard.Scoreboard
     /// </summary>
     public partial class ScoreboardDisplay
     {
+        /// <summary> The opacity used by the scoreboard when visible. The maximum value used during transitions. </summary>
+        private double maxOpacity = 1;
+
         /// <summary> Initializes a new instance of the <see cref="ScoreboardDisplay"/> class. </summary>
         public ScoreboardDisplay()
         {
@@ -38,6 +41,26 @@ namespace Starboard.Scoreboard
 
         /// <summary> Gets or sets a value indicating whether the window can be dragged. </summary>
         public bool IsWindowMovable { get; set; }
+
+        /// <summary> Gets or sets the maximum opacity used by the scoreboard. </summary>
+        public double MaxOpacity
+        {
+            get
+            {
+                return this.maxOpacity;
+            }
+
+            set
+            {
+                this.maxOpacity = value;
+                if (scoreboardControl.IsVisible)
+                {
+                    // Applying the opacity without an animation results in no change. Is there a better way?
+                    var animation = new DoubleAnimation(value, new Duration(new TimeSpan(0, 0, 0, 0)));
+                    scoreboardControl.BeginAnimation(OpacityProperty, animation);
+                }
+            }
+        }
 
         /// <summary> Resets the position of the window to the default location, centered on the primary monitor with a 10px offset from top. </summary>
         public void ResetPosition()
@@ -68,7 +91,7 @@ namespace Starboard.Scoreboard
 
             if (this.AllowsTransparency)
             {
-                var animation = new DoubleAnimation(1, new Duration(new TimeSpan(0, 0, 0, 1)));
+                var animation = new DoubleAnimation(this.MaxOpacity, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
                 scoreboardControl.BeginAnimation(OpacityProperty, animation);
             }
         }
@@ -78,7 +101,7 @@ namespace Starboard.Scoreboard
         {
             if (this.AllowsTransparency)
             {
-                var animation = new DoubleAnimation(0, new Duration(new TimeSpan(0, 0, 0, 1)));
+                var animation = new DoubleAnimation(0, new Duration(new TimeSpan(0, 0, 0, 0, 500)));
                 Action hideAction = base.Hide;
                 animation.Completed += (sender, e) => hideAction();
                 scoreboardControl.BeginAnimation(OpacityProperty, animation);

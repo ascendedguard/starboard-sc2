@@ -13,6 +13,7 @@ namespace Starboard
     using System.Reflection;
     using System.Windows;
     using System.Windows.Controls.Primitives;
+    using System.Windows.Data;
 
     using Starboard.Model;
     using Starboard.Scoreboard;
@@ -23,11 +24,11 @@ namespace Starboard
     /// </summary>
     public partial class MainWindow
     {
-        /// <summary> Window controlling the scoreboard display </summary>
-        private ScoreboardDisplay display = new ScoreboardDisplay();
-
         /// <summary> The desired width of the viewbox in the display window, based on the screen resolution. </summary>
         private readonly int desiredWidth;
+
+        /// <summary> Window controlling the scoreboard display </summary>
+        private ScoreboardDisplay display = new ScoreboardDisplay();
 
         /// <summary> Initializes a new instance of the <see cref="MainWindow"/> class. </summary>
         public MainWindow()
@@ -190,16 +191,30 @@ namespace Starboard
             this.viewModel.Player2.Score++;
         }
 
+        /// <summary> Sets the binding of the transparency slider to the new display context. </summary>
+        private void BindToTransparencySlider()
+        {
+            this.sldrTransparency.DataContext = this.display;
+            this.sldrTransparency.SetBinding(RangeBase.ValueProperty, new Binding("MaxOpacity"));
+        }
+        
         /// <summary> Recreates the scoreboard display to allow transparency. </summary>
         /// <param name="sender"> The sender. </param>
         /// <param name="e"> The event arguments. </param>
         private void TransparencyOptionChecked(object sender, RoutedEventArgs e)
         {
+            var opacity = this.display.MaxOpacity;
+
             this.display.Close();
             this.display = null;
 
             this.display = new ScoreboardDisplay { AllowsTransparency = true };
             this.display.SetViewModel(this.viewModel);
+
+            this.display.MaxOpacity = opacity;
+
+            this.sldrTransparency.IsEnabled = true;
+            this.BindToTransparencySlider();
         }
 
         /// <summary> Recreates the scoreboard display to turn off transparency. </summary>
@@ -207,11 +222,17 @@ namespace Starboard
         /// <param name="e"> The event arguments. </param>
         private void TransparencyOptionUnchecked(object sender, RoutedEventArgs e)
         {
+            var opacity = this.display.MaxOpacity;
+
             this.display.Close();
             this.display = null;
 
             this.display = new ScoreboardDisplay { AllowsTransparency = false };
             this.display.SetViewModel(this.viewModel);
+
+            this.display.MaxOpacity = opacity;
+
+            this.sldrTransparency.IsEnabled = false;
         }
     }
 }
