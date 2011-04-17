@@ -83,6 +83,10 @@ namespace Starboard.Scoreboard
                 animation.Completed += (sender, e) => hideAction();
                 scoreboardControl.BeginAnimation(OpacityProperty, animation);
             }
+            else
+            {
+                base.Hide();
+            }
         }
 
         /// <summary> Allows the window to be dragged if IsWindowMovable has been set. </summary>
