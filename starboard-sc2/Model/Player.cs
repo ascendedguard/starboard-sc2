@@ -81,7 +81,7 @@ namespace Starboard.Model
 
             set
             {
-                this.score = value;
+                this.score = value < 0 ? 0 : value;
                 RaisePropertyChanged("Score");
             }
         }
