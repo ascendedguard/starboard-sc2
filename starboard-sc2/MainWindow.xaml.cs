@@ -70,7 +70,6 @@ namespace Starboard
             }
             else
             {
-                this.display.ViewboxWidth = this.desiredWidth;
                 this.display.Show();
             }
         }
@@ -205,6 +204,9 @@ namespace Starboard
         {
             var opacity = this.display.MaxOpacity;
 
+            var showing = this.display.IsVisible;
+            var size = this.sldrSize.Value;
+
             this.display.Close();
             this.display = null;
 
@@ -215,6 +217,14 @@ namespace Starboard
 
             this.sldrTransparency.IsEnabled = true;
             this.BindToTransparencySlider();
+
+            this.sldrSize.DataContext = this.display;
+            this.sldrSize.Value = size;
+
+            if (showing)
+            {
+                this.display.Show();
+            }
         }
 
         /// <summary> Recreates the scoreboard display to turn off transparency. </summary>
@@ -223,6 +233,8 @@ namespace Starboard
         private void TransparencyOptionUnchecked(object sender, RoutedEventArgs e)
         {
             var opacity = this.display.MaxOpacity;
+            var showing = this.display.IsVisible;
+            var size = this.sldrSize.Value;
 
             this.display.Close();
             this.display = null;
@@ -231,8 +243,15 @@ namespace Starboard
             this.display.SetViewModel(this.viewModel);
 
             this.display.MaxOpacity = opacity;
-
             this.sldrTransparency.IsEnabled = false;
+
+            this.sldrSize.DataContext = this.display;
+            this.sldrSize.Value = size;
+
+            if (showing)
+            {
+                this.display.Show();
+            }
         }
     }
 }
