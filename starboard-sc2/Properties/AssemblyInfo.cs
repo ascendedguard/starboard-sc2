@@ -16,7 +16,7 @@ using System.Windows;
 // associated with an assembly.
 [assembly: AssemblyTitle("Starboard")]
 [assembly: AssemblyDescription("A scoreboard designed specifically for Starcraft.")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyCompany("Ascend")]
 [assembly: AssemblyProduct("starboard-sc2")]
 [assembly: AssemblyCopyright("Copyright © Starboard 2011")]
@@ -26,5 +26,5 @@ using System.Windows;
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 
-[assembly: AssemblyVersion("0.4.2.*")]
-[assembly: AssemblyFileVersion("0.4.2.0")]
+[assembly: AssemblyVersion("0.5.0.*")]
+[assembly: AssemblyFileVersion("0.5.0.0")]

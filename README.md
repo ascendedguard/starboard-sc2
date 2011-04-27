@@ -21,6 +21,14 @@ As of version 0.4, you can click on the scoreboard and press a hotkey to make an
 
 **Changes**
 
+v0.5.0:
+
+* Fixed crash when using invalid timer values.
+* Added the ability to enable transparency for the scoreboard.
+* Added the ability to customize the opacity of the scoreboard.
+* Scores cannot be less than 0.
+* Added fade-in and fade-out effects for when transparency is enabled.
+
 v0.4.2:
 
 * Fixed the 1-click buttons not working properly.
