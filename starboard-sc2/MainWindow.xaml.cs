@@ -203,7 +203,6 @@ namespace Starboard
         private void TransparencyOptionChecked(object sender, RoutedEventArgs e)
         {
             var opacity = this.display.MaxOpacity;
-
             var showing = this.display.IsVisible;
             var size = this.sldrSize.Value;
 

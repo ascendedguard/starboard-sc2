@@ -93,11 +93,18 @@ namespace Starboard.Scoreboard
                 this.playerTwoObserver = new PropertyObserver<Player>(value.Player2)
                     .RegisterHandler(n => n.Color, this.Player2ColorChanged);
 
+                this.Player1ColorChanged(value.Player1);
+                this.Player2ColorChanged(value.Player2);
+
                 this.previousSubbarIndex = 0;
                 value.SubbarText.CollectionChanged += this.SubbarTextCollectionChanged;
 
+                this.SubbarTextCollectionChanged(value.SubbarText, null);
+
                 this.previousAnnouncementIndex = 0;
                 value.AnnouncementText.CollectionChanged += this.AnnouncementTextCollectionChanged;
+
+                this.AnnouncementTextCollectionChanged(value.AnnouncementText, null);
             }
         }
 
@@ -143,6 +150,12 @@ namespace Starboard.Scoreboard
                 }
 
                 // Else the timer will take care of the updating.
+            }
+
+            if (e == null)
+            {
+                // Incase the arguments are not passed in.
+                return;
             }
 
             if (e.Action == NotifyCollectionChangedAction.Remove)
@@ -206,6 +219,11 @@ namespace Starboard.Scoreboard
                 }
 
                 // Else the timer will take care of the updating.
+            }
+
+            if (e == null)
+            {
+                return;
             }
 
             if (e.Action == NotifyCollectionChangedAction.Remove)
