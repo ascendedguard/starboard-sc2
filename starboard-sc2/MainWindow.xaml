@@ -130,7 +130,7 @@
             <TabItem Header="Options">
                 <Grid>
                     <StackPanel Margin="5,5,5,25">
-                        <CheckBox Margin="2" Content="Allow Scoreboard To Be Moved" Height="16" Checked="WindowMovableChecked" Unchecked="WindowMovableUnchecked"/>
+                        <CheckBox Margin="2" Content="Allow Scoreboard To Be Moved" Height="16" x:Name="cbxWindowMovable" Checked="WindowMovableChecked" Unchecked="WindowMovableUnchecked"/>
                         <Button Content="Reset Position" Width="100" HorizontalAlignment="Left" Click="ResetPositionClicked" />
                         <TextBlock Margin="2" Text="Size:" />
                         <Grid Height="25">

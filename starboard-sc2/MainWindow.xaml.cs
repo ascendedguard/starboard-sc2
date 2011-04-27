@@ -206,6 +206,9 @@ namespace Starboard
             var showing = this.display.IsVisible;
             var size = this.sldrSize.Value;
 
+            var left = this.display.Left;
+            var top = this.display.Top;
+
             this.display.Close();
             this.display = null;
 
@@ -219,6 +222,12 @@ namespace Starboard
 
             this.sldrSize.DataContext = this.display;
             this.sldrSize.Value = size;
+            
+            // Retain the previous position settings.
+            this.display.InitializePositionOnLoad = false;
+            this.display.IsWindowMovable = cbxWindowMovable.IsChecked == true;
+            this.display.SetValue(TopProperty, top);
+            this.display.SetValue(LeftProperty, left);
 
             if (showing)
             {
@@ -235,6 +244,9 @@ namespace Starboard
             var showing = this.display.IsVisible;
             var size = this.sldrSize.Value;
 
+            var left = this.display.Left;
+            var top = this.display.Top;
+
             this.display.Close();
             this.display = null;
 
@@ -246,6 +258,12 @@ namespace Starboard
 
             this.sldrSize.DataContext = this.display;
             this.sldrSize.Value = size;
+
+            // Retain the previous position settings.
+            this.display.InitializePositionOnLoad = false;
+            this.display.IsWindowMovable = cbxWindowMovable.IsChecked == true;
+            this.display.SetValue(TopProperty, top);
+            this.display.SetValue(LeftProperty, left);
 
             if (showing)
             {

@@ -28,6 +28,8 @@ namespace Starboard.Scoreboard
         {
             InitializeComponent();
 
+            this.InitializePositionOnLoad = true;
+
             this.Loaded += this.WindowLoaded;
             this.IsWindowMovable = false;
         }
@@ -41,6 +43,9 @@ namespace Starboard.Scoreboard
 
         /// <summary> Gets or sets a value indicating whether the window can be dragged. </summary>
         public bool IsWindowMovable { get; set; }
+
+        /// <summary> Gets or sets a value indicating whether the window should reset positions when first loaded. </summary>
+        public bool InitializePositionOnLoad { get; set; }
 
         /// <summary> Gets or sets the maximum opacity used by the scoreboard. </summary>
         public double MaxOpacity
@@ -65,11 +70,18 @@ namespace Starboard.Scoreboard
         /// <summary> Resets the position of the window to the default location, centered on the primary monitor with a 10px offset from top. </summary>
         public void ResetPosition()
         {
+            if (this.IsMeasureValid == false)
+            {
+                this.UpdateLayout();
+                this.Measure(new Size(SystemParameters.PrimaryScreenWidth, SystemParameters.PrimaryScreenHeight));
+            }
+
             var leftAdjust = this.Width / 2.0;
+            
             var left = (SystemParameters.PrimaryScreenWidth / 2.0) - leftAdjust;
 
             this.Left = left;
-            this.Top = 10;   
+            this.Top = 10.0;
         }
 
         /// <summary> Sets the viewmodel for the window to another instance of ScoreboardControlViewModel </summary>
@@ -218,7 +230,10 @@ namespace Starboard.Scoreboard
         /// <param name="e"> The event parameters. </param>
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
-            this.ResetPosition();
+            if (this.InitializePositionOnLoad)
+            {
+                this.ResetPosition();                
+            }
         }
     }
 }
