@@ -3,3 +3,4 @@ starboard-sc2/bin
 starboard-sc2/obj
 *.suo
 *.ReSharper.user
+*StyleCop.Cache
