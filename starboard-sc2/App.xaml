@@ -1,5 +1,9 @@
 ﻿<Application x:Class="Starboard.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Model="clr-namespace:Starboard.Model" xmlns:View="clr-namespace:Starboard.View" StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <DataTemplate DataType="{x:Type Model:Player}">
+            <View:PlayerView />
+        </DataTemplate>
+    </Application.Resources>
 </Application>

@@ -67,6 +67,9 @@
     <Compile Include="View\ColorSelectionControl.xaml.cs">
       <DependentUpon>ColorSelectionControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PlayerView.xaml.cs">
+      <DependentUpon>PlayerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RaceSelectionControl.xaml.cs">
       <DependentUpon>RaceSelectionControl.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\ColorSelectionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PlayerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

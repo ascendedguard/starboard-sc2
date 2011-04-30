@@ -60,36 +60,12 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <StackPanel Margin="10">
-                            <TextBlock Height="23" HorizontalAlignment="Left" Text="Player 1" VerticalAlignment="Top" />
-                            <TextBox Height="23" Text="{Binding Path=Player1.Name, UpdateSourceTrigger=PropertyChanged}" />
-                            <View:RaceSelectionControl SelectedRace="{Binding Path=Player1.Race}"/>
-                            <View:ColorSelectionControl SelectedColor="{Binding Path=Player1.Color}" Height="50" />
-                            <TextBlock Height="23" Text="Score" />
-                            <Grid Height="23">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="40" />
-                                </Grid.ColumnDefinitions>
-                                <TextBox Text="{Binding Path=Player1.Score, UpdateSourceTrigger=PropertyChanged}" />
-                                <Button Content="+1" Grid.Column="1" Click="IncrementPlayer1Score" />
-                            </Grid>
-                        </StackPanel>
-                        <StackPanel Margin="10" Grid.Column="1">
-                            <TextBlock Height="23" HorizontalAlignment="Left" Text="Player 2" VerticalAlignment="Top" />
-                            <TextBox Height="23" Text="{Binding Path=Player2.Name, UpdateSourceTrigger=PropertyChanged}" />
-                            <View:RaceSelectionControl SelectedRace="{Binding Path=Player2.Race}"/>
-                            <View:ColorSelectionControl SelectedColor="{Binding Path=Player2.Color}" Height="50" />
-                            <TextBlock Height="23" Text="Score" />
-                            <Grid Height="23">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="40" />
-                                </Grid.ColumnDefinitions>
-                                <TextBox Text="{Binding Path=Player2.Score, UpdateSourceTrigger=PropertyChanged}" />
-                                <Button Content="+1" Grid.Column="1" Click="IncrementPlayer2Score" />
-                            </Grid>
-                        </StackPanel>
+                        <GroupBox Header="Left Player">
+                            <ContentPresenter Content="{Binding Player1}" />
+                        </GroupBox>
+                        <GroupBox Header="Right Player" Grid.Column="1">
+                            <ContentPresenter Content="{Binding Player2}" />
+                        </GroupBox>
                     </Grid>
 
                     <Expander Header="Subbar Text" Grid.Row="1">
