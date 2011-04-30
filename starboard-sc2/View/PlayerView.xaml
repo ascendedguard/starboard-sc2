@@ -17,5 +17,6 @@
             <TextBox Text="{Binding Path=Score, UpdateSourceTrigger=PropertyChanged}" />
             <Button Content="+1" Grid.Column="1" Click="IncrementPlayerScore" />
         </Grid>
+        <Button Margin="2" Content="Reset" Command="{Binding ResetCommand}" />
     </StackPanel>
 </UserControl>

@@ -9,13 +9,18 @@
 
 namespace Starboard.Model
 {
+    using System.Windows.Input;
+
     using Starboard.MVVM;
 
     /// <summary> Model for a Player, containing the player's name, color, race and score.</summary>
     public class Player : ObservableObject
     {
+        /// <summary> Backing for the ResetCommand command. </summary>
+        private ICommand resetCommand;
+
         /// <summary> The player's name, defaulting to "Player". </summary>
-        private string name = "Player";
+        private string name = string.Empty;
 
         /// <summary> The player's color, default to "Unknown" </summary>
         private PlayerColor color = PlayerColor.Unknown;
@@ -25,6 +30,15 @@ namespace Starboard.Model
 
         /// <summary> The current score, starting at 0. </summary>
         private int score;
+
+        /// <summary> Gets a command which </summary>
+        public ICommand ResetCommand
+        {
+            get
+            {
+                return this.resetCommand ?? (this.resetCommand = new RelayCommand(this.Reset));
+            }
+        }
 
         /// <summary> Gets or sets the name of the player. </summary>
         public string Name
@@ -84,6 +98,15 @@ namespace Starboard.Model
                 this.score = value < 0 ? 0 : value;
                 RaisePropertyChanged("Score");
             }
+        }
+
+        /// <summary> Resets the player back to default status. </summary>
+        public void Reset()
+        {
+            this.Name = string.Empty;
+            this.Color = PlayerColor.Unknown;
+            this.Race = Race.Unknown;
+            this.Score = 0;
         }
     }
 }
