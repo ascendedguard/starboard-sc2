@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:Scoreboard="clr-namespace:Starboard.Scoreboard" 
-             xmlns:AscendStudio="clr-namespace:Starboard" 
              xmlns:Converters="clr-namespace:Starboard.Converters"
              Height="56" Width="690">
     <UserControl.DataContext>
@@ -13,7 +12,6 @@
     </UserControl.DataContext>
     <UserControl.Resources>
         <Scoreboard:RaceTypeConverter x:Key="RaceConverter"/>
-        <AscendStudio:PlayerColorConverter x:Key="PlayerColorConverter" />
         <Converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter" />
     </UserControl.Resources>
     <Grid>
@@ -62,11 +60,32 @@
                     </Rectangle.Fill>
                 </Rectangle>
 
-                <TextBlock Text="{Binding Player1.Name}" FontFamily="Century Gothic" FontSize="24" TextOptions.TextHintingMode="Animated"  Foreground="White" VerticalAlignment="Center" Margin="75,0,0,0"/>
-                <TextBlock Grid.Column="1" Text="{Binding Player2.Name}" TextAlignment="Right" FontFamily="Century Gothic" FontSize="24" TextOptions.TextHintingMode="Animated"  Foreground="White" VerticalAlignment="Center" Margin="0,0,75,0"/>
-
-                <Image Margin="10" HorizontalAlignment="Left" Source="{Binding Path=Player1.Race, Converter={StaticResource RaceConverter}}" />
-                <Image Margin="10" HorizontalAlignment="Right" Grid.Column="1" Source="{Binding Path=Player2.Race, Converter={StaticResource RaceConverter}}" />
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Margin="75,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding Player1.Name}" FontFamily="Century Gothic" FontSize="24" TextOptions.TextHintingMode="Animated" Foreground="White" />
+                </Grid>
+                
+                <Grid HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,75,0" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="1" Text="{Binding Player2.Name}" TextAlignment="Right" FontFamily="Century Gothic" FontSize="24" TextOptions.TextHintingMode="Animated"  Foreground="White" />
+                </Grid>
+                
+                <Image Margin="10" HorizontalAlignment="Left" Source="{Binding Path=Player1.Race, Converter={StaticResource RaceConverter}}" >
+                    <Image.Effect>
+                        <DropShadowEffect />
+                    </Image.Effect>
+                </Image>
+                <Image Margin="10" HorizontalAlignment="Right" Grid.Column="1" Source="{Binding Path=Player2.Race, Converter={StaticResource RaceConverter}}" >
+                    <Image.Effect>
+                        <DropShadowEffect />
+                    </Image.Effect>
+                </Image>
             </Grid>
 
             <!-- Scoring -->
