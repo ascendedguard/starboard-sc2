@@ -18,8 +18,11 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <UniformGrid x:Name="gridBase" Columns="4">
+    <UniformGrid x:Name="gridBase" Columns="5">
         <RadioButton Click="RaceButtonClicked" IsChecked="True">
+            <x:Static Member="Model:Race.Unknown" />
+        </RadioButton>
+        <RadioButton Click="RaceButtonClicked" IsChecked="False">
             <x:Static Member="Model:Race.Terran" />
         </RadioButton>
         <RadioButton Click="RaceButtonClicked">

@@ -29,7 +29,7 @@ namespace Starboard
         {
             var color = (PlayerColor)value;
 
-            var selectedColor = Colors.Black;
+            var selectedColor = Colors.Transparent;
 
             switch (color)
             {
@@ -64,7 +64,11 @@ namespace Starboard
                 return new SolidColorBrush(selectedColor);
             }
 
-            selectedColor.A = 202;
+            if (selectedColor != Colors.Transparent)
+            {
+                selectedColor.A = 202;                
+            }
+
             return selectedColor;
         }
 

@@ -21,7 +21,7 @@ namespace Starboard.Model
         private PlayerColor color = PlayerColor.Unknown;
 
         /// <summary> The player's race, defaulting to terran. </summary>
-        private Race race = Race.Terran;
+        private Race race = Race.Unknown;
 
         /// <summary> The current score, starting at 0. </summary>
         private int score;

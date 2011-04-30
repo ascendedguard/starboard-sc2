@@ -24,7 +24,10 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <UniformGrid x:Name="gridBase" Columns="4">
+    <UniformGrid x:Name="gridBase" Columns="5">
+        <RadioButton Click="ColorClicked" Grid.RowSpan="2" IsChecked="true">
+            <x:Static Member="Model:PlayerColor.Unknown" />
+        </RadioButton>
         <RadioButton Click="ColorClicked">
             <x:Static Member="Model:PlayerColor.Red" />
         </RadioButton>
