@@ -10,6 +10,7 @@
 namespace Starboard.Scoreboard
 {
     using System;
+    using System.Diagnostics;
     using System.Windows;
     using System.Windows.Media.Animation;
 
@@ -22,6 +23,8 @@ namespace Starboard.Scoreboard
     {
         /// <summary> The opacity used by the scoreboard when visible. The maximum value used during transitions. </summary>
         private double maxOpacity = 1;
+
+        private ScoreboardControlViewModel scoreboard = null;
 
         /// <summary> Initializes a new instance of the <see cref="ScoreboardDisplay"/> class. </summary>
         public ScoreboardDisplay()
@@ -88,7 +91,8 @@ namespace Starboard.Scoreboard
         /// <param name="vm"> The viewModel to apply. </param>
         public void SetViewModel(ScoreboardControlViewModel vm)
         {
-            scoreboardControl.ViewModel = vm;
+            scoreboardControl.DataContext = vm;
+            this.scoreboard = vm;
         }
 
         /// <summary> Overrides the original Show function to support a fade-in effect in cases where transparency is used. </summary>
@@ -136,23 +140,44 @@ namespace Starboard.Scoreboard
             }
         }
 
+        protected override void OnPreviewKeyDown(System.Windows.Input.KeyEventArgs e)
+        {
+            Debug.WriteLine(e.SystemKey);
+            Debug.WriteLine(e.Key);
+
+            base.OnPreviewKeyDown(e);
+        }
+
         /// <summary> Overrides the OnKeyDown event to handled hotkeys for this window. </summary>
         /// <param name="e"> The event arguments. </param>
         protected override void OnKeyDown(System.Windows.Input.KeyEventArgs e)
         {
+            /*
+            Debug.WriteLine(e.SystemKey);
+            Debug.WriteLine(e.Key);
+            */
             if (e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Control)
             {
-                var result = ApplyHotkey(e.Key, scoreboardControl.ViewModel.Player1);
+                var result = ApplyHotkey(e.Key, this.scoreboard.Player1);
                 e.Handled = result;
             }
 
-            if (e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Alt)
+            if (e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Alt && e.SystemKey != System.Windows.Input.Key.LeftAlt)
             {
-                var result = ApplyHotkey(e.SystemKey, scoreboardControl.ViewModel.Player2);
+                var result = ApplyHotkey(e.SystemKey, this.scoreboard.Player2);
                 e.Handled = result;
             }
+            else if (e.SystemKey == System.Windows.Input.Key.LeftAlt)
+            {
 
-            base.OnKeyDown(e);
+            }
+            else
+            {
+                int i = 0;
+                i++;
+            }
+
+            //base.OnKeyDown(e);
         }
 
         /// <summary> Applies the hotkey for the attached key to the attached player. </summary>

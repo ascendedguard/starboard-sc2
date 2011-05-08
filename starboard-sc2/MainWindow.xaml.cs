@@ -38,7 +38,7 @@ namespace Starboard
             this.Closing += MainWindowClosing;
 
             this.display.SetViewModel(this.viewModel);
-            this.scoreboardPreview.ViewModel = this.viewModel;
+            this.scoreboardPreview.DataContext = this.viewModel;
 
             this.desiredWidth = (int)(SystemParameters.PrimaryScreenWidth * .36);
             this.display.ViewboxWidth = this.desiredWidth;

@@ -54,6 +54,43 @@ namespace Starboard.Scoreboard
             {
                 return;
             }
+
+            this.DataContextChanged += this.ScoreboardControl_DataContextChanged;
+        }
+
+        void ScoreboardControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var viewmodel = (ScoreboardControlViewModel)e.NewValue;
+
+            if (this.playerOneObserver != null)
+            {
+                this.playerOneObserver.UnregisterHandler(n => n.Color);
+            }
+
+            if (this.playerTwoObserver != null)
+            {
+                this.playerTwoObserver.UnregisterHandler(n => n.Color);
+            }
+
+            this.DataContext = viewmodel;
+
+            this.playerOneObserver = new PropertyObserver<Player>(viewmodel.Player1)
+                .RegisterHandler(n => n.Color, this.Player1ColorChanged);
+            this.playerTwoObserver = new PropertyObserver<Player>(viewmodel.Player2)
+                .RegisterHandler(n => n.Color, this.Player2ColorChanged);
+
+            this.Player1ColorChanged(viewmodel.Player1);
+            this.Player2ColorChanged(viewmodel.Player2);
+
+            this.previousSubbarIndex = 0;
+            viewmodel.SubbarText.CollectionChanged += this.SubbarTextCollectionChanged;
+
+            this.SubbarTextCollectionChanged(viewmodel.SubbarText, null);
+
+            this.previousAnnouncementIndex = 0;
+            viewmodel.AnnouncementText.CollectionChanged += this.AnnouncementTextCollectionChanged;
+
+            this.AnnouncementTextCollectionChanged(viewmodel.AnnouncementText, null);
         }
 
         /// <summary> Finalizes an instance of the <see cref="ScoreboardControl"/> class.  </summary>
@@ -65,49 +102,16 @@ namespace Starboard.Scoreboard
                 this.currentSubbarTimer.Dispose();
             }
         }
-
+        
         /// <summary> Gets or sets the viewmodel used for the control </summary>
-        public ScoreboardControlViewModel ViewModel
+        private ScoreboardControlViewModel ViewModel
         {
             get
             {
                 return (ScoreboardControlViewModel)DataContext;
             }
-
-            set
-            {
-                if (this.playerOneObserver != null)
-                {
-                    this.playerOneObserver.UnregisterHandler(n => n.Color);
-                }
-                
-                if (this.playerTwoObserver != null)
-                {
-                    this.playerTwoObserver.UnregisterHandler(n => n.Color);
-                }
-
-                this.DataContext = value;
-
-                this.playerOneObserver = new PropertyObserver<Player>(value.Player1)
-                    .RegisterHandler(n => n.Color, this.Player1ColorChanged);
-                this.playerTwoObserver = new PropertyObserver<Player>(value.Player2)
-                    .RegisterHandler(n => n.Color, this.Player2ColorChanged);
-
-                this.Player1ColorChanged(value.Player1);
-                this.Player2ColorChanged(value.Player2);
-
-                this.previousSubbarIndex = 0;
-                value.SubbarText.CollectionChanged += this.SubbarTextCollectionChanged;
-
-                this.SubbarTextCollectionChanged(value.SubbarText, null);
-
-                this.previousAnnouncementIndex = 0;
-                value.AnnouncementText.CollectionChanged += this.AnnouncementTextCollectionChanged;
-
-                this.AnnouncementTextCollectionChanged(value.AnnouncementText, null);
-            }
         }
-
+       
         /// <summary> Handles logic when the number of announcement messages has changed. Starts/stops appropriate timers automatically. </summary>
         /// <param name="sender"> The sender. </param>
         /// <param name="e"> The event arguments. </param>
