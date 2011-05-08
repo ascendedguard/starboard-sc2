@@ -13,22 +13,11 @@ namespace Starboard.Scoreboard
     using System.Windows;
 
     using Starboard.Model;
+    using Starboard.MVVM;
 
     /// <summary> ViewModel controlling all the information necessary for databinding the scoreboards. </summary>
-    public class ScoreboardControlViewModel : DependencyObject
+    public class ScoreboardControlViewModel : ObservableObject
     {
-        /// <summary> DependencyProperty for the MatchupType property. </summary>
-        public static readonly DependencyProperty MatchupTypeProperty =
-            DependencyProperty.Register("MatchupType", typeof(string), typeof(ScoreboardControlViewModel), new UIPropertyMetadata("King of the Hill"));
-
-        /// <summary> DependencyProperty for the IsAnnouncementShowing property. </summary>
-        public static readonly DependencyProperty IsAnnouncementShowingProperty =
-            DependencyProperty.Register("IsAnnouncementShowing", typeof(bool), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(false));
-
-        /// <summary> DependencyProperty for the IsSubbarShowing property. </summary>
-        public static readonly DependencyProperty IsSubbarShowingProperty =
-            DependencyProperty.Register("IsSubbarShowing", typeof(bool), typeof(ScoreboardControlViewModel), new UIPropertyMetadata(false));
-
         /// <summary> Holds our first player, which is initialized on creation. </summary>
         private readonly Player player1 = new Player();
 
@@ -41,6 +30,12 @@ namespace Starboard.Scoreboard
         /// <summary> Contains the array of TimedText objects defining the announcement text. </summary>
         private readonly ObservableCollection<TimedText> announcementText = new ObservableCollection<TimedText>();
 
+        /// <summary> Backing property for the IsAnnouncementShowing property. </summary>
+        private bool isAnnouncementShowing;
+
+        /// <summary> Backing property for the isSubbarShowing property. </summary>
+        private bool isSubbarShowing;
+
         /// <summary> Gets the first player's information. </summary>
         public Player Player1
         {
@@ -51,13 +46,6 @@ namespace Starboard.Scoreboard
         public Player Player2
         {
             get { return this.player2; }
-        }
-
-        /// <summary> Gets or sets the matchup type, the bottom line displayed on the matchup. </summary>
-        public string MatchupType
-        {
-            get { return (string)GetValue(MatchupTypeProperty); }
-            set { SetValue(MatchupTypeProperty, value); }
         }
 
         /// <summary> Gets the array containing the subbar text fields. </summary>
@@ -78,18 +66,34 @@ namespace Starboard.Scoreboard
             }
         }
 
-        /// <summary> Gets or sets a value indicating whether the announcement is showing. </summary>
+        /// <summary> Gets or sets a value indicating whether the announcement bar is showing. </summary>
         public bool IsAnnouncementShowing
         {
-            get { return (bool)GetValue(IsAnnouncementShowingProperty); }
-            set { SetValue(IsAnnouncementShowingProperty, value); }
+            get
+            {
+                return this.isAnnouncementShowing;
+            }
+
+            set
+            {
+                this.isAnnouncementShowing = value;
+                RaisePropertyChanged("IsAnnouncementShowing");
+            }
         }
 
         /// <summary> Gets or sets a value indicating whether the subbar is showing. </summary>
         public bool IsSubbarShowing
         {
-            get { return (bool)GetValue(IsSubbarShowingProperty); }
-            set { SetValue(IsSubbarShowingProperty, value); }
+            get
+            {
+                return this.isSubbarShowing;
+            }
+
+            set
+            {
+                this.isSubbarShowing = value;
+                RaisePropertyChanged("IsSubbarShowing");
+            }
         }
     }
 }
