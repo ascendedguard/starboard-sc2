@@ -174,22 +174,6 @@ namespace Starboard
             this.sldrSize.Value = this.desiredWidth;
         }
 
-        /// <summary> Increments player 1's score by 1. </summary>
-        /// <param name="sender"> The sender. </param>
-        /// <param name="e"> The event arguments. </param>
-        private void IncrementPlayer1Score(object sender, RoutedEventArgs e)
-        {
-            this.viewModel.Player1.Score++;
-        }
-
-        /// <summary> Increments player 2's score by 1. </summary>
-        /// <param name="sender"> The sender. </param>
-        /// <param name="e"> The event arguments. </param>
-        private void IncrementPlayer2Score(object sender, RoutedEventArgs e)
-        {
-            this.viewModel.Player2.Score++;
-        }
-
         /// <summary> Sets the binding of the transparency slider to the new display context. </summary>
         private void BindToTransparencySlider()
         {
