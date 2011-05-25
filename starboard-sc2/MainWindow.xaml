@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
         xmlns:Scoreboard="clr-namespace:Starboard.Scoreboard" 
         xmlns:Model="clr-namespace:Starboard.Model" 
-        xmlns:AscendStudio="clr-namespace:Starboard" 
-        Title="Starboard" 
+        xmlns:AscendStudio="clr-namespace:Starboard" xmlns:View="clr-namespace:Starboard.View" Title="Starboard" 
         Width="471"
         SizeToContent="Height"
         ResizeMode="CanMinimize">
@@ -80,7 +79,7 @@
                     </Expander>
 
                     <Viewbox Grid.Row="3" Margin="2" Name="viewbox1">
-                        <Scoreboard:ScoreboardControl x:Name="scoreboardPreview" />
+                        <View:ScoreboardControl x:Name="scoreboardPreview" />
                     </Viewbox>
                     
                     <Button Grid.Row="4" Content="Show Scoreboard" Click="ShowClicked" />

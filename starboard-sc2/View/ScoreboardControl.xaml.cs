@@ -7,12 +7,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Starboard.Scoreboard
+namespace Starboard.View
 {
     using System;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.Timers;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
@@ -21,8 +22,7 @@ namespace Starboard.Scoreboard
 
     using Starboard.Model;
     using Starboard.MVVM;
-
-    using Timer = System.Timers.Timer;
+    using Starboard.Scoreboard;
 
     /// <summary> Main control displaying the scoreboard. Has built-in logic for handling transitions and animations. </summary>
     public partial class ScoreboardControl
@@ -55,25 +55,40 @@ namespace Starboard.Scoreboard
                 return;
             }
 
-            this.DataContextChanged += this.ScoreboardControl_DataContextChanged;
+            this.DataContextChanged += this.ScoreboardDataContextChanged;
         }
 
-        void ScoreboardControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        /// <summary> Finalizes an instance of the <see cref="ScoreboardControl"/> class.  </summary>
+        ~ScoreboardControl()
+        {
+            if (this.currentSubbarTimer == null)
+            {
+                return;
+            }
+            
+            this.currentSubbarTimer.Stop();
+            this.currentSubbarTimer.Dispose();
+        }
+
+        /// <summary> Gets the viewmodel used for the control </summary>
+        private ScoreboardControlViewModel ViewModel
+        {
+            get
+            {
+                return (ScoreboardControlViewModel)DataContext;
+            }
+        }
+
+        /// <summary> Implements property observers when a new viewmodel is applied. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
+        private void ScoreboardDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             var viewmodel = (ScoreboardControlViewModel)e.NewValue;
 
-            if (this.playerOneObserver != null)
-            {
-                this.playerOneObserver.UnregisterHandler(n => n.Color);
-            }
-
-            if (this.playerTwoObserver != null)
-            {
-                this.playerTwoObserver.UnregisterHandler(n => n.Color);
-            }
-
             this.DataContext = viewmodel;
 
+            // Unregistering handlers aren't necessary thanks to weak references.
             this.playerOneObserver = new PropertyObserver<Player>(viewmodel.Player1)
                 .RegisterHandler(n => n.Color, this.Player1ColorChanged);
             this.playerTwoObserver = new PropertyObserver<Player>(viewmodel.Player2)
@@ -93,25 +108,6 @@ namespace Starboard.Scoreboard
             this.AnnouncementTextCollectionChanged(viewmodel.AnnouncementText, null);
         }
 
-        /// <summary> Finalizes an instance of the <see cref="ScoreboardControl"/> class.  </summary>
-        ~ScoreboardControl()
-        {
-            if (this.currentSubbarTimer != null)
-            {
-                this.currentSubbarTimer.Stop();
-                this.currentSubbarTimer.Dispose();
-            }
-        }
-        
-        /// <summary> Gets or sets the viewmodel used for the control </summary>
-        private ScoreboardControlViewModel ViewModel
-        {
-            get
-            {
-                return (ScoreboardControlViewModel)DataContext;
-            }
-        }
-       
         /// <summary> Handles logic when the number of announcement messages has changed. Starts/stops appropriate timers automatically. </summary>
         /// <param name="sender"> The sender. </param>
         /// <param name="e"> The event arguments. </param>
