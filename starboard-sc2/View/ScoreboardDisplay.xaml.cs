@@ -15,6 +15,7 @@ namespace Starboard.View
 
     using Starboard.Model;
     using Starboard.Scoreboard;
+    using Starboard.ViewModel;
 
     /// <summary>
     /// Interaction logic for ScoreboardDisplay.xaml

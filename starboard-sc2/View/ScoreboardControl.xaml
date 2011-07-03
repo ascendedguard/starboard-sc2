@@ -5,10 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:Scoreboard="clr-namespace:Starboard.Scoreboard" 
-             xmlns:Converters="clr-namespace:Starboard.Converters"
-             Height="56" Width="690">
+             xmlns:Converters="clr-namespace:Starboard.Converters" xmlns:ViewModel="clr-namespace:Starboard.ViewModel" Height="56" Width="690">
     <UserControl.DataContext>
-        <Scoreboard:ScoreboardControlViewModel />
+        <ViewModel:ScoreboardControlViewModel />
     </UserControl.DataContext>
     <UserControl.Resources>
         <Scoreboard:RaceTypeConverter x:Key="RaceConverter"/>

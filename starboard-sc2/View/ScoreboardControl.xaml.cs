@@ -23,6 +23,7 @@ namespace Starboard.View
     using Starboard.Model;
     using Starboard.MVVM;
     using Starboard.Scoreboard;
+    using Starboard.ViewModel;
 
     /// <summary> Main control displaying the scoreboard. Has built-in logic for handling transitions and animations. </summary>
     public partial class ScoreboardControl
@@ -101,7 +102,7 @@ namespace Starboard.View
             viewmodel.SubbarText.CollectionChanged += this.SubbarTextCollectionChanged;
 
             this.SubbarTextCollectionChanged(viewmodel.SubbarText, null);
-
+                
             this.previousAnnouncementIndex = 0;
             viewmodel.AnnouncementText.CollectionChanged += this.AnnouncementTextCollectionChanged;
 

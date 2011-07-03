@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
         xmlns:Scoreboard="clr-namespace:Starboard.Scoreboard" 
         xmlns:Model="clr-namespace:Starboard.Model" 
-        xmlns:AscendStudio="clr-namespace:Starboard" xmlns:View="clr-namespace:Starboard.View" Title="Starboard" 
+        xmlns:AscendStudio="clr-namespace:Starboard" xmlns:View="clr-namespace:Starboard.View" xmlns:ViewModel="clr-namespace:Starboard.ViewModel" Title="Starboard" 
         Width="471"
         SizeToContent="Height"
         ResizeMode="CanMinimize">
     <Window.DataContext>
-        <Scoreboard:ScoreboardControlViewModel x:Name="viewModel" />
+        <ViewModel:ScoreboardControlViewModel x:Name="viewModel" />
     </Window.DataContext>
     <Window.Resources>
         <AscendStudio:PlayerColorConverter x:Key="PlayerColorConverter" />

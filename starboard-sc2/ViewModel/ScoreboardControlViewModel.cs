@@ -7,10 +7,9 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Starboard.Scoreboard
+namespace Starboard.ViewModel
 {
     using System.Collections.ObjectModel;
-    using System.Windows;
 
     using Starboard.Model;
     using Starboard.MVVM;
