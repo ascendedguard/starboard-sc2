@@ -11,6 +11,8 @@ namespace Starboard.View
 {
     using System;
     using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
     using System.Windows.Media.Animation;
 
     using Starboard.Model;
@@ -145,6 +147,17 @@ namespace Starboard.View
         /// <param name="e"> The event arguments. </param>
         protected override void OnKeyDown(System.Windows.Input.KeyEventArgs e)
         {
+            if (e.Key == System.Windows.Input.Key.F1)
+            {
+                // Change Player 1's Name
+                this.CreatePlayerChangeField("Player1.Name");
+            }
+            else if (e.Key == System.Windows.Input.Key.F2)
+            {
+                // Change Player 2's Name
+                this.CreatePlayerChangeField("Player2.Name");
+            }
+
             if (e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.Control)
             {
                 var result = ApplyHotkey(e.Key, this.scoreboard.Player1);
@@ -226,6 +239,30 @@ namespace Starboard.View
             }
 
             return handled;
+        }
+
+        /// <summary> Creates a text field for typing the player name directly into the scoreboard. Clears the player name upon the hotkey press. </summary>
+        /// <param name="binding"> The binding to apply to the TextBox. </param>
+        private void CreatePlayerChangeField(string binding)
+        {
+            var field = new TextBox();
+            field.SetBinding(TextBox.TextProperty, new Binding(binding) { Source = this.scoreboard, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
+            field.Width = 50;
+            field.Height = 20;
+
+            field.LostFocus += (sender, e) => this.rootGrid.Children.Remove(field);
+            field.KeyDown += (sender, e) =>
+                {
+                    if (e.Key == System.Windows.Input.Key.Enter || e.Key == System.Windows.Input.Key.Return || e.Key == System.Windows.Input.Key.Escape)
+                    {
+                        this.rootGrid.Children.Remove(field);
+                    }
+                };
+
+            this.rootGrid.Children.Insert(0, field);
+
+            field.Focus();
+            field.Text = string.Empty;
         }
 
         /// <summary> Resets the position of the window after it has completed loading. </summary>

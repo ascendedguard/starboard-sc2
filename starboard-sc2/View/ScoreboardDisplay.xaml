@@ -16,7 +16,7 @@
         SizeToContent="WidthAndHeight" ShowInTaskbar="False">
     <Grid x:Name="rootGrid">
         <Viewbox Margin="0" Stretch="Uniform" x:Name="viewBox">
-            <View:ScoreboardControl Focusable="True"  x:Name="scoreboardControl" />
+            <View:ScoreboardControl x:Name="scoreboardControl" />
         </Viewbox>
     </Grid>
 </Window>
