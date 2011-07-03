@@ -16,7 +16,6 @@ namespace Starboard
     using System.Windows.Data;
 
     using Starboard.Model;
-    using Starboard.Scoreboard;
     using Starboard.View;
 
     /// <summary>

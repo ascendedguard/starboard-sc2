@@ -35,7 +35,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="40"/>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
                     </Grid.RowDefinitions>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -59,7 +60,6 @@
                             <TextBlock Margin="10,0,0,0" Text="Text" Height="16" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                             <TextBlock Grid.Column="1" Text="Time To Show, In Seconds" Height="16" VerticalAlignment="Top" HorizontalAlignment="Left" />
                             <ListBox HorizontalContentAlignment="Stretch" x:Name="spSubbar" Margin="5,22,5,35" Grid.ColumnSpan="2" />                            
-                            <Button Content="Toggle Subbar" Height="23" HorizontalAlignment="Left" Margin="9,0,0,6" Name="btnShowSubbar" VerticalAlignment="Bottom" Width="110" Click="ShowSubbarClicked" />
                             <Button Content="Add Text" Height="23" HorizontalAlignment="Right" Margin="0,0,5,6" Name="button1" VerticalAlignment="Bottom" Width="110" Grid.Column="1" Click="AddSubbarClicked" />
                         </Grid>
                     </Expander>
@@ -73,7 +73,6 @@
                             <TextBlock Margin="10,0,0,0" Text="Text" Height="16" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                             <TextBlock Grid.Column="1" Text="Time To Show, In Seconds" Height="16" VerticalAlignment="Top" HorizontalAlignment="Left" />
                         	<ListBox Grid.ColumnSpan="2" HorizontalContentAlignment="Stretch" x:Name="lbxAnnouncements" Margin="5,22,5,35" />
-                        	<Button Content="Toggle Announcement" Height="23" HorizontalAlignment="Left" Margin="6,0,0,6" Name="btnShowAnnouncement" VerticalAlignment="Bottom" Width="142" Click="ShowAnnouncementClicked" />
                         	<Button Content="Add Text" Height="23" HorizontalAlignment="Right" Margin="0,0,5,6" Name="button2" VerticalAlignment="Bottom" Width="110" Click="AddAnnouncementClicked" Grid.Column="1" />
                         </Grid>
                     </Expander>
@@ -81,8 +80,13 @@
                     <Viewbox Grid.Row="3" Margin="2" Name="viewbox1">
                         <View:ScoreboardControl x:Name="scoreboardPreview" />
                     </Viewbox>
-                    
-                    <Button Grid.Row="4" Content="Show Scoreboard" Click="ShowClicked" />
+
+                    <Grid Grid.Row="4">
+                        <Button Content="Toggle Announcement" HorizontalAlignment="Left" Margin="4"  Name="btnShowAnnouncement" Width="150" Click="ShowAnnouncementClicked" />
+                        <Button Content="Toggle Subbar" HorizontalAlignment="Right" Margin="4" Name="btnShowSubbar" Width="150" Click="ShowSubbarClicked" />
+                    </Grid>
+
+                    <Button Grid.Row="5" Margin="4" Content="Show Scoreboard" Click="ShowClicked" />
                 </Grid>
             </TabItem>
             <TabItem Header="Options">
