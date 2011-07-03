@@ -196,21 +196,26 @@ namespace Starboard
             this.display = null;
 
             this.display = new ScoreboardDisplay { AllowsTransparency = true };
-            this.display.SetViewModel(this.viewModel);
+            this.display.SetViewModel(this.viewModel);                
 
             this.display.MaxOpacity = opacity;
 
             this.sldrTransparency.IsEnabled = true;
             this.BindToTransparencySlider();
 
+            this.display.ViewboxWidth = size;
             this.sldrSize.DataContext = this.display;
             this.sldrSize.Value = size;
+
+            this.display.IsWindowMovable = cbxWindowMovable.IsChecked == true;
             
             // Retain the previous position settings.
-            this.display.InitializePositionOnLoad = false;
-            this.display.IsWindowMovable = cbxWindowMovable.IsChecked == true;
-            this.display.SetValue(TopProperty, top);
-            this.display.SetValue(LeftProperty, left);
+            if (double.IsNaN(left) == false && double.IsNaN(top) == false)
+            {
+                this.display.InitializePositionOnLoad = false;
+                this.display.SetValue(TopProperty, top);
+                this.display.SetValue(LeftProperty, left);
+            }
 
             if (showing)
             {
@@ -234,19 +239,24 @@ namespace Starboard
             this.display = null;
 
             this.display = new ScoreboardDisplay { AllowsTransparency = false };
-            this.display.SetViewModel(this.viewModel);
+            this.display.SetViewModel(this.viewModel);    
 
             this.display.MaxOpacity = opacity;
             this.sldrTransparency.IsEnabled = false;
 
+            this.display.ViewboxWidth = size;
             this.sldrSize.DataContext = this.display;
             this.sldrSize.Value = size;
 
-            // Retain the previous position settings.
-            this.display.InitializePositionOnLoad = false;
             this.display.IsWindowMovable = cbxWindowMovable.IsChecked == true;
-            this.display.SetValue(TopProperty, top);
-            this.display.SetValue(LeftProperty, left);
+
+            // Retain the previous position settings.
+            if (double.IsNaN(left) == false && double.IsNaN(top) == false)
+            {
+                this.display.InitializePositionOnLoad = false;
+                this.display.SetValue(TopProperty, top);
+                this.display.SetValue(LeftProperty, left);                
+            }
 
             if (showing)
             {
