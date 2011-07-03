@@ -14,7 +14,6 @@ namespace Starboard.View
     using System.Windows.Media.Animation;
 
     using Starboard.Model;
-    using Starboard.Scoreboard;
     using Starboard.ViewModel;
 
     /// <summary>

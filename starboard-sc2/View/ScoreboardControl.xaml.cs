@@ -22,17 +22,21 @@ namespace Starboard.View
 
     using Starboard.Model;
     using Starboard.MVVM;
-    using Starboard.Scoreboard;
     using Starboard.ViewModel;
 
     /// <summary> Main control displaying the scoreboard. Has built-in logic for handling transitions and animations. </summary>
     public partial class ScoreboardControl
     {
+        // ReSharper disable UnaccessedField.Local
+        // These fields only get set, this hides the resharper warning. It's just holding a weak reference.
+
         /// <summary> Used to keep a reference to the property observer used for player one. </summary>
         private PropertyObserver<Player> playerOneObserver;
 
         /// <summary> Used to keep a reference to the property observer used for player two. </summary>
         private PropertyObserver<Player> playerTwoObserver;
+        
+        // ReSharper restore UnaccessedField.Local
 
         /// <summary> Index of the last subbar item displayed. </summary>
         private int previousSubbarIndex;
