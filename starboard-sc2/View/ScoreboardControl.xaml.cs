@@ -303,9 +303,9 @@ namespace Starboard.View
         private void ChangeMatchupText(BindingBase newBinding)
         {
             // Fade text away.
-            this.Dispatcher.BeginInvoke((Action)(() => txtStatus.BeginAnimation(OpacityProperty, new DoubleAnimation(1.0, 0.0, new Duration(new TimeSpan(0, 0, 0, 0, 300))))));
+            this.Dispatcher.BeginInvoke((Action)(() => txtStatus.BeginAnimation(OpacityProperty, new DoubleAnimation(1.0, 0.0, new Duration(new TimeSpan(0, 0, 0, 0, 250))))));
 
-            var timer = new Timer(800);
+            var timer = new Timer(250);
             timer.Elapsed += (sender, e) =>
                 {
                     this.Dispatcher.BeginInvoke(
