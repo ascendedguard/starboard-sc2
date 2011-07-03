@@ -10,7 +10,11 @@ As-is, the application runs as a single executable, no installation required, an
 
 **Hotkeys**
 
-As of version 0.4, you can click on the scoreboard and press a hotkey to make an instant change. The following are the supported hotkeys:
+All hotkeys require you to click on the visible scoreboard before using:
+
+* F1 - Change Player 1 Name
+* F2 - Change Player 2 Name
+* (Press enter/esc to end changing player name)
 
 * Ctrl+Hotkey = Player 1
 * Alt+Hotkey = Player 2
@@ -20,6 +24,14 @@ As of version 0.4, you can click on the scoreboard and press a hotkey to make an
 * +/- - Increment/Decrement player's score by 1.
 
 **Changes**
+
+v1.0:
+
+* Moved toggle buttons outside of the expanders
+* The scoreboard itself no longer displays in the task manager.
+* Added F1/F2 hotkeys for changing player names.
+* Shorter transition timers on subbar text
+* Fixed bug with setting transparency causing incorrect window positioning.
 
 v0.5.0:
 
