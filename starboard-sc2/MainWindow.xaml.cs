@@ -263,5 +263,24 @@ namespace Starboard
                 this.display.Show();
             }
         }
+
+        /// <summary> Swaps the information for Player1 and Player2. </summary>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="e"> The event arguments. </param>
+        private void SwapPlayersClicked(object sender, RoutedEventArgs e)
+        {
+            var player2 = (Player)viewModel.Player1.Clone();
+            var player1 = (Player)viewModel.Player2.Clone();
+
+            viewModel.Player1.Name = player1.Name;
+            viewModel.Player1.Color = player1.Color;
+            viewModel.Player1.Score = player1.Score;
+            viewModel.Player1.Race = player1.Race;
+
+            viewModel.Player2.Name = player2.Name;
+            viewModel.Player2.Color = player2.Color;
+            viewModel.Player2.Score = player2.Score;
+            viewModel.Player2.Race = player2.Race;
+        }
     }
 }

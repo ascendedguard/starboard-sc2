@@ -9,12 +9,13 @@
 
 namespace Starboard.Model
 {
+    using System;
     using System.Windows.Input;
 
     using Starboard.MVVM;
 
     /// <summary> Model for a Player, containing the player's name, color, race and score.</summary>
-    public class Player : ObservableObject
+    public class Player : ObservableObject, ICloneable
     {
         /// <summary> Backing for the ResetCommand command. </summary>
         private ICommand resetCommand;
@@ -31,7 +32,7 @@ namespace Starboard.Model
         /// <summary> The current score, starting at 0. </summary>
         private int score;
 
-        /// <summary> Gets a command which </summary>
+        /// <summary> Gets a command which resets the player. </summary>
         public ICommand ResetCommand
         {
             get
@@ -107,6 +108,17 @@ namespace Starboard.Model
             this.Color = PlayerColor.Unknown;
             this.Race = Race.Unknown;
             this.Score = 0;
+        }
+
+        public object Clone()
+        {
+            Player player = new Player();
+            player.Color = this.Color;
+            player.Name = this.Name;
+            player.Race = this.Race;
+            player.Score = this.Score;
+
+            return player;
         }
     }
 }
