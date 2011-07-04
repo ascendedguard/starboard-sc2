@@ -25,6 +25,10 @@ All hotkeys require you to click on the visible scoreboard before using:
 
 **Changes**
 
+v1.1:
+
+* Added button to swap player positions on the scoreboard.
+
 v1.0:
 
 * Moved toggle buttons outside of the expanders
