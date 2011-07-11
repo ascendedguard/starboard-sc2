@@ -63,6 +63,7 @@
     <Compile Include="MVVM\ObservableObject.cs" />
     <Compile Include="MVVM\PropertyObserver.cs" />
     <Compile Include="MVVM\RelayCommand.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="ViewModel\ScoreboardControlViewModel.cs" />
     <Compile Include="View\ColorSelectionControl.xaml.cs">
       <DependentUpon>ColorSelectionControl.xaml</DependentUpon>

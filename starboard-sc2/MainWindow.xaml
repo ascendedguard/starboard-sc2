@@ -106,7 +106,7 @@
                             <Slider x:Name="sldrSize" />
                             <Button Grid.Column="1" Content="Reset" Click="ResetSize" />
                         </Grid>
-                        <CheckBox Margin="2" Content="Allow Transparency" Checked="TransparencyOptionChecked" Unchecked="TransparencyOptionUnchecked" />
+                        <CheckBox Margin="2" Content="Allow Transparency" Checked="TransparencyOptionChecked" Unchecked="TransparencyOptionUnchecked" Name="cbxAllowTransparency" />
                         <TextBlock Margin="2" Text="Window Transparency" />
                         <Slider Margin="2" x:Name="sldrTransparency" Minimum="0" Maximum="1" Value="1" LargeChange=".1" SmallChange=".01" IsEnabled="false" />
                     </StackPanel>

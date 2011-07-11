@@ -23,6 +23,9 @@ namespace Starboard
     /// </summary>
     public partial class MainWindow
     {
+        /// <summary> Settings files stored to the registry for retaining last-used settings </summary>
+        private readonly Settings settings = Settings.Load();
+
         /// <summary> The desired width of the viewbox in the display window, based on the screen resolution. </summary>
         private readonly int desiredWidth;
 
@@ -34,18 +37,30 @@ namespace Starboard
         {
             InitializeComponent();
 
-            this.Closing += MainWindowClosing;
+            this.Closing += this.MainWindowClosing;
 
             this.display.SetViewModel(this.viewModel);
             this.scoreboardPreview.DataContext = this.viewModel;
 
-            this.desiredWidth = (int)(SystemParameters.PrimaryScreenWidth * .36);
+            cbxAllowTransparency.IsChecked = this.settings.AllowTransparency;
+            this.sldrTransparency.Value = this.settings.WindowTransparency;
+
+            this.desiredWidth = this.settings.Size;
             this.display.ViewboxWidth = this.desiredWidth;
+
+            if (this.settings.Position.X != 0 || this.settings.Position.Y != 0)
+            {
+                this.display.InitializePositionOnLoad = false;
+                this.display.SetValue(TopProperty, this.settings.Position.Y);
+                this.display.SetValue(LeftProperty, this.settings.Position.X);
+            }
 
             this.sldrSize.Minimum = (int)(SystemParameters.PrimaryScreenWidth * .10);
             this.sldrSize.Maximum = (int)(SystemParameters.PrimaryScreenWidth * .60);
             this.sldrSize.DataContext = this.display;
             this.sldrSize.SetBinding(RangeBase.ValueProperty, "ViewboxWidth");
+
+            this.sldrSize.Value = this.desiredWidth;
 
             this.txtBuild.Text = string.Format("Build: {0}", Assembly.GetExecutingAssembly().GetName().Version);
         }
@@ -53,8 +68,13 @@ namespace Starboard
         /// <summary> Shuts down the application when the main window closes. </summary>
         /// <param name="sender"> The sender. </param>
         /// <param name="e"> The event arguments. </param>
-        private static void MainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void MainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            this.settings.Size = (int)this.display.ViewboxWidth;
+            this.settings.Position = new Point(this.display.Left, this.display.Top);
+            this.settings.AllowTransparency = this.display.AllowsTransparency;
+            this.settings.WindowTransparency = sldrTransparency.Value;
+            this.settings.Save();
             Application.Current.Shutdown();
         }
 
