@@ -25,6 +25,10 @@ All hotkeys require you to click on the visible scoreboard before using:
 
 **Changes**
 
+v1.2:
+
+* Settings are saved to the registry upon closing, including: Size, Position, and Transparency settings.
+
 v1.1:
 
 * Added button to swap player positions on the scoreboard.
