@@ -91,6 +91,11 @@ namespace Starboard.View
         {
             var viewmodel = (ScoreboardControlViewModel)e.NewValue;
 
+            if (viewmodel == null)
+            {
+                return;
+            }
+
             this.DataContext = viewmodel;
 
             // Unregistering handlers aren't necessary thanks to weak references.

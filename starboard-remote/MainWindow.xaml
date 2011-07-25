@@ -1,0 +1,64 @@
+﻿<Window x:Class="Starboard.Remote.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:Remote="clr-namespace:Starboard.Remote" 
+        Title="Scoreboard Remote Control" Height="374" Width="523">
+    <Window.DataContext>
+        <Remote:MainWindowViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid IsEnabled="{Binding AreConnectionFieldsEnabled}">
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="12,12,0,0" Text="IP Address" VerticalAlignment="Top" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="74,9,0,0" Text="{Binding IPAddressText}" VerticalAlignment="Top" Width="120" />
+            
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="203,12,0,0" Text="Port" VerticalAlignment="Top" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="231,9,0,0" Text="{Binding Port}" VerticalAlignment="Top" Width="56" />
+        </Grid>
+
+        <Grid>
+            <Button Content="{Binding ConnectionString}" Height="23" HorizontalAlignment="Left" Margin="403,8,0,0" Command="{Binding ConnectCommand}" VerticalAlignment="Top" Width="92" />
+        </Grid>
+        
+        <Grid IsEnabled="{Binding IsConnected}" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <GroupBox Header="Left Player">
+                    <ContentControl Content="{Binding Player1}" />
+                </GroupBox>
+                <GroupBox Header="Right Player" Grid.Column="1">
+                    <ContentControl Content="{Binding Player2}" />
+                </GroupBox>
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+            </Grid>
+                
+            <UniformGrid Grid.Row="3" Rows="1">
+                <Button Content="Toggle Announcement" Margin="4" Command="{Binding ToggleAnnouncementCommand}" />
+                <Button Content="Swap Players" Margin="4" Command="{Binding SwapPlayersCommand}" />
+                <Button Content="Toggle Subbar" Margin="4" Command="{Binding ToggleSubbarCommand}" />
+            </UniformGrid>
+
+            <Button Grid.Row="4" Margin="4" Content="Show Scoreboard" Command="{Binding ToggleScoreboardVisibleCommand}" />
+        </Grid>
+
+    </Grid>
+</Window>

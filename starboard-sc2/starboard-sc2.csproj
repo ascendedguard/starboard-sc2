@@ -43,9 +43,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -56,6 +60,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\BooleanVisibilityConverter.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\PlayerColor.cs" />
     <Compile Include="Model\Race.cs" />
@@ -64,6 +69,17 @@
     <Compile Include="MVVM\PropertyObserver.cs" />
     <Compile Include="MVVM\RelayCommand.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Sockets\Commands\BytePacketCommand.cs" />
+    <Compile Include="Sockets\Commands\Int32PacketCommand.cs" />
+    <Compile Include="Sockets\Commands\EmptyPacketCommand.cs" />
+    <Compile Include="Sockets\Commands\ScoreboardPacketCommandBase.cs" />
+    <Compile Include="Sockets\Commands\StringPacketCommand.cs" />
+    <Compile Include="Sockets\CommandType.cs" />
+    <Compile Include="Sockets\IScoreboardPacketCommand.cs" />
+    <Compile Include="Sockets\PacketCommandType.cs" />
+    <Compile Include="Sockets\ScoreboardNetwork.cs" />
+    <Compile Include="Sockets\ScoreboardPacket.cs" />
+    <Compile Include="Sockets\ScoreboardUpdater.cs" />
     <Compile Include="ViewModel\ScoreboardControlViewModel.cs" />
     <Compile Include="View\ColorSelectionControl.xaml.cs">
       <DependentUpon>ColorSelectionControl.xaml</DependentUpon>
@@ -83,7 +99,10 @@
     <Compile Include="View\TimedTextControl.xaml.cs">
       <DependentUpon>TimedTextControl.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Compile Include="View\TimedTextEditGroupControl.xaml.cs">
+      <DependentUpon>TimedTextEditGroupControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -93,8 +112,8 @@
     </Compile>
     <Compile Include="Converters\PlayerColorConverter.cs" />
     <Compile Include="Converters\RaceTypeConverter.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="View\MainWindowView.xaml.cs">
+      <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\ColorSelectionControl.xaml">
@@ -118,6 +137,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\TimedTextControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TimedTextEditGroupControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,6 +169,7 @@
   <ItemGroup>
     <Resource Include="StarboardIcon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

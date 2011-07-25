@@ -1,6 +1,8 @@
 _Resharper.starboard-sc2/*
 starboard-sc2/bin
 starboard-sc2/obj
+starboard-remote/bin
+starboard-remote/obj
 *.suo
 *.ReSharper.user
 *StyleCop.Cache

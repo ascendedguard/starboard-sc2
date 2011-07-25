@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BA3431DF-109F-4EA2-A8FC-5CBC572C8A89}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Starboard.Remote</RootNamespace>
+    <AssemblyName>StarboardRemoteControl</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="..\starboard-sc2\View\ColorSelectionControl.xaml">
+      <Link>View\ColorSelectionControl.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\starboard-sc2\View\PlayerView.xaml">
+      <Link>View\PlayerView.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\starboard-sc2\View\RaceSelectionControl.xaml">
+      <Link>View\RaceSelectionControl.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\starboard-sc2\View\ScoreboardControl.xaml">
+      <Link>View\ScoreboardControl.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\starboard-sc2\View\TimedTextControl.xaml">
+      <Link>View\TimedTextControl.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\starboard-sc2\View\TimedTextEditGroupControl.xaml">
+      <Link>View\TimedTextEditGroupControl.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="..\starboard-sc2\Converters\BooleanVisibilityConverter.cs">
+      <Link>Converters\BooleanVisibilityConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\Converters\PlayerColorConverter.cs">
+      <Link>Converters\PlayerColorConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\Model\Player.cs">
+      <Link>Model\Player.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\Model\PlayerColor.cs">
+      <Link>Model\PlayerColor.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\Model\Race.cs">
+      <Link>Model\Race.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\Model\TimedText.cs">
+      <Link>Model\TimedText.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\MVVM\ObservableObject.cs">
+      <Link>MVVM\ObservableObject.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\MVVM\PropertyObserver.cs">
+      <Link>MVVM\PropertyObserver.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\MVVM\RelayCommand.cs">
+      <Link>MVVM\RelayCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\Sockets\Commands\BytePacketCommand.cs">
+      <Link>Sockets\BytePacketCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\Sockets\Commands\EmptyPacketCommand.cs">
+      <Link>Sockets\EmptyPacketCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\Sockets\Commands\Int32PacketCommand.cs">
+      <Link>Sockets\Int32PacketCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\Sockets\Commands\ScoreboardPacketCommandBase.cs">
+      <Link>Sockets\ScoreboardPacketCommandBase.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\Sockets\Commands\StringPacketCommand.cs">
+      <Link>Sockets\StringPacketCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\Sockets\CommandType.cs">
+      <Link>Sockets\CommandType.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\Sockets\IScoreboardPacketCommand.cs">
+      <Link>Sockets\IScoreboardPacketCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\Sockets\PacketCommandType.cs">
+      <Link>Sockets\PacketCommandType.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\Sockets\ScoreboardPacket.cs">
+      <Link>Sockets\ScoreboardPacket.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\Sockets\ScoreboardUpdater.cs">
+      <Link>Sockets\ScoreboardUpdater.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\ViewModel\ScoreboardControlViewModel.cs">
+      <Link>ViewModel\ScoreboardControlViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\starboard-sc2\View\ColorSelectionControl.xaml.cs">
+      <Link>View\ColorSelectionControl.xaml.cs</Link>
+      <DependentUpon>ColorSelectionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\starboard-sc2\View\PlayerView.xaml.cs">
+      <Link>View\PlayerView.xaml.cs</Link>
+      <DependentUpon>PlayerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\starboard-sc2\View\RaceSelectionControl.xaml.cs">
+      <Link>View\RaceSelectionControl.xaml.cs</Link>
+      <DependentUpon>RaceSelectionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\starboard-sc2\View\ScoreboardControl.xaml.cs">
+      <Link>View\ScoreboardControl.xaml.cs</Link>
+      <DependentUpon>ScoreboardControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\starboard-sc2\View\TimedTextControl.xaml.cs">
+      <Link>View\TimedTextControl.xaml.cs</Link>
+      <DependentUpon>TimedTextControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\starboard-sc2\View\TimedTextEditGroupControl.xaml.cs">
+      <Link>View\TimedTextEditGroupControl.xaml.cs</Link>
+      <DependentUpon>TimedTextEditGroupControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converters\RaceTypeConverter.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background.png" />
+    <Resource Include="Images\BlackLogo\BlackProtossLogo.png" />
+    <Resource Include="Images\BlackLogo\BlackRandomLogo.png" />
+    <Resource Include="Images\BlackLogo\BlackTerranEagleLogo.png" />
+    <Resource Include="Images\BlackLogo\BlackZergLogo.png" />
+    <Resource Include="Images\ProtossLogo.png" />
+    <Resource Include="Images\RandomLogo.png" />
+    <Resource Include="Images\TerranEagleLogo.png" />
+    <Resource Include="Images\ZergLogo.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
