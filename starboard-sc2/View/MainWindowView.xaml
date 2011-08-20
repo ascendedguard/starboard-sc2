@@ -28,7 +28,37 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <TabControl>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <!-- Header Region -->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="5" />
+            </Grid.RowDefinitions>
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0" Color="#070707" />
+                    <GradientStop Offset=".5" Color="#202020" />
+                    <GradientStop Offset="1" Color="#070707" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            
+            <Image Source="/Images/starboardname.png" Height="30" Margin="5,0,0,0" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            
+            <ToggleButton Content="Settings" Height="25" Margin="0,0,5,0" HorizontalAlignment="Right" Width="75" IsChecked="{Binding IsSettingsVisible}" />
+            
+            <Grid Grid.Row="1">
+                <Grid.Background>
+                    <ImageBrush Viewport="0,0,.2,1" ImageSource="/Images/StarboardSeparator.png" TileMode="Tile" />
+                </Grid.Background>
+            </Grid>
+        </Grid>
+        
+        <TabControl Grid.Row="1">
             <TabItem Header="Scoreboard">
                 <Grid>
                     <Grid.RowDefinitions>

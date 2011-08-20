@@ -89,6 +89,7 @@ namespace Starboard.Sockets
 
             var socket = new Socket(endPoint.Address.AddressFamily, SocketType.Dgram, ProtocolType.Udp) { ReceiveTimeout = 2000 };
             socket.Bind(endPoint);
+            socket.ReceiveTimeout = 0;
 
             this.listenThread = new Thread(
                 new ThreadStart(
@@ -103,8 +104,9 @@ namespace Starboard.Sockets
                             {
                                 socket.ReceiveFrom(inBuffer, ref senderRemote);
                             }
-                            catch (SocketException)
+                            catch (SocketException ex)
                             {
+                                int errorCode = ex.ErrorCode;
                                 continue;
                             }
 

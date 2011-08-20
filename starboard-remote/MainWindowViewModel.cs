@@ -250,6 +250,23 @@ namespace Starboard.Remote
             return new ScoreboardUpdater { EndPoint = endPoint };
         }
 
+        private bool isSettingsVisible;
+
+        public bool IsSettingsVisible
+        {
+            get
+            {
+                return this.isSettingsVisible;
+            }
+
+            set
+            {
+                this.isSettingsVisible = value;
+                RaisePropertyChanged("MyProperty");
+            }
+        }
+        
+
         private int port = 12000;
 
         public int Port
