@@ -1,9 +1,7 @@
 ﻿<Window x:Class="Starboard.View.MainWindowView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-        xmlns:Model="clr-namespace:Starboard.Model" 
         xmlns:AscendStudio="clr-namespace:Starboard" 
-        xmlns:View="clr-namespace:Starboard.View" 
         Title="Starboard" 
         Width="471"
         SizeToContent="Height"
@@ -12,20 +10,7 @@
         <AscendStudio:MainWindowViewModel />
     </Window.DataContext>
     <Window.Resources>
-        <AscendStudio:PlayerColorConverter x:Key="PlayerColorConverter" />
-        
-        <DataTemplate DataType="{x:Type Model:PlayerColor}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Border BorderBrush="Black" Margin="2" BorderThickness="1">
-                    <Rectangle Fill="{Binding Converter={StaticResource PlayerColorConverter}}"/>
-                </Border>
-                <TextBlock Grid.Column="1" Margin="3,0,0,0" Text="{Binding}" />
-            </Grid>
-        </DataTemplate>
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -58,80 +43,6 @@
             </Grid>
         </Grid>
         
-        <TabControl Grid.Row="1">
-            <TabItem Header="Scoreboard">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="35"/>
-                        <RowDefinition Height="35"/>
-                    </Grid.RowDefinitions>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <GroupBox Header="Left Player">
-                            <ContentControl Content="{Binding Scoreboard.Player1}" />
-                        </GroupBox>
-                        <GroupBox Header="Right Player" Grid.Column="1">
-                            <ContentControl Content="{Binding Scoreboard.Player2}" />
-                        </GroupBox>
-                    </Grid>
-
-                    <Expander Header="Subbar Text" Grid.Row="1">
-                        <View:TimedTextEditGroupControl DataContext="{Binding Scoreboard.SubbarText}"/>
-                    </Expander>
-
-                	<Expander Grid.Row="2" Header="Announcement Text">
-                        <View:TimedTextEditGroupControl DataContext="{Binding Scoreboard.AnnouncementText}"/>
-                    </Expander>
-
-                    <Viewbox Grid.Row="3" Margin="2">
-                        <View:ScoreboardControl DataContext="{Binding Scoreboard}" />
-                    </Viewbox>
-
-                    <UniformGrid Grid.Row="4" Rows="1">
-                        <Button Content="Toggle Announcement" Margin="4" Command="{Binding ToggleAnnouncementCommand}" />
-                        <Button Content="Swap Players" Margin="4" Command="{Binding SwapPlayersCommand}" />
-                        <Button Content="Toggle Subbar" Margin="4" Command="{Binding ToggleSubbarCommand}" />
-                    </UniformGrid>
-
-                    <Button Grid.Row="5" Margin="4" Content="Show Scoreboard" Command="{Binding ToggleScoreboardVisibleCommand}" />
-                </Grid>
-            </TabItem>
-            <TabItem Header="Options">
-                <Grid>
-                    <StackPanel Margin="5,5,5,25">
-                        <CheckBox Margin="2" Content="Allow Scoreboard To Be Moved" Height="16" IsChecked="{Binding IsWindowMovable}" />
-                        <Button Content="Reset Position" Width="100" HorizontalAlignment="Left" Command="{Binding ResetPositionCommand}" />
-                        <TextBlock Margin="2" Text="Size:" />
-                        <Grid Height="25">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="80"/>
-                            </Grid.ColumnDefinitions>
-                            <Slider Minimum="{Binding WidthMinimum}" Maximum="{Binding WidthMaximum}" Value="{Binding ViewboxWidth}"/>
-                            <Button Grid.Column="1" Content="Reset" Command="{Binding ResetSizeCommand}" />
-                        </Grid>
-                        <CheckBox Margin="2" Content="Allow Transparency" IsChecked="{Binding AllowTransparency}" />
-                        <TextBlock Margin="2" Text="Window Transparency" />
-                        <Slider Margin="2" Minimum="0" Maximum="1" Value="{Binding TransparencyLevel}" LargeChange=".1" SmallChange=".01" IsEnabled="{Binding AllowTransparency}" />
-                        <GroupBox Header="Remote Connections"  Margin="5">
-                            <Grid Margin="5">
-                                <TextBlock Text="Listening Port" VerticalAlignment="Center" Width="83" HorizontalAlignment="Left" />
-                                <TextBox Text="{Binding PortNumber}" Margin="89,0,0,0" Width="65" HorizontalAlignment="Left" />
-                                <Button Content="{Binding ConnectionButtonString}" x:Name="btnEnableRemote" Command="{Binding ToggleNetworkingCommand}" Margin="222,0,6,0" />
-                            </Grid>
-                        </GroupBox>
-                    </StackPanel>
-
-                    <TextBlock HorizontalAlignment="Right" x:Name="txtBuild" VerticalAlignment="Bottom" Text="Build Version" />
-                </Grid>
-            </TabItem>
-        </TabControl>
+        <ContentControl Content="{Binding ActiveViewModel}" Grid.Row="1" />
     </Grid>
 </Window>

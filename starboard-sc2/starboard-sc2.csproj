@@ -80,7 +80,9 @@
     <Compile Include="Sockets\ScoreboardNetwork.cs" />
     <Compile Include="Sockets\ScoreboardPacket.cs" />
     <Compile Include="Sockets\ScoreboardUpdater.cs" />
+    <Compile Include="ViewModel\ScoreboardControlPanelViewModel.cs" />
     <Compile Include="ViewModel\ScoreboardControlViewModel.cs" />
+    <Compile Include="ViewModel\SettingsPanelViewModel.cs" />
     <Compile Include="View\ColorSelectionControl.xaml.cs">
       <DependentUpon>ColorSelectionControl.xaml</DependentUpon>
     </Compile>
@@ -93,8 +95,14 @@
     <Compile Include="View\ScoreboardControl.xaml.cs">
       <DependentUpon>ScoreboardControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ScoreboardControlPanelView.xaml.cs">
+      <DependentUpon>ScoreboardControlPanelView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ScoreboardDisplay.xaml.cs">
       <DependentUpon>ScoreboardDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SettingsPanelView.xaml.cs">
+      <DependentUpon>SettingsPanelView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TimedTextControl.xaml.cs">
       <DependentUpon>TimedTextControl.xaml</DependentUpon>
@@ -132,9 +140,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\ScoreboardControlPanelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ScoreboardDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\SettingsPanelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TimedTextControl.xaml">
       <SubType>Designer</SubType>

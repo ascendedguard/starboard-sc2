@@ -53,7 +53,7 @@ namespace Starboard.Sockets
 
         public bool IsListening { get; private set; }
 
-        public void Listen(MainWindowViewModel sb)
+        public void Listen(SettingsPanelViewModel sb)
         {
             if (this.listenThread != null)
             {
@@ -89,7 +89,10 @@ namespace Starboard.Sockets
 
             var socket = new Socket(endPoint.Address.AddressFamily, SocketType.Dgram, ProtocolType.Udp) { ReceiveTimeout = 2000 };
             socket.Bind(endPoint);
-            socket.ReceiveTimeout = 0;
+
+            // This ReceiveTimeout was causing issues with the Android app... we may need to change this?
+            // A value of 0 worked with the app, but then the application couldn't abort the thread while waiting.
+            socket.ReceiveTimeout = 5000;
 
             this.listenThread = new Thread(
                 new ThreadStart(

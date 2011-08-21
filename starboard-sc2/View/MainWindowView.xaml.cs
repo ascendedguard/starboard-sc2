@@ -23,8 +23,6 @@ namespace Starboard.View
             InitializeComponent();
 
             this.Closing += this.MainWindowClosing;
-
-            this.txtBuild.Text = string.Format("Build: {0}", Assembly.GetExecutingAssembly().GetName().Version);
         }
 
         /// <summary> Shuts down the application when the main window closes. </summary>
@@ -34,7 +32,7 @@ namespace Starboard.View
         {
             var vm = (MainWindowViewModel)this.DataContext;
 
-            vm.CloseNetworkConnections();
+            vm.CloseNetwork();
             vm.SaveSettings();
 
             Application.Current.Shutdown();
