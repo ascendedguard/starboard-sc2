@@ -36,7 +36,6 @@ namespace Starboard.Sockets.Commands
             var data = Encoding.UTF8.GetBytes(this.Data);
             var count = BitConverter.GetBytes(data.Length);
 
-
             output.Add(pt);
             output.Add(cmd);
             output.Add(this.Player);
