@@ -48,9 +48,9 @@
             }
         }
 
-        private ScoreboardControlPanelViewModel scoreboardControlViewModel;
+        private readonly ScoreboardControlPanelViewModel scoreboardControlViewModel;
 
-        private SettingsPanelViewModel settingsPanelViewModel;
+        private readonly SettingsPanelViewModel settingsPanelViewModel;
 
         public MainWindowViewModel()
         {

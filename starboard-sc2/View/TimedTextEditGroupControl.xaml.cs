@@ -14,6 +14,27 @@
         public TimedTextEditGroupControl()
         {
             InitializeComponent();
+
+            this.DataContextChanged += this.TimedTextDataContextChanged;
+        }
+
+        private void TimedTextDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var vm = this.ViewModel;
+
+            if (vm == null)
+            {
+                return;
+            }
+
+            foreach (var v in vm)
+            {
+                var ctrl = new TimedTextControl { TimedText = v };
+
+                ctrl.RowDeleted += this.RowDeleted;
+
+                lstItems.Items.Add(ctrl);
+            }
         }
 
         public ObservableCollection<TimedText> ViewModel
