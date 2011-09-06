@@ -13,8 +13,6 @@ namespace Starboard.ViewModel
 
     using Starboard.Model;
     using Starboard.MVVM;
-    using Starboard.Sockets;
-    using Starboard.Sockets.Commands;
 
     /// <summary> ViewModel controlling all the information necessary for databinding the scoreboards. </summary>
     public class ScoreboardControlViewModel : ObservableObject

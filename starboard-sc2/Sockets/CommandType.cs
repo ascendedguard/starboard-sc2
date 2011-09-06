@@ -27,6 +27,10 @@ namespace Starboard.Sockets
         ToggleSubbar =         0x21,
         SwapPlayer =           0x22,
 
+        IncrementPlayerScore = 0x30,
+
+        RetrievePlayerInformation = 0x40,
+
         Ping =                 0x90,
         Pong =                 0x91,
     }

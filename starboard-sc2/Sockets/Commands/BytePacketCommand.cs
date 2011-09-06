@@ -23,7 +23,7 @@ namespace Starboard.Sockets.Commands
         }
 
         public byte Data { get; set; }
-
+            
         public override byte[] ToBytes()
         {
             var pt = (byte)this.PacketType;

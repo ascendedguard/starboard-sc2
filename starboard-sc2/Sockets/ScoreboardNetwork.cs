@@ -126,7 +126,7 @@ namespace Starboard.Sockets
                                 }
                             }
 
-                            this.dispatcher.BeginInvoke((Action)(() => sb.HandleRemoteCommands(packet)));
+                            this.dispatcher.BeginInvoke((Action)(() => sb.HandleRemoteCommands(packet, socket, senderRemote)));
                         }
 
                         socket.Close();

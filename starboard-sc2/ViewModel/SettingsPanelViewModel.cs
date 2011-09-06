@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
+    using System.Net.Sockets;
     using System.Text;
     using System.Windows;
     using System.Windows.Input;
@@ -190,7 +192,7 @@
             }
         }
 
-        public void HandleRemoteCommands(ScoreboardPacket packet)
+        public void HandleRemoteCommands(ScoreboardPacket packet, Socket socket, EndPoint senderRemote)
         {
             foreach (var command in packet.Commands)
             {
@@ -306,6 +308,78 @@
                                 {
                                     this.controlViewModel.Scoreboard.Player2.Reset();
                                 }
+                            }
+
+                            break;
+                        }
+
+                    case CommandType.IncrementPlayerScore:
+                        {
+                            var cmd = command as EmptyPacketCommand;
+
+                            if (cmd != null)
+                            {
+                                if (cmd.Player == 1)
+                                {
+                                    this.controlViewModel.Scoreboard.Player1.Score++;
+                                }
+                                else if (cmd.Player == 2)
+                                {
+                                    this.controlViewModel.Scoreboard.Player2.Score++;
+                                }
+                            }
+
+                            break;
+                        }
+
+                    case CommandType.RetrievePlayerInformation:
+                        {
+                            var cmd = command as EmptyPacketCommand;
+
+                            if (cmd != null)
+                            {
+                                var commands = new List<IScoreboardPacketCommand>();
+                                Player player;
+                                
+                                player = cmd.Player == 1 ? this.controlViewModel.Scoreboard.Player1 : this.controlViewModel.Scoreboard.Player2;
+
+
+                                    commands.Add(
+                                        new StringPacketCommand()
+                                        {
+                                            Command = CommandType.UpdatePlayerName,
+                                            Player = cmd.Player,
+                                            Data = player.Name
+                                        });
+
+                                    commands.Add(
+                                        new BytePacketCommand()
+                                        {
+                                            Command = CommandType.UpdatePlayerRace,
+                                            Data = (byte)player.Race,
+                                            Player = cmd.Player
+                                        });
+
+                                    commands.Add(
+                                        new BytePacketCommand()
+                                        {
+                                            Command = CommandType.UpdatePlayerColor,
+                                            Data = (byte)player.Color,
+                                            Player = cmd.Player
+                                        });
+
+
+                                    commands.Add(
+                                        new Int32PacketCommand()
+                                        {
+                                            Command = CommandType.UpdatePlayerScore,
+                                            Data = player.Score,
+                                            Player = cmd.Player
+                                        });
+
+                                var p = new ScoreboardPacket { Commands = commands.ToArray() };
+
+                                socket.SendTo(p.ToBytes(), senderRemote);
                             }
 
                             break;
