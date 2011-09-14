@@ -8,15 +8,14 @@
         WindowStartupLocation="Manual" 
         WindowStyle="None" 
         Background="Transparent" 
+        x:Name="Window"
         mc:Ignorable="d" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-        xmlns:View="clr-namespace:Starboard.View" 
-        d:DesignHeight="102" d:DesignWidth="723" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="102" d:DesignWidth="723" 
         SizeToContent="WidthAndHeight" ShowInTaskbar="False">
     <Grid x:Name="rootGrid">
         <Viewbox Margin="0" Stretch="Uniform" x:Name="viewBox">
-            <View:ScoreboardControl x:Name="scoreboardControl" />
+            <ContentControl Content="{Binding ElementName=Window, Path=Scoreboard}"/>
         </Viewbox>
     </Grid>
 </Window>

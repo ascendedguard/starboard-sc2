@@ -54,7 +54,7 @@
             </Expander>
 
             <Viewbox Grid.Row="3" Margin="2">
-                <View:ScoreboardControl DataContext="{Binding Scoreboard}" />
+                <ContentControl Content="{Binding Scoreboard}" />
             </Viewbox>
 
             <UniformGrid Grid.Row="4" Rows="1">

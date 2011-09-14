@@ -19,5 +19,9 @@
         <DataTemplate DataType="{x:Type ViewModel:SettingsPanelViewModel}">
             <View:SettingsPanelView />
         </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type ViewModel:ScoreboardControlViewModel}">
+            <View:ScoreboardControl />
+        </DataTemplate>
     </Application.Resources>
 </Application>

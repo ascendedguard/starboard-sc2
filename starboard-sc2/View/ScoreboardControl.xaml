@@ -5,9 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Converters="clr-namespace:Starboard.Converters" xmlns:ViewModel="clr-namespace:Starboard.ViewModel" 
              Height="56" Width="690">
+    <!-- Uncomment this to work with a default viewmodel when designing the scoreboard. 
     <UserControl.DataContext>
         <ViewModel:ScoreboardControlViewModel />
     </UserControl.DataContext>
+    -->
     <UserControl.Resources>
         <Converters:RaceTypeConverter x:Key="RaceConverter"/>
         <Converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter" />
