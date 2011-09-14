@@ -1,13 +1,13 @@
 ﻿<Window x:Class="Starboard.View.MainWindowView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-        xmlns:AscendStudio="clr-namespace:Starboard" 
+        xmlns:ViewModel="clr-namespace:Starboard.ViewModel" 
         Title="Starboard" 
         Width="471"
         SizeToContent="Height"
         ResizeMode="CanMinimize">
     <Window.DataContext>
-        <AscendStudio:MainWindowViewModel />
+        <ViewModel:MainWindowViewModel />
     </Window.DataContext>
     <Window.Resources>
 

@@ -1,57 +1,64 @@
-﻿namespace Starboard
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MainWindowViewModel.cs" company="Starboard">
+//   Copyright © 2011 All Rights Reserved
+// </copyright>
+// <summary>
+//   The main window view model.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Starboard.ViewModel
 {
     using System.Windows;
 
     using Starboard.MVVM;
     using Starboard.View;
-    using Starboard.ViewModel;
 
+    /// <summary> The view model for the main application window. </summary>
     public class MainWindowViewModel : ObservableObject
     {
-        /// <summary> Settings files stored to the registry for retaining last-used settings </summary>
-        private readonly Settings settings = Settings.Load();
+        #region Constants and Fields
 
-        /// <summary> Window controlling the scoreboard display </summary>
-        private static ScoreboardDisplay display = new ScoreboardDisplay();
+        /// <summary>
+        /// The scoreboard view model used for the actual scoreboard.
+        /// </summary>
+        private readonly ScoreboardControlViewModel scoreboard = new ScoreboardControlViewModel();
 
-        public static ScoreboardDisplay DisplayWindow
-        {
-            get
-            {
-                return display;
-            }
-
-            set
-            {
-                display = value;
-            }
-        }
-
-        public void CloseNetwork()
-        {
-            this.settingsPanelViewModel.CloseNetworkConnections();
-        }
-
-        private ObservableObject activeViewModel;
-
-        public ObservableObject ActiveViewModel
-        {
-            get
-            {
-                return this.activeViewModel;
-            }
-
-            set
-            {
-                this.activeViewModel = value;
-                RaisePropertyChanged("ActiveViewModel");
-            }
-        }
-
+        /// <summary>
+        /// The scoreboard control view model.
+        /// </summary>
         private readonly ScoreboardControlPanelViewModel scoreboardControlViewModel;
 
+        /// <summary>
+        /// Settings files stored to the registry for retaining last-used settings
+        /// </summary>
+        private readonly Settings settings = Settings.Load();
+
+        /// <summary>
+        /// The settings panel view model.
+        /// </summary>
         private readonly SettingsPanelViewModel settingsPanelViewModel;
 
+        /// <summary>
+        ///   Window controlling the scoreboard display
+        /// </summary>
+        private static ScoreboardDisplay display = new ScoreboardDisplay();
+
+        /// <summary>
+        /// The active view model being displayed on the main application.
+        /// </summary>
+        private ObservableObject activeViewModel;
+
+        /// <summary>
+        /// Whether the settings panel is currently visible.
+        /// </summary>
+        private bool isSettingsVisible;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary> Initializes a new instance of the <see cref="MainWindowViewModel"/> class. </summary>
         public MainWindowViewModel()
         {
             this.scoreboardControlViewModel = new ScoreboardControlPanelViewModel(this.Scoreboard);
@@ -68,28 +75,40 @@
             this.ActiveViewModel = this.scoreboardControlViewModel;
         }
 
+        #endregion
 
-        public void SaveSettings()
-        {
-            this.settings.Size = this.settingsPanelViewModel.ViewboxWidth;
-            this.settings.Position = new Point(MainWindowViewModel.DisplayWindow.Left, MainWindowViewModel.DisplayWindow.Top);
-            this.settings.AllowTransparency = MainWindowViewModel.DisplayWindow.AllowsTransparency;
+        #region Public Properties
 
-            this.settings.Save();
-        }
-
-        private ScoreboardControlViewModel scoreboard = new ScoreboardControlViewModel();
-
-        public ScoreboardControlViewModel Scoreboard
+        /// <summary>   Gets or sets the active display window being used. </summary>
+        public static ScoreboardDisplay DisplayWindow
         {
             get
             {
-                return this.scoreboard;
+                return display;
+            }
+
+            set
+            {
+                display = value;
             }
         }
 
-        private bool isSettingsVisible;
+        /// <summary> Gets or sets the active view model being displayed on the main application screen. </summary>
+        public ObservableObject ActiveViewModel
+        {
+            get
+            {
+                return this.activeViewModel;
+            }
 
+            set
+            {
+                this.activeViewModel = value;
+                this.RaisePropertyChanged("ActiveViewModel");
+            }
+        }
+
+        /// <summary> Gets or sets a value indicating whether the settings button is pressed, and the settings tab is visible. </summary>
         public bool IsSettingsVisible
         {
             get
@@ -100,7 +119,7 @@
             set
             {
                 this.isSettingsVisible = value;
-                RaisePropertyChanged("IsSettingsVisible");
+                this.RaisePropertyChanged("IsSettingsVisible");
 
                 if (value)
                 {
@@ -112,6 +131,45 @@
                 }
             }
         }
-        
+
+        /// <summary> Gets the scoreboard view model. </summary>
+        public ScoreboardControlViewModel Scoreboard
+        {
+            get
+            {
+                return this.scoreboard;
+            }
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary> Closes the active network connection. </summary>
+        public void CloseNetwork()
+        {
+            this.settingsPanelViewModel.CloseNetworkConnections();
+        }
+
+        /// <summary> Saves the active settings to the registry. </summary>
+        public void SaveSettings()
+        {
+            this.settings.Size = this.settingsPanelViewModel.ViewboxWidth;
+            this.settings.Position = new Point(DisplayWindow.Left, DisplayWindow.Top);
+            
+            try
+            {
+                this.settings.AllowTransparency = DisplayWindow.AllowsTransparency;
+            }
+            catch (System.InvalidOperationException)
+            {
+                // Shouldn't happen, but if it did, default to the application default.
+                this.settings.AllowTransparency = false;
+            }
+
+            this.settings.Save();
+        }
+
+        #endregion
     }
 }

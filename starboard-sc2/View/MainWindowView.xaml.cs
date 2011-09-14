@@ -9,8 +9,9 @@
 
 namespace Starboard.View
 {
-    using System.Reflection;
     using System.Windows;
+
+    using Starboard.ViewModel;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
