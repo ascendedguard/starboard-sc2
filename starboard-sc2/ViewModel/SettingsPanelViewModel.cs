@@ -1,11 +1,17 @@
-﻿namespace Starboard.ViewModel
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SettingsPanelViewModel.cs" company="Starboard">
+//   Copyright © 2011 All Rights Reserved
+// </copyright>
+// <summary>
+//   The view model for the settings panel.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Starboard.ViewModel
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Net;
     using System.Net.Sockets;
-    using System.Text;
     using System.Windows;
     using System.Windows.Input;
 
@@ -15,15 +21,68 @@
     using Starboard.Sockets.Commands;
     using Starboard.View;
 
+    /// <summary>
+    /// The settings panel view model.
+    /// </summary>
     public class SettingsPanelViewModel : ObservableObject
     {
-        private Settings settings;
+        #region Constants and Fields
 
-        private ScoreboardControlPanelViewModel controlViewModel;
+        /// <summary> A reference to the view model for the scoreboard controls. </summary>
+        private readonly ScoreboardControlPanelViewModel controlViewModel;
 
-        /// <summary> The desired width of the viewbox in the display window, based on the screen resolution. </summary>
+        /// <summary>   The desired width of the viewbox in the display window, based on the screen resolution. </summary>
         private readonly int desiredWidth;
 
+        /// <summary> The application settings. </summary>
+        private readonly Settings settings;
+
+        /// <summary> Whether the display show allow transparency. </summary>
+        private bool allowTransparency;
+
+        /// <summary> String displayed on the network connect button. </summary>
+        private string connectionButtonString = "Enable Remote";
+
+        /// <summary> Whether networking is currently enabled. </summary>
+        private bool isNetworkingEnabled;
+
+        /// <summary> Whether the scoreboard can be moved. </summary>
+        private bool isWindowMovable;
+
+        /// <summary> The network connection. </summary>
+        private ScoreboardNetwork network;
+
+        /// <summary> The port number for the network. </summary>
+        private int portNumber = 12000;
+
+        /// <summary> The backing field for the reset position command. </summary>
+        private ICommand resetPositionCommand;
+
+        /// <summary> The backing field for the reset size command. </summary>
+        private ICommand resetSizeCommand;
+
+        /// <summary> The backing field for the toggle networking command. </summary>
+        private ICommand toggleNetworkingCommand;
+
+        /// <summary> The transparency level of the scoreboard. </summary>
+        private double transparencyLevel;
+
+        /// <summary> The viewbox width. </summary>
+        private int viewboxWidth;
+
+        /// <summary> The maximum width allowed for the viewbox. </summary>
+        private int widthMaximum;
+
+        /// <summary> The minimum width allowed for the viewbox. </summary>
+        private int widthMinimum;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary> Initializes a new instance of the <see cref="SettingsPanelViewModel"/> class. </summary>
+        /// <param name="settings"> The application settings. </param>
+        /// <param name="controlViewModel"> The scoreboard controlpanel view model. </param>
         public SettingsPanelViewModel(Settings settings, ScoreboardControlPanelViewModel controlViewModel)
         {
             this.controlViewModel = controlViewModel;
@@ -39,42 +98,11 @@
             this.TransparencyLevel = this.settings.WindowTransparency;
         }
 
-        private double transparencyLevel;
+        #endregion
 
-        public double TransparencyLevel
-        {
-            get
-            {
-                return this.transparencyLevel;
-            }
+        #region Public Properties
 
-            set
-            {
-                this.transparencyLevel = value;
-                MainWindowViewModel.DisplayWindow.Opacity = value;
-                RaisePropertyChanged("TransparencyLevel");
-            }
-        }
-
-        private bool isWindowMovable;
-
-        public bool IsWindowMovable
-        {
-            get
-            {
-                return this.isWindowMovable;
-            }
-
-            set
-            {
-                this.isWindowMovable = value;
-                MainWindowViewModel.DisplayWindow.IsWindowMovable = value;
-                RaisePropertyChanged("IsWindowMovable");
-            }
-        }
-
-        private bool allowTransparency;
-
+        /// <summary> Gets or sets a value indicating whether transparency is allowed. </summary>
         public bool AllowTransparency
         {
             get
@@ -86,63 +114,119 @@
             {
                 this.allowTransparency = value;
                 this.SetTransparency(value);
-                RaisePropertyChanged("AllowTransparency");
+                this.RaisePropertyChanged("AllowTransparency");
             }
         }
 
-        private void SetTransparency(bool value)
-        {
-            var opacity = MainWindowViewModel.DisplayWindow.MaxOpacity;
-            var showing = MainWindowViewModel.DisplayWindow.IsVisible;
-
-            var left = MainWindowViewModel.DisplayWindow.Left;
-            var top = MainWindowViewModel.DisplayWindow.Top;
-
-            MainWindowViewModel.DisplayWindow.Close();
-            MainWindowViewModel.DisplayWindow = null;
-
-            MainWindowViewModel.DisplayWindow = new ScoreboardDisplay { AllowsTransparency = value };
-            MainWindowViewModel.DisplayWindow.SetViewModel(this.controlViewModel.Scoreboard);
-
-            MainWindowViewModel.DisplayWindow.MaxOpacity = opacity;
-            MainWindowViewModel.DisplayWindow.ViewboxWidth = this.ViewboxWidth;
-
-            MainWindowViewModel.DisplayWindow.IsWindowMovable = this.IsWindowMovable;
-
-            // Retain the previous position settings.
-            if (double.IsNaN(left) == false && double.IsNaN(top) == false)
-            {
-                MainWindowViewModel.DisplayWindow.InitializePositionOnLoad = false;
-                MainWindowViewModel.DisplayWindow.SetValue(Window.TopProperty, top);
-                MainWindowViewModel.DisplayWindow.SetValue(Window.LeftProperty, left);
-            }
-
-            if (showing)
-            {
-                MainWindowViewModel.DisplayWindow.Show();
-            }
-        }
-
-
-
-        private int widthMaximum;
-
-        public int WidthMaximum
+        /// <summary> Gets the string to be displayed on the connection button. </summary>
+        public string ConnectionButtonString
         {
             get
             {
-                return this.widthMaximum;
+                return this.connectionButtonString;
+            }
+
+            private set
+            {
+                this.connectionButtonString = value;
+                this.RaisePropertyChanged("ConnectionButtonString");
+            }
+        }
+
+        /// <summary> Gets or sets a value indicating whether networking is enabled. </summary>
+        public bool IsNetworkingEnabled
+        {
+            get
+            {
+                return this.isNetworkingEnabled;
             }
 
             set
             {
-                this.widthMaximum = value;
-                RaisePropertyChanged("WidthMaximum");
+                this.isNetworkingEnabled = value;
+
+                this.ConnectionButtonString = value ? "Disable Remote" : "Enable Remote";
+
+                this.RaisePropertyChanged("IsNetworkingEnabled");
             }
         }
 
-        private int viewboxWidth;
+        /// <summary> Gets or sets a value indicating whether the display window can be moved. </summary>
+        public bool IsWindowMovable
+        {
+            get
+            {
+                return this.isWindowMovable;
+            }
 
+            set
+            {
+                this.isWindowMovable = value;
+                MainWindowViewModel.DisplayWindow.IsWindowMovable = value;
+                this.RaisePropertyChanged("IsWindowMovable");
+            }
+        }
+
+        /// <summary> Gets or sets the network port number. </summary>
+        public int PortNumber
+        {
+            get
+            {
+                return this.portNumber;
+            }
+
+            set
+            {
+                this.portNumber = value;
+                this.RaisePropertyChanged("PortNumber");
+            }
+        }
+
+        /// <summary> Gets a command to reset the scoreboard position to it's default. </summary>
+        public ICommand ResetPositionCommand
+        {
+            get
+            {
+                return this.resetPositionCommand ?? (this.resetPositionCommand = new RelayCommand(ResetPosition));
+            }
+        }
+
+        /// <summary> Gets a command to reset the scoreboard size. </summary>
+        public ICommand ResetSizeCommand
+        {
+            get
+            {
+                return this.resetSizeCommand ?? (this.resetSizeCommand = new RelayCommand(this.ResetSize));
+            }
+        }
+
+        /// <summary> Gets a command to toggle whether networking is enabled. </summary>
+        public ICommand ToggleNetworkingCommand
+        {
+            get
+            {
+                return this.toggleNetworkingCommand
+                       ?? (this.toggleNetworkingCommand = new RelayCommand(this.ToggleNetworking));
+            }
+        }
+
+        /// <summary> Gets or sets the display's transparency level. </summary>
+        public double TransparencyLevel
+        {
+            get
+            {
+                return this.transparencyLevel;
+            }
+
+            set
+            {
+                this.transparencyLevel = value;
+                MainWindowViewModel.DisplayWindow.Opacity = value;
+                this.RaisePropertyChanged("TransparencyLevel");
+            }
+        }
+
+        /// <summary> Gets or sets the width of the display viewbox. </summary>
         public int ViewboxWidth
         {
             get
@@ -154,13 +238,26 @@
             {
                 this.viewboxWidth = value;
                 MainWindowViewModel.DisplayWindow.ViewboxWidth = value;
-                RaisePropertyChanged("ViewboxWidth");
+                this.RaisePropertyChanged("ViewboxWidth");
             }
         }
 
+        /// <summary> Gets or sets the maximum width of the viewbox. </summary>
+        public int WidthMaximum
+        {
+            get
+            {
+                return this.widthMaximum;
+            }
 
-        private int widthMinimum;
+            set
+            {
+                this.widthMaximum = value;
+                this.RaisePropertyChanged("WidthMaximum");
+            }
+        }
 
+        /// <summary> Gets or sets the minimum width of the viewbox. </summary>
         public int WidthMinimum
         {
             get
@@ -171,10 +268,15 @@
             set
             {
                 this.widthMinimum = value;
-                RaisePropertyChanged("WidthMinimum");
+                this.RaisePropertyChanged("WidthMinimum");
             }
         }
 
+        #endregion
+
+        #region Public Methods
+
+        /// <summary> Closes the active network connection. </summary>
         public void CloseNetworkConnections()
         {
             if (this.network != null)
@@ -183,15 +285,11 @@
             }
         }
 
-        private ICommand toggleNetworkingCommand;
-        public ICommand ToggleNetworkingCommand
-        {
-            get
-            {
-                return this.toggleNetworkingCommand ?? (this.toggleNetworkingCommand = new RelayCommand(this.ToggleNetworking));
-            }
-        }
-
+        /// <summary> Handles all incoming network packets. </summary>
+        /// <param name="packet"> The packet. </param>
+        /// <param name="socket"> The active socket. </param>
+        /// <param name="senderRemote"> The sender where the packet originated. </param>
+        /// <exception cref="System.Net.Sockets.SocketException"> Thrown if a response failed to send. </exception>
         public void HandleRemoteCommands(ScoreboardPacket packet, Socket socket, EndPoint senderRemote)
         {
             foreach (var command in packet.Commands)
@@ -339,41 +437,39 @@
                             if (cmd != null)
                             {
                                 var commands = new List<IScoreboardPacketCommand>();
-                                Player player;
-                                
-                                player = cmd.Player == 1 ? this.controlViewModel.Scoreboard.Player1 : this.controlViewModel.Scoreboard.Player2;
+                                var player = cmd.Player == 1
+                                             ? this.controlViewModel.Scoreboard.Player1
+                                             : this.controlViewModel.Scoreboard.Player2;
 
-
-                                    commands.Add(
-                                        new StringPacketCommand()
+                                commands.Add(
+                                    new StringPacketCommand
                                         {
-                                            Command = CommandType.UpdatePlayerName,
-                                            Player = cmd.Player,
+                                            Command = CommandType.UpdatePlayerName, 
+                                            Player = cmd.Player, 
                                             Data = player.Name
                                         });
 
-                                    commands.Add(
-                                        new BytePacketCommand()
+                                commands.Add(
+                                    new BytePacketCommand
                                         {
-                                            Command = CommandType.UpdatePlayerRace,
-                                            Data = (byte)player.Race,
+                                            Command = CommandType.UpdatePlayerRace, 
+                                            Data = (byte)player.Race, 
                                             Player = cmd.Player
                                         });
 
-                                    commands.Add(
-                                        new BytePacketCommand()
+                                commands.Add(
+                                    new BytePacketCommand
                                         {
-                                            Command = CommandType.UpdatePlayerColor,
-                                            Data = (byte)player.Color,
+                                            Command = CommandType.UpdatePlayerColor, 
+                                            Data = (byte)player.Color, 
                                             Player = cmd.Player
                                         });
 
-
-                                    commands.Add(
-                                        new Int32PacketCommand()
+                                commands.Add(
+                                    new Int32PacketCommand 
                                         {
-                                            Command = CommandType.UpdatePlayerScore,
-                                            Data = player.Score,
+                                            Command = CommandType.UpdatePlayerScore, 
+                                            Data = player.Score, 
                                             Player = cmd.Player
                                         });
 
@@ -388,59 +484,58 @@
             }
         }
 
-        private string connectionButtonString = "Enable Remote";
+        #endregion
 
-        public string ConnectionButtonString
+        #region Methods
+
+        /// <summary> Resets the positon of the display window. </summary>
+        private static void ResetPosition()
         {
-            get
+            MainWindowViewModel.DisplayWindow.ResetPosition();
+        }
+
+        /// <summary> Resets the size of the viewbox to default. </summary>
+        private void ResetSize()
+        {
+            this.ViewboxWidth = this.desiredWidth;
+        }
+
+        /// <summary> Sets whether transparency is allowed. </summary>
+        /// <param name="value"> Indicates whether transparency is allowed. </param>
+        private void SetTransparency(bool value)
+        {
+            var opacity = MainWindowViewModel.DisplayWindow.MaxOpacity;
+            var showing = MainWindowViewModel.DisplayWindow.IsVisible;
+
+            var left = MainWindowViewModel.DisplayWindow.Left;
+            var top = MainWindowViewModel.DisplayWindow.Top;
+
+            MainWindowViewModel.DisplayWindow.Close();
+            MainWindowViewModel.DisplayWindow = null;
+
+            MainWindowViewModel.DisplayWindow = new ScoreboardDisplay { AllowsTransparency = value };
+            MainWindowViewModel.DisplayWindow.SetViewModel(this.controlViewModel.Scoreboard);
+
+            MainWindowViewModel.DisplayWindow.MaxOpacity = opacity;
+            MainWindowViewModel.DisplayWindow.ViewboxWidth = this.ViewboxWidth;
+
+            MainWindowViewModel.DisplayWindow.IsWindowMovable = this.IsWindowMovable;
+
+            // Retain the previous position settings.
+            if (double.IsNaN(left) == false && double.IsNaN(top) == false)
             {
-                return this.connectionButtonString;
+                MainWindowViewModel.DisplayWindow.InitializePositionOnLoad = false;
+                MainWindowViewModel.DisplayWindow.SetValue(Window.TopProperty, top);
+                MainWindowViewModel.DisplayWindow.SetValue(Window.LeftProperty, left);
             }
 
-            private set
+            if (showing)
             {
-                this.connectionButtonString = value;
-                RaisePropertyChanged("ConnectionButtonString");
+                MainWindowViewModel.DisplayWindow.Show();
             }
         }
 
-        private bool isNetworkingEnabled;
-
-        public bool IsNetworkingEnabled
-        {
-            get
-            {
-                return this.isNetworkingEnabled;
-            }
-
-            set
-            {
-                this.isNetworkingEnabled = value;
-
-                this.ConnectionButtonString = value ? "Disable Remote" : "Enable Remote";
-
-                RaisePropertyChanged("IsNetworkingEnabled");
-            }
-        }
-
-        private int portNumber = 12000;
-
-        public int PortNumber
-        {
-            get
-            {
-                return this.portNumber;
-            }
-
-            set
-            {
-                this.portNumber = value;
-                RaisePropertyChanged("PortNumber");
-            }
-        }
-
-        private ScoreboardNetwork network;
-
+        /// <summary> Toggles whether networking is currently enabled. </summary>
         private void ToggleNetworking()
         {
             if (this.network == null)
@@ -467,32 +562,6 @@
             }
         }
 
-        private ICommand resetSizeCommand;
-        public ICommand ResetSizeCommand
-        {
-            get
-            {
-                return this.resetSizeCommand ?? (this.resetSizeCommand = new RelayCommand(this.ResetSize));
-            }
-        }
-
-        private void ResetSize()
-        {
-            this.ViewboxWidth = this.desiredWidth;
-        }
-
-        private ICommand resetPositionCommand;
-        public ICommand ResetPositionCommand
-        {
-            get
-            {
-                return this.resetPositionCommand ?? (this.resetPositionCommand = new RelayCommand(this.ResetPosition));
-            }
-        }
-
-        private void ResetPosition()
-        {
-            MainWindowViewModel.DisplayWindow.ResetPosition();
-        }
+        #endregion
     }
 }
