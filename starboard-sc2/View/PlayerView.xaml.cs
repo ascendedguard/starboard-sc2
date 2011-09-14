@@ -18,25 +18,31 @@ namespace Starboard.View
     /// </summary>
     public partial class PlayerView
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PlayerView"/> class.
-        /// </summary>
+        #region Constructors and Destructors
+
+        /// <summary> Initializes a new instance of the <see cref = "PlayerView" /> class. </summary>
         public PlayerView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary> Increment's the player's score by 1. </summary>
-        /// <param name="sender"> The sender. </param>
-        /// <param name="e"> The event arguments. </param>
+        /// <param name="sender"> The sender.  </param>
+        /// <param name="e"> The event arguments.  </param>
         private void IncrementPlayerScore(object sender, RoutedEventArgs e)
         {
             var player = this.DataContext as Player;
-            
+
             if (player != null)
             {
-                player.Score++;                
+                player.Score++;
             }
         }
+
+        #endregion
     }
 }

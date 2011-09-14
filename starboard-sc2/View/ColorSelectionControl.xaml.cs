@@ -14,31 +14,53 @@ namespace Starboard.View
 
     using Starboard.Model;
 
-    /// <summary>
-    /// Control for providing 1-click control over a player's color. Provides databinding through the SelectedColor property.
-    /// </summary>
+    /// <summary> Control for providing 1-click control over a player's color. Provides databinding through the SelectedColor property. </summary>
     public partial class ColorSelectionControl
     {
-        /// <summary> DependencyProperty for the SelectedColor property. </summary>
-        public static readonly DependencyProperty SelectedColorProperty =
-            DependencyProperty.Register("SelectedColor", typeof(PlayerColor), typeof(ColorSelectionControl), new FrameworkPropertyMetadata(PlayerColor.Unknown, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, ColorChanged));
+        #region Constants and Fields
 
-        /// <summary> Initializes a new instance of the <see cref="ColorSelectionControl"/> class. </summary>
+        /// <summary> DependencyProperty for the SelectedColor property. </summary>
+        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register(
+            "SelectedColor", 
+            typeof(PlayerColor), 
+            typeof(ColorSelectionControl), 
+            new FrameworkPropertyMetadata(PlayerColor.Unknown, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, ColorChanged));
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary> Initializes a new instance of the <see cref = "ColorSelectionControl" /> class. </summary>
         public ColorSelectionControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary> Gets or sets the selected player color. </summary>
         public PlayerColor SelectedColor
         {
-            get { return (PlayerColor)GetValue(SelectedColorProperty); }
-            set { SetValue(SelectedColorProperty, value); }
+            get
+            {
+                return (PlayerColor)this.GetValue(SelectedColorProperty);
+            }
+
+            set
+            {
+                this.SetValue(SelectedColorProperty, value);
+            }
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary> Checks the appropriate button when the SelectedColor property is changed externally. </summary>
-        /// <param name="d"> The object to apply the DependencyProperty change to. </param>
-        /// <param name="e"> The event arguments, containing the new property value. </param>
+        /// <param name="d"> The object to apply the DependencyProperty change to.  </param>
+        /// <param name="e"> The event arguments, containing the new property value.  </param>
         private static void ColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var userControl = (ColorSelectionControl)d;
@@ -55,13 +77,15 @@ namespace Starboard.View
         }
 
         /// <summary> Sets the SelectedColor property when a button has been pressed. </summary>
-        /// <param name="sender"> The sender. </param>
-        /// <param name="e"> The event arguments. </param>
+        /// <param name="sender"> The sender.  </param>
+        /// <param name="e"> The event arguments.  </param>
         private void ColorClicked(object sender, RoutedEventArgs e)
         {
             var btn = (RadioButton)sender;
 
             this.SelectedColor = (PlayerColor)btn.Content;
         }
+
+        #endregion
     }
 }

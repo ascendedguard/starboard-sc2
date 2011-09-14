@@ -9,6 +9,7 @@
 
 namespace Starboard.View
 {
+    using System.ComponentModel;
     using System.Windows;
 
     using Starboard.ViewModel;
@@ -18,18 +19,24 @@ namespace Starboard.View
     /// </summary>
     public partial class MainWindowView
     {
-        /// <summary> Initializes a new instance of the <see cref="MainWindowView"/> class. </summary>
+        #region Constructors and Destructors
+
+        /// <summary> Initializes a new instance of the <see cref = "MainWindowView" /> class. </summary>
         public MainWindowView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             this.Closing += this.MainWindowClosing;
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary> Shuts down the application when the main window closes. </summary>
-        /// <param name="sender"> The sender. </param>
-        /// <param name="e"> The event arguments. </param>
-        private void MainWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        /// <param name="sender"> The sender.  </param>
+        /// <param name="e"> The event arguments.  </param>
+        private void MainWindowClosing(object sender, CancelEventArgs e)
         {
             var vm = (MainWindowViewModel)this.DataContext;
 
@@ -38,5 +45,7 @@ namespace Starboard.View
 
             Application.Current.Shutdown();
         }
+
+        #endregion
     }
 }
