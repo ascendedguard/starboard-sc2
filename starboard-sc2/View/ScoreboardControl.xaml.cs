@@ -20,6 +20,7 @@ namespace Starboard.View
     using System.Windows.Media;
     using System.Windows.Media.Animation;
 
+    using Starboard.Converters;
     using Starboard.Model;
     using Starboard.MVVM;
     using Starboard.ViewModel;

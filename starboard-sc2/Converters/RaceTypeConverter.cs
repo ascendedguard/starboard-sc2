@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Starboard.Scoreboard
+namespace Starboard.Converters
 {
     using System;
     using System.Globalization;

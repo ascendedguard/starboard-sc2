@@ -5,10 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:View="clr-namespace:Starboard.View" 
              xmlns:Model="clr-namespace:Starboard.Model" 
-             xmlns:AscendStudio="clr-namespace:Starboard" 
-             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
+             xmlns:AscendStudio="clr-namespace:Starboard" xmlns:Converters="clr-namespace:Starboard.Converters" mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <AscendStudio:PlayerColorConverter x:Key="PlayerColorConverter" />
+        <Converters:PlayerColorConverter x:Key="PlayerColorConverter" />
 
         <DataTemplate DataType="{x:Type Model:PlayerColor}">
             <Grid>

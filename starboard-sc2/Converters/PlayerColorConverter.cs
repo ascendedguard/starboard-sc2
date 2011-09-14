@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Starboard
+namespace Starboard.Converters
 {
     using System;
     using System.Globalization;
