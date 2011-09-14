@@ -25,6 +25,11 @@ All hotkeys require you to click on the visible scoreboard before using:
 
 **Changes**
 
+v1.3.1:
+
+* Fixed bug where subbar and announcements would disappear after entering/exiting settings
+* Added additional networking commands for increment player scores and retriving player information.
+
 v1.3:
 
 * Added remote control support.
