@@ -1,31 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SettingsPanelView.xaml.cs" company="Starboard">
+//   Copyright © 2011 All Rights Reserved
+// </copyright>
+// <summary>
+//   View for the settings panel, which has special settings for the application.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Starboard.View
 {
     using System.Reflection;
 
-    /// <summary>
-    /// Interaction logic for SettingsPanelView.xaml
-    /// </summary>
-    public partial class SettingsPanelView : UserControl
+    /// <summary> Interaction logic for SettingsPanelView.xaml </summary>
+    public partial class SettingsPanelView
     {
+        #region Constructors and Destructors
+
+        /// <summary> Initializes a new instance of the <see cref="SettingsPanelView"/> class. </summary>
         public SettingsPanelView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             this.txtBuild.Text = string.Format("Build: {0}", Assembly.GetExecutingAssembly().GetName().Version);
         }
+
+        #endregion
     }
 }
