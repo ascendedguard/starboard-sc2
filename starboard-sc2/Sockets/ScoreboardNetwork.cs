@@ -7,6 +7,7 @@
 namespace Starboard.Sockets
 {
     using System;
+    using System.Collections.Generic;
     using System.Net;
     using System.Net.Sockets;
     using System.Threading;
@@ -71,28 +72,28 @@ namespace Starboard.Sockets
             this.StopListen = false;
 
             IPHostEntry hostEntry = Dns.GetHostEntry(Dns.GetHostName());
-            IPEndPoint endPoint = null;
+            var endPoints = new List<IPEndPoint>();
 
             foreach (var entry in hostEntry.AddressList)
             {
                 if (entry.AddressFamily == AddressFamily.InterNetwork)
                 {
-                    endPoint = new IPEndPoint(entry, this.PortNumber);
+                    endPoints.Add(new IPEndPoint(entry, this.PortNumber));
+                    break;
                 }
             }
 
-            if (endPoint == null)
+            if (endPoints.Count == 0)
             {
-                MessageBox.Show("This application does not support IPv6 yet.");
+                MessageBox.Show("No valid networks were found to connect to.");
                 return;
             }
 
-            var socket = new Socket(endPoint.Address.AddressFamily, SocketType.Dgram, ProtocolType.Udp) { ReceiveTimeout = 2000 };
-            socket.Bind(endPoint);
-
-            // This ReceiveTimeout was causing issues with the Android app... we may need to change this?
-            // A value of 0 worked with the app, but then the application couldn't abort the thread while waiting.
-            socket.ReceiveTimeout = 5000;
+            var socket = new Socket(endPoints[0].Address.AddressFamily, SocketType.Dgram, ProtocolType.Udp) { ReceiveTimeout = 5000 };
+            foreach (var e in endPoints)
+            {
+                socket.Bind(e);
+            }
 
             this.listenThread = new Thread(
                 new ThreadStart(
