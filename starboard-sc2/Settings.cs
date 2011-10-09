@@ -56,7 +56,15 @@ namespace Starboard
             if (pos != null)
             {
                 var splitPos = pos.Split('x');
-                settings.Position = new Point(int.Parse(splitPos[0]), int.Parse(splitPos[1]));
+                try
+                {
+                    settings.Position = new Point(int.Parse(splitPos[0]), int.Parse(splitPos[1]));
+                }
+                catch
+                {
+                    // Incase the field is corrupt and the split didn't work:
+                    settings.Position = new Point(0, 0);
+                }
             }
             else
             {
