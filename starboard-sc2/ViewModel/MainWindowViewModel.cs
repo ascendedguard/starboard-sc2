@@ -14,6 +14,8 @@ namespace Starboard.ViewModel
     using Starboard.MVVM;
     using Starboard.View;
 
+    using VHMediaCOMLib;
+
     /// <summary> The view model for the main application window. </summary>
     public class MainWindowViewModel : ObservableObject
     {
@@ -58,6 +60,13 @@ namespace Starboard.ViewModel
 
         #region Constructors and Destructors
 
+        public static IVHCOMRenderEngineExtSrc2 extsrc = new VHCOMRenderEngineExtSrc2();
+
+        static MainWindowViewModel()
+        {
+            extsrc.ConnectionUID = "12345";
+        }
+
         /// <summary> Initializes a new instance of the <see cref="MainWindowViewModel"/> class. </summary>
         public MainWindowViewModel()
         {
@@ -74,6 +83,7 @@ namespace Starboard.ViewModel
 
             this.ActiveViewModel = this.scoreboardControlViewModel;
         }
+
 
         #endregion
 

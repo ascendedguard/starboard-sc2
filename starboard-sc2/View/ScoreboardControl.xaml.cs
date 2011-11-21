@@ -306,7 +306,7 @@ namespace Starboard.View
         /// <param name="e"> The event arguments.  </param>
         private void ScoreboardDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            var viewmodel = (ScoreboardControlViewModel)e.NewValue;
+            var viewmodel = e.NewValue as ScoreboardControlViewModel;
 
             if (viewmodel == null)
             {

@@ -53,8 +53,8 @@
                 <View:TimedTextEditGroupControl DataContext="{Binding Scoreboard.AnnouncementText}"/>
             </Expander>
 
-            <Viewbox Grid.Row="3" Margin="2">
-                <ContentControl Content="{Binding Scoreboard}" />
+            <Viewbox  Grid.Row="3" Margin="2">
+                <View:ScoreboardControl x:Name="contentView" Content="{Binding Scoreboard}" />
             </Viewbox>
 
             <UniformGrid Grid.Row="4" Rows="1">

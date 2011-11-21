@@ -1,0 +1,4 @@
+<configuration id="12345" name="Starboard">
+	<app imagename="starboard-sc2.exe" />
+	<event notloaded="notloaded.png" noconn="noconn.png" nosignal="nosignal.png" nosignaltimeout="2000" />
+</configuration>

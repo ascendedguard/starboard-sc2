@@ -7,3 +7,4 @@ starboard-remote/obj
 *.ReSharper.user
 *StyleCop.Cache
 *.dotCover
+*.user

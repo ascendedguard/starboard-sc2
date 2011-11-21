@@ -43,6 +43,6 @@
             </Grid>
         </Grid>
         
-        <ContentControl Content="{Binding ActiveViewModel}" Grid.Row="1" />
+        <ContentControl x:Name="scoreboardContentControl" Content="{Binding ActiveViewModel}" Grid.Row="1" />
     </Grid>
 </Window>
