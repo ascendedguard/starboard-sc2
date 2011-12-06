@@ -12,5 +12,6 @@ Main development is done with Visual Studio 2010 (Express should be supported du
 
 As-is, the application runs as a single executable, no installation required, and has a requirement of .NET 4.0 Client Profile, available as a free download from Microsoft.
 
+**[Screenshots](https://github.com/ascendedguard/starboard-sc2/wiki/Screenshots)**<br/>
 **[List of Hotkeys](https://github.com/ascendedguard/starboard-sc2/wiki/Hotkeys)**<br/>
 **[Changelog](https://github.com/ascendedguard/starboard-sc2/wiki/Changelog)**
