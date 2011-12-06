@@ -17,7 +17,6 @@ namespace Starboard.View
     using System.Threading.Tasks;
     using System.Timers;
     using System.Windows;
-    using System.Windows.Controls;
     using System.Windows.Input;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
@@ -36,16 +35,21 @@ namespace Starboard.View
         {
             this.InitializeComponent();
 
-            // 20FPS update to XSplit. This should only be created if the COM object exists.
-            this.timer = new Timer { Interval = 50, AutoReset = true };
-            this.timer.Elapsed += this.XSplitTimerElapsed;
-            this.timer.Start();
-
             this.uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
-            this.contentView.PreviewMouseDown += this.contentView_PreviewMouseDown;
-            this.contentView.PreviewMouseMove += this.contentView_PreviewMouseMove;
+            if (MainWindowViewModel.IsXSplitInstalled)
+            {
+                // 20FPS update to XSplit. This should only be created if the COM object exists.
+                this.timer = new Timer { Interval = 50, AutoReset = true };
+                this.timer.Elapsed += this.XSplitTimerElapsed;
+                this.timer.Start();
+
+                this.contentView.PreviewMouseDown += this.contentView_PreviewMouseDown;
+                this.contentView.PreviewMouseMove += this.contentView_PreviewMouseMove;
+            }
         }
+
+        #region XBS (XSplit) Dragging Support
 
         private Point startPoint;
 
@@ -86,6 +90,8 @@ namespace Starboard.View
                 DragDrop.DoDragDrop(senderObj, o, DragDropEffects.Copy);
             }
         }
+
+        #endregion
 
         #endregion
 
