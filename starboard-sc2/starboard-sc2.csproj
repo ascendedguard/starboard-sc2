@@ -143,6 +143,8 @@
     <Compile Include="View\TimedTextEditGroupControl.xaml.cs">
       <DependentUpon>TimedTextEditGroupControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XSplit Plugin\BroadcasterPlugin.cs" />
+    <Compile Include="XSplit Plugin\TimedBroadcasterPlugin.cs" />
     <Page Include="View\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

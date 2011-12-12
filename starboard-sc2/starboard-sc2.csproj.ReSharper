@@ -1,0 +1,5 @@
+<Configuration>
+  <NamespaceFolders>
+    <SkipFolder>D8769190-E0D7-4D32-A2CF-2E9683441D2D/d:XSplit Plugin</SkipFolder>
+  </NamespaceFolders>
+</Configuration>

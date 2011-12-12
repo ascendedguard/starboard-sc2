@@ -61,28 +61,6 @@ namespace Starboard.ViewModel
 
         #region Constructors and Destructors
 
-        public static IVHCOMRenderEngineExtSrc2 extsrc;
-
-        public static bool IsXSplitInstalled
-        {
-            get; set;
-        }
-
-        static MainWindowViewModel()
-        {
-            try
-            {
-                extsrc = new VHCOMRenderEngineExtSrc2();
-                extsrc.ConnectionUID = "BCB458E4-13D9-11E1-BF80-790C4824019B";
-                IsXSplitInstalled = true;
-            }
-            catch (COMException)
-            {
-                // Assume that XSplit (or the proper COM extension) is not installed.
-                IsXSplitInstalled = false;
-            }
-        }
-
         /// <summary> Initializes a new instance of the <see cref="MainWindowViewModel"/> class. </summary>
         public MainWindowViewModel()
         {
