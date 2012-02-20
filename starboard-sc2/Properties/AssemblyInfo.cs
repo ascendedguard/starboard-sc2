@@ -19,12 +19,12 @@ using System.Windows;
 [assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyCompany("Ascend")]
 [assembly: AssemblyProduct("starboard-sc2")]
-[assembly: AssemblyCopyright("Copyright © Starboard 2011")]
+[assembly: AssemblyCopyright("Copyright © Starboard 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 
-[assembly: AssemblyVersion("1.4.0.*")]
-[assembly: AssemblyFileVersion("1.4.0.0")]
+[assembly: AssemblyVersion("1.5.0.*")]
+[assembly: AssemblyFileVersion("1.5.0.0")]

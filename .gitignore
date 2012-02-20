@@ -8,3 +8,4 @@ starboard-remote/obj
 *StyleCop.Cache
 *.dotCover
 *.user
+*DotSettings
