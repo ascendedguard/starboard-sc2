@@ -124,8 +124,10 @@ SectionIn 1 RO
   ;Add to Add/Remove Programs
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "DisplayName" "Starboard"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "InstallLocation" '"$INSTDIR"'
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "DisplayIcon" '"$INSTDIR\starboard-sc2.exe"'
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "UninstallString" '"$INSTDIR\Uninstall.exe"'
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "Publisher" "Ascend"
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "URLInfoAbout" "http://ascendtv.com/starboard"
   WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "NoModify" 1
   WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "NoRepair" 1
   
@@ -137,7 +139,7 @@ Section "Desktop Shortcut" DesktopShort
 
 SectionEnd
 
-Section /o "Start Menu Shortcut" StartShort
+Section "Start Menu Shortcut" StartShort
 
   CreateShortCut "$SMPROGRAMS\Starboard.lnk" "$INSTDIR\starboard-sc2.exe" "" "" "" "" "" "Starcraft 2 Scoreboard"
 
