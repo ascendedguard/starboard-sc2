@@ -12,7 +12,7 @@
 ;General
 
   ;Name and file
-  Name "Starboard Installer v1.5"
+  Name "Starboard"
   OutFile "StarboardSetup.exe"
   SetCompressor lzma
   RequestExecutionLevel user
@@ -35,13 +35,13 @@
   VIAddVersionKey /LANG=${LANG_ENGLISH} "Comments" "Installation package for Starboard"
   VIProductVersion 1.5.0.0
   
-  BrandingText "Starboard Installation"
+  BrandingText "Starboard v1.5 Installation"
   
 ;--------------------------------
 ;Interface Configuration
 
   !define MUI_HEADERIMAGE
-;  !define MUI_HEADERIMAGE_BITMAP "filename.bmp"
+  !define MUI_HEADERIMAGE_BITMAP "logo.bmp"
   !define MUI_ABORTWARNING
 
 ;--------------------------------
