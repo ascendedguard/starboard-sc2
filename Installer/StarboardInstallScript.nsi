@@ -41,7 +41,7 @@
 ;Interface Configuration
 
   !define MUI_HEADERIMAGE
-;  !define MUI_HEADERIMAGE_BITMAP "Veriacty Data Viewer.bmp" ; optional
+;  !define MUI_HEADERIMAGE_BITMAP "filename.bmp"
   !define MUI_ABORTWARNING
 
 ;--------------------------------
@@ -133,13 +133,13 @@ SectionEnd
 
 Section "Desktop Shortcut" DesktopShort
 
-  CreateShortCut "$DESKTOP\Starboard.lnk" "$INSTDIR\starboard-sc2.exe"
+  CreateShortCut "$DESKTOP\Starboard.lnk" "$INSTDIR\starboard-sc2.exe" "" "" "" "" "" "Starcraft 2 Scoreboard"
 
 SectionEnd
 
 Section /o "Start Menu Shortcut" StartShort
 
-  CreateShortCut "$SMPROGRAMS\Starboard.lnk" "$INSTDIR\starboard-sc2.exe"
+  CreateShortCut "$SMPROGRAMS\Starboard.lnk" "$INSTDIR\starboard-sc2.exe" "" "" "" "" "" "Starcraft 2 Scoreboard"
 
 SectionEnd
 
