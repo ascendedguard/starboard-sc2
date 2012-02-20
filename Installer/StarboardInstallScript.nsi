@@ -12,9 +12,10 @@
 ;General
 
   ;Name and file
-  Name "Starboard"
+  Name "Starboard Installer v1.5"
   OutFile "StarboardSetup.exe"
   SetCompressor lzma
+  RequestExecutionLevel user
   
   CRCCheck on
 
@@ -27,9 +28,6 @@
   
   ;Get installation folder from registry if available
   InstallDirRegKey HKCU "Software\Ascend\Starboard" "Install_Dir"
-
-  ;Request application privileges for Windows Vista
-  RequestExecutionLevel admin
   
   VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "Starboard"
   VIAddVersionKey /LANG=${LANG_ENGLISH} "CompanyName" "Will 'Ascend' Eddins"
@@ -49,9 +47,6 @@
 ;--------------------------------
 ;Pages
 
-  !insertmacro MUI_PAGE_LICENSE "License.txt"
-  ;!insertmacro MUI_PAGE_COMPONENTS
-  ;!insertmacro MUI_PAGE_DIRECTORY
   !insertmacro MUI_PAGE_INSTFILES
   
   !insertmacro MUI_UNPAGE_CONFIRM
@@ -127,12 +122,12 @@ SectionIn 1 RO
   WriteUninstaller "$INSTDIR\Uninstall.exe"
   
   ;Add to Add/Remove Programs
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "DisplayName" "Starboard"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "InstallLocation" '"$INSTDIR"'
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "UninstallString" '"$INSTDIR\Uninstall.exe"'
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "Publisher" "Ascend"
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "NoModify" 1
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "NoRepair" 1
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "DisplayName" "Starboard"
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "InstallLocation" '"$INSTDIR"'
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "UninstallString" '"$INSTDIR\Uninstall.exe"'
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "Publisher" "Ascend"
+  WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "NoModify" 1
+  WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard" "NoRepair" 1
   
 SectionEnd
 
@@ -172,7 +167,7 @@ Section "Uninstall"
   RMDir "$LOCALAPPDATA\Starboard\"
   
   DeleteRegKey HKCU "Software\Ascend\Starboard"
-  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard"
+  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Starboard"
   
   Delete "$DESKTOP\Starboard.lnk"
   Delete "$SMPROGRAMS\Starboard.lnk"
