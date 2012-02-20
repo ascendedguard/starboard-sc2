@@ -22,17 +22,22 @@ namespace Starboard.View
     {
         #region Constructors and Destructors
 
+        /// <summary>
+        /// Reference to the timer for updating the XSplit output.
+        /// </summary>
+        private readonly TimedBroadcasterPlugin plugin;
+
         /// <summary> Initializes a new instance of the <see cref="ScoreboardControlPanelView"/> class. </summary>
         public ScoreboardControlPanelView()
         {
             this.InitializeComponent();
 
-            TimedBroadcasterPlugin plugin = TimedBroadcasterPlugin.CreateInstance(
+            this.plugin = TimedBroadcasterPlugin.CreateInstance(
                 "BCB458E4-13D9-11E1-BF80-790C4824019B", this.contentView, 1380, 112, 50);
 
-            if (plugin != null)
+            if (this.plugin != null)
             {
-                plugin.StartTimer();
+                this.plugin.StartTimer();
                 this.contentView.PreviewMouseDown += this.contentView_PreviewMouseDown;
                 this.contentView.PreviewMouseMove += this.contentView_PreviewMouseMove;
             }

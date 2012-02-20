@@ -216,6 +216,10 @@ namespace Starboard.View
                 // Change Player 2's Name
                 this.CreatePlayerChangeField("Player2.Name");
             }
+            else if (e.Key == Key.F3)
+            {
+                this.Scoreboard.SwapPlayers();
+            }
 
             if (e.KeyboardDevice.Modifiers == ModifierKeys.Control)
             {

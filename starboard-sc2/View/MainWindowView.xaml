@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Starboard.View.MainWindowView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-        xmlns:ViewModel="clr-namespace:Starboard.ViewModel" 
+        xmlns:ViewModel="clr-namespace:Starboard.ViewModel" xmlns:Converters="clr-namespace:Starboard.Converters"
         Title="Starboard" 
         Width="471"
         SizeToContent="Height"
@@ -10,7 +10,7 @@
         <ViewModel:MainWindowViewModel />
     </Window.DataContext>
     <Window.Resources>
-
+        <Converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -42,7 +42,9 @@
                 </Grid.Background>
             </Grid>
         </Grid>
-        
-        <ContentControl x:Name="scoreboardContentControl" Content="{Binding ActiveViewModel}" Grid.Row="1" />
+
+        <ContentControl x:Name="scoreboardContentControl" Content="{Binding ScoreboardControlPanelViewModel}" Grid.Row="1" Visibility="{Binding Path=IsMainSettingsVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
+
+        <ContentControl x:Name="optionContentControl" Content="{Binding SettingsPanelViewModel}" Grid.Row="1" Visibility="{Binding Path=IsSettingsVisible, Converter={StaticResource BooleanVisibilityConverter}}" />
     </Grid>
 </Window>

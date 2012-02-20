@@ -133,6 +133,22 @@ namespace Starboard.ViewModel
             }
         }
 
+        public void SwapPlayers()
+        {
+            var player2 = (Player)this.Player1.Clone();
+            var player1 = (Player)this.Player2.Clone();
+
+            this.Player1.Name = player1.Name;
+            this.Player1.Color = player1.Color;
+            this.Player1.Score = player1.Score;
+            this.Player1.Race = player1.Race;
+
+            this.Player2.Name = player2.Name;
+            this.Player2.Color = player2.Color;
+            this.Player2.Score = player2.Score;
+            this.Player2.Race = player2.Race;
+        }
+
         #endregion
     }
 }

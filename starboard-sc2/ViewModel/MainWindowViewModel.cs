@@ -9,18 +9,20 @@
 
 namespace Starboard.ViewModel
 {
-    using System.Runtime.InteropServices;
     using System.Windows;
 
     using Starboard.MVVM;
     using Starboard.View;
 
-    using VHMediaCOMLib;
-
     /// <summary> The view model for the main application window. </summary>
     public class MainWindowViewModel : ObservableObject
     {
         #region Constants and Fields
+
+        /// <summary>
+        /// Settings files stored to the registry for retaining last-used settings
+        /// </summary>
+        private readonly Settings settings = Settings.Load();
 
         /// <summary>
         /// The scoreboard view model used for the actual scoreboard.
@@ -33,11 +35,6 @@ namespace Starboard.ViewModel
         private readonly ScoreboardControlPanelViewModel scoreboardControlViewModel;
 
         /// <summary>
-        /// Settings files stored to the registry for retaining last-used settings
-        /// </summary>
-        private readonly Settings settings = Settings.Load();
-
-        /// <summary>
         /// The settings panel view model.
         /// </summary>
         private readonly SettingsPanelViewModel settingsPanelViewModel;
@@ -48,14 +45,14 @@ namespace Starboard.ViewModel
         private static ScoreboardDisplay display = new ScoreboardDisplay();
 
         /// <summary>
-        /// The active view model being displayed on the main application.
-        /// </summary>
-        private ObservableObject activeViewModel;
-
-        /// <summary>
         /// Whether the settings panel is currently visible.
         /// </summary>
         private bool isSettingsVisible;
+
+        /// <summary>
+        /// Value describing whether the main settings panel is currently showing. Used for databinding.
+        /// </summary>
+        private bool isMainSettingsVisible;
 
         #endregion
 
@@ -67,6 +64,7 @@ namespace Starboard.ViewModel
             this.scoreboardControlViewModel = new ScoreboardControlPanelViewModel(this.Scoreboard);
             this.settingsPanelViewModel = new SettingsPanelViewModel(this.settings, this.scoreboardControlViewModel);
             display.SetViewModel(this.Scoreboard);
+            this.IsMainSettingsVisible = true;
 
             if (this.settings.Position.X != 0 || this.settings.Position.Y != 0)
             {
@@ -74,10 +72,29 @@ namespace Starboard.ViewModel
                 display.SetValue(Window.TopProperty, this.settings.Position.Y);
                 display.SetValue(Window.LeftProperty, this.settings.Position.X);
             }
-
-            this.ActiveViewModel = this.scoreboardControlViewModel;
         }
 
+        /// <summary>
+        /// Gets the view model for the scoreboard control panel (main screen).
+        /// </summary>
+        public ScoreboardControlPanelViewModel ScoreboardControlPanelViewModel
+        {
+            get
+            {
+                return this.scoreboardControlViewModel;
+            }
+        }
+
+        /// <summary>
+        /// Gets the view model for the settings panel.
+        /// </summary>
+        public SettingsPanelViewModel SettingsPanelViewModel
+        {
+            get
+            {
+                return this.settingsPanelViewModel;
+            }
+        }
 
         #endregion
 
@@ -97,21 +114,6 @@ namespace Starboard.ViewModel
             }
         }
 
-        /// <summary> Gets or sets the active view model being displayed on the main application screen. </summary>
-        public ObservableObject ActiveViewModel
-        {
-            get
-            {
-                return this.activeViewModel;
-            }
-
-            set
-            {
-                this.activeViewModel = value;
-                this.RaisePropertyChanged("ActiveViewModel");
-            }
-        }
-
         /// <summary> Gets or sets a value indicating whether the settings button is pressed, and the settings tab is visible. </summary>
         public bool IsSettingsVisible
         {
@@ -125,14 +127,21 @@ namespace Starboard.ViewModel
                 this.isSettingsVisible = value;
                 this.RaisePropertyChanged("IsSettingsVisible");
 
-                if (value)
-                {
-                    this.ActiveViewModel = this.settingsPanelViewModel;
-                }
-                else
-                {
-                    this.ActiveViewModel = this.scoreboardControlViewModel;
-                }
+                this.IsMainSettingsVisible = !value;
+            }
+        }
+
+        public bool IsMainSettingsVisible
+        {
+            get
+            {
+                return this.isMainSettingsVisible;
+            }
+
+            set
+            {
+                this.isMainSettingsVisible = value;
+                this.RaisePropertyChanged("IsMainSettingsVisible");
             }
         }
 
