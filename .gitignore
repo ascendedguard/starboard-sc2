@@ -1,11 +1,10 @@
-_Resharper.starboard-sc2/*
-starboard-sc2/bin
-starboard-sc2/obj
-starboard-remote/bin
-starboard-remote/obj
+_Resharper.*
+*/bin
+*/obj
 *.suo
 *.ReSharper.user
 *StyleCop.Cache
 *.dotCover
 *.user
 *DotSettings
+Installer/StarboardSetup.exe

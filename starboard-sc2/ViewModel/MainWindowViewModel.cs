@@ -9,6 +9,7 @@
 
 namespace Starboard.ViewModel
 {
+    using System;
     using System.Windows;
 
     using Starboard.MVVM;
@@ -66,11 +67,25 @@ namespace Starboard.ViewModel
             display.SetViewModel(this.Scoreboard);
             this.IsMainSettingsVisible = true;
 
-            if (this.settings.Position.X != 0 || this.settings.Position.Y != 0)
+            if (Math.Abs(this.settings.Position.X - 0) > .001 || Math.Abs(this.settings.Position.Y - 0) > .001)
             {
                 display.InitializePositionOnLoad = false;
                 display.SetValue(Window.TopProperty, this.settings.Position.Y);
                 display.SetValue(Window.LeftProperty, this.settings.Position.X);
+            }
+        }
+
+        /// <summary>   Gets or sets the active display window being used. </summary>
+        public static ScoreboardDisplay DisplayWindow
+        {
+            get
+            {
+                return display;
+            }
+
+            set
+            {
+                display = value;
             }
         }
 
@@ -100,20 +115,6 @@ namespace Starboard.ViewModel
 
         #region Public Properties
 
-        /// <summary>   Gets or sets the active display window being used. </summary>
-        public static ScoreboardDisplay DisplayWindow
-        {
-            get
-            {
-                return display;
-            }
-
-            set
-            {
-                display = value;
-            }
-        }
-
         /// <summary> Gets or sets a value indicating whether the settings button is pressed, and the settings tab is visible. </summary>
         public bool IsSettingsVisible
         {
@@ -131,6 +132,9 @@ namespace Starboard.ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the main settings screen is currently visible.
+        /// </summary>
         public bool IsMainSettingsVisible
         {
             get
@@ -174,7 +178,7 @@ namespace Starboard.ViewModel
             {
                 this.settings.AllowTransparency = DisplayWindow.AllowsTransparency;
             }
-            catch (System.InvalidOperationException)
+            catch (InvalidOperationException)
             {
                 // Shouldn't happen, but if it did, default to the application default.
                 this.settings.AllowTransparency = false;

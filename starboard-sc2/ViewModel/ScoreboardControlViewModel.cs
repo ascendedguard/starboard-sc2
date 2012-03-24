@@ -22,32 +22,32 @@ namespace Starboard.ViewModel
         #region Constants and Fields
 
         /// <summary>
-        ///   Contains the array of TimedText objects defining the announcement text.
+        /// Contains the array of TimedText objects defining the announcement text.
         /// </summary>
         private readonly ObservableCollection<TimedText> announcementText = new ObservableCollection<TimedText>();
 
         /// <summary>
-        ///   Holds our first player, which is initialized on creation.
+        /// Holds our first player, which is initialized on creation.
         /// </summary>
         private readonly Player player1 = new Player();
 
         /// <summary>
-        ///   Holds our second player, which is initialized on creation.
+        /// Holds our second player, which is initialized on creation.
         /// </summary>
         private readonly Player player2 = new Player();
 
         /// <summary>
-        ///   Contains the array of TimedText objects defining the subbar text.
+        /// Contains the array of TimedText objects defining the subbar text.
         /// </summary>
         private readonly ObservableCollection<TimedText> subbarText = new ObservableCollection<TimedText>();
 
         /// <summary>
-        ///   Backing property for the IsAnnouncementShowing property.
+        /// Backing property for the IsAnnouncementShowing property.
         /// </summary>
         private bool isAnnouncementShowing;
 
         /// <summary>
-        ///   Backing property for the isSubbarShowing property.
+        /// Backing property for the isSubbarShowing property.
         /// </summary>
         private bool isSubbarShowing;
 
@@ -123,7 +123,7 @@ namespace Starboard.ViewModel
         }
 
         /// <summary>
-        ///   Gets the array containing the subbar text fields.
+        /// Gets the array containing the subbar text fields.
         /// </summary>
         public ObservableCollection<TimedText> SubbarText
         {
@@ -133,20 +133,23 @@ namespace Starboard.ViewModel
             }
         }
 
+        /// <summary>
+        /// Swap the players between the left and right sides of the scoreboard.
+        /// </summary>
         public void SwapPlayers()
         {
-            var player2 = (Player)this.Player1.Clone();
-            var player1 = (Player)this.Player2.Clone();
+            var p1 = (Player)this.Player2.Clone();
+            var p2 = (Player)this.Player1.Clone();
 
-            this.Player1.Name = player1.Name;
-            this.Player1.Color = player1.Color;
-            this.Player1.Score = player1.Score;
-            this.Player1.Race = player1.Race;
+            this.Player1.Name = p1.Name;
+            this.Player1.Color = p1.Color;
+            this.Player1.Score = p1.Score;
+            this.Player1.Race = p1.Race;
 
-            this.Player2.Name = player2.Name;
-            this.Player2.Color = player2.Color;
-            this.Player2.Score = player2.Score;
-            this.Player2.Race = player2.Race;
+            this.Player2.Name = p2.Name;
+            this.Player2.Color = p2.Color;
+            this.Player2.Score = p2.Score;
+            this.Player2.Race = p2.Race;
         }
 
         #endregion

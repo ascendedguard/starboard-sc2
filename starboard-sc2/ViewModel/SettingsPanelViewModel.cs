@@ -10,10 +10,13 @@
 namespace Starboard.ViewModel
 {
     using System.Collections.Generic;
+    using System.IO;
     using System.Net;
     using System.Net.Sockets;
     using System.Windows;
     using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
 
     using Starboard.Model;
     using Starboard.MVVM;
@@ -76,6 +79,9 @@ namespace Starboard.ViewModel
         /// <summary> The minimum width allowed for the viewbox. </summary>
         private int widthMinimum;
 
+        /// <summary> Backing property for the SaveImageCommand property. </summary>
+        private ICommand saveImageCommand;
+
         #endregion
 
         #region Constructors and Destructors
@@ -101,6 +107,17 @@ namespace Starboard.ViewModel
         #endregion
 
         #region Public Properties
+
+        /// <summary>
+        /// Gets a command executed when the Save Image button is clicked.
+        /// </summary>
+        public ICommand SaveImageCommand
+        {
+            get
+            {
+                return this.saveImageCommand ?? (this.saveImageCommand = new RelayCommand(this.SaveImage));
+            }
+        }
 
         /// <summary> Gets or sets a value indicating whether transparency is allowed. </summary>
         public bool AllowTransparency
@@ -492,6 +509,95 @@ namespace Starboard.ViewModel
         private static void ResetPosition()
         {
             MainWindowViewModel.DisplayWindow.ResetPosition();
+        }
+
+        /// <summary> Saves the rendered scoreboard to an image when clicked. </summary>
+        private void SaveImage()
+        {
+            if (MainWindowViewModel.DisplayWindow.IsVisible == false)
+            {
+                MessageBox.Show(
+                    "Scoreboard must be showing on-screen in order to save to an image.",
+                    "Error: Scoreboard Hidden",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return;
+            }
+
+            const string Filter = "PNG Image (*.png)|*.png|" +
+                                  "TIFF Image (*.tiff)|*.tiff|" +
+                                  "All Files (*.*)|*.*";
+
+            var sfd = new Microsoft.Win32.SaveFileDialog { Filter = Filter };
+
+            if (sfd.ShowDialog() == true)
+            {
+                var filename = sfd.FileName;
+
+                if (string.IsNullOrEmpty(filename))
+                {
+                    return;
+                }
+
+                var viewBox = MainWindowViewModel.DisplayWindow.rootGrid;
+
+                var bmp = new RenderTargetBitmap(
+                    (int)viewBox.RenderSize.Width, (int)viewBox.RenderSize.Height, 96, 96, PixelFormats.Pbgra32);
+                bmp.Render(viewBox);
+
+                BitmapEncoder encoder;
+
+                var extUpper = Path.GetExtension(filename);
+
+                if (extUpper == null)
+                {
+                    // Could happen if they choose all files and didn't type an extension.
+                    MessageBox.Show(
+                        "Unrecognized Image Format",
+                        "Error: Format Unrecognized",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                    return;
+                }
+
+                string ext = extUpper.ToLower();
+
+                if (ext.Equals(".png"))
+                {
+                    encoder = new PngBitmapEncoder();
+                }
+                else if (ext.Equals(".jpg"))
+                {
+                    encoder = new JpegBitmapEncoder { QualityLevel = 95 };
+                }
+                else if (ext.Equals(".tiff"))
+                {
+                    encoder = new TiffBitmapEncoder();
+                }
+                else if (ext.Equals(".gif"))
+                {
+                    encoder = new GifBitmapEncoder();
+                }
+                else if (ext.Equals(".bmp"))
+                {
+                    encoder = new BmpBitmapEncoder();
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "Unrecognized Image Format",
+                        "Error: Format Unrecognized",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                    return;
+                }
+
+                using (var stream = new FileStream(filename, FileMode.Create))
+                {
+                    encoder.Frames.Add(BitmapFrame.Create(bmp));
+                    encoder.Save(stream);
+                }
+            }
         }
 
         /// <summary> Resets the size of the viewbox to default. </summary>

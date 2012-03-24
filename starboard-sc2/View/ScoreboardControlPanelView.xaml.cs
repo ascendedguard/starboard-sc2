@@ -72,7 +72,7 @@ namespace Starboard.View
                 (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
                 Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
             {
-                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "starboard.xbs");
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "XSplit", "starboard.xbs");
 
                if (File.Exists(path) == false)
                {

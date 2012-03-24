@@ -27,6 +27,7 @@
                     <Button Content="{Binding ConnectionButtonString}" x:Name="btnEnableRemote" Command="{Binding ToggleNetworkingCommand}" Margin="222,0,6,0" />
                 </Grid>
             </GroupBox>
+            <Button Command="{Binding SaveImageCommand}" Content="Save Image" />
         </StackPanel>
 
         <TextBlock HorizontalAlignment="Right" x:Name="txtBuild" VerticalAlignment="Bottom" Text="Build Version" />

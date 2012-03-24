@@ -389,7 +389,7 @@ namespace Starboard.View
             {
                 if (e.OldStartingIndex == this.previousSubbarIndex)
                 {
-                    if (this.currentAnnouncementTimer != null)
+                    if (this.currentSubbarTimer != null)
                     {
                         this.currentSubbarTimer.Stop();
                         this.currentSubbarTimer.Dispose();
@@ -411,6 +411,7 @@ namespace Starboard.View
             // Just incase we call this manually.
             if (this.currentSubbarTimer != null)
             {
+                this.currentSubbarTimer.Stop();
                 this.currentSubbarTimer.Dispose();
             }
 
