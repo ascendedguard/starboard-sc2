@@ -9,6 +9,7 @@
 
 namespace Starboard
 {
+    using System.Globalization;
     using System.Windows;
 
     using Microsoft.Win32;
@@ -29,6 +30,7 @@ namespace Starboard
 
         /// <summary> Gets or sets the Top-Left position of the scoreboard. </summary>
         public Point Position { get; set; }
+
 
         /// <summary> Gets or sets a value indicating whether the scoreboard allows transparency. </summary>
         public bool AllowTransparency { get; set; }
@@ -76,14 +78,14 @@ namespace Starboard
             if (allowTrans != null)
             {
                 var value = (int)allowTrans;
-                settings.AllowTransparency = value != 0 ? true : false;                
+                settings.AllowTransparency = value != 0;
             }
             else
             {
                 settings.AllowTransparency = false;
             }
 
-            var winTrans = Registry.GetValue(RegistryPath, "WindowTransparency", 1.ToString()) as string;
+            var winTrans = Registry.GetValue(RegistryPath, "WindowTransparency", 1.ToString(CultureInfo.InvariantCulture)) as string;
 
             settings.WindowTransparency = winTrans != null ? double.Parse(winTrans) : 1;
 
