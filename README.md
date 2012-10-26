@@ -1,4 +1,4 @@
-![Starboard](http://ascendtv.com/starboard/starboard-header.png)
+![Starboard](https://raw.github.com/ascendedguard/starboard-sc2/master/photoshop/starboard-header.png)
 
 Starboard is a scoreboard, designed by Ascend, meant for professional Starcraft 2 broadcasting. Features player name, color, race, and score displays with a subbar showing optional stream/match information.
 
